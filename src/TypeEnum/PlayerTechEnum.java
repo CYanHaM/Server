@@ -2,7 +2,6 @@ package TypeEnum;
 
 public enum PlayerTechEnum {
 	name,               //姓名
-	season,             //赛季
 	team,               //所属球队
 	gameNum,            //参赛场数
 	startingNum,        //首发场数

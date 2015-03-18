@@ -2,8 +2,6 @@ package TypeEnum;
 
 public enum TeamTechEnum {
 	name,                            //球队名称
-	season,                          //赛季
-	gameNum,                         //比赛场数
 	shotInNum,                       //投篮命中数
 	shotNum,                         //投篮出手数
 	threeShotInNum,                  //三分命中数
