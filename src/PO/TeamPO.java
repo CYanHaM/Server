@@ -2,7 +2,7 @@ package PO;
 import java.io.Serializable;
 
 
-public class TeamPo implements Serializable{
+public class TeamPO implements Serializable{
 	/**
 	 * 球队基本信息
 	 */

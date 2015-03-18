@@ -2,7 +2,7 @@ package PO;
 import java.io.Serializable;
 
 
-public class TeamDataPo implements Serializable {
+public class TeamTechPO implements Serializable {
 	
 	/**
 	 * 赛季球队总数据
