@@ -2,6 +2,7 @@ package data;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -14,6 +15,24 @@ import dataservice.PlayerTechDataService;
 public class PlayerTechData implements PlayerTechDataService {
 	//选择某个条件升序,返回升序后的球员数据列表
 	public ArrayList<PlayerTechPO> ascend(PlayerTechEnum list){
+		//驱动程序名
+		String driver = "com.mysql.jdbc.Driver";
+		//URL指向要访问的数据库名nba
+		String url = "jdbc:mysql://127.0.0.1:3306/nba";
+		// MySQL配置时的用户名
+		String user = "root";
+		// Java连接MySQL配置时的密码
+		String password = "";
+		try {
+			// 加载驱动程序
+			Class.forName(driver);
+			// 连续数据库
+			Connection conn = DriverManager.getConnection(url, user, password);
+			if(!conn.isClosed()){
+				System.out.println("Succeeded connecting to the Database!");
+			}
+			PreparedStatement cmd = connection.
+					prepareStatement("select * from t_team where ?=?");
 		return null;
 	}
 	
@@ -31,15 +50,6 @@ public class PlayerTechData implements PlayerTechDataService {
 	
 	//连接至数据库
 	public ArrayList<PlayerTechPO> link(String field){
-		//驱动程序名
-		String driver = "com.mysql.jdbc.Driver";
-
-		//URL指向要访问的数据库名nba
-		String url = "jdbc:mysql://127.0.0.1:3306/nba";
-		// MySQL配置时的用户名
-		String user = "root";
-		// Java连接MySQL配置时的密码
-		String password = "";
 				
 		try {
 			// 加载驱动程序
