@@ -31,11 +31,11 @@ public class TeamTechPO implements Serializable {
 	public double penaltyShotInRate;               //罚球命中率
 	public double winningRate;                     //胜率
 	public double offensiveRound;                  //进攻回合
-	public double offensiveEffiency;               //进攻效率
-	public double defensiveEffiency;               //防守效率
-	public double reboundEffiency;                 //篮板效率
-	public double stealEffiency;                   //抢断效率
-	public double secondaryAttackEffiency;         //助攻效率
+	public double offensiveEfficiency;               //进攻效率
+	public double defensiveEfficiency;               //防守效率
+	public double reboundEfficiency;                 //篮板效率
+	public double stealEfficiency;                   //抢断效率
+	public double secondaryAttackEfficiency;         //助攻效率
 	
 	
 }

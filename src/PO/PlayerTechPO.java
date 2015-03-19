@@ -25,10 +25,10 @@ public class PlayerTechPO implements Serializable{
 	public double fault;                           //失误数
 	public double foul;                            //犯规数
 	public double score;                           //得分
-	public double effiency;                        //效率
-	public double GmScEffiency;                    //GmSc效率值
+	public double efficiency;                        //效率
+	public double GmScEffciiency;                    //GmSc效率值
 	public double trueShotInRate;                  //真实命中率
-	public double shootingEffiency;                //投篮效率
+	public double shootingEfficiency;                //投篮效率
 	public double reboundRate;                     //篮板率
 	public double offensiveReboundRate;            //进攻篮板率
 	public double defensiveReboundRate;            //防守篮板率

@@ -18,10 +18,10 @@ public enum PlayerTechEnum {
 	fault,              //失误数
 	foul,               //犯规数
 	score,              //得分
-	effiency,           //效率
-	GmScEffiency,       //GmSc效率值
+	efficiency,           //效率
+	GmScEfficiency,       //GmSc效率值
 	trueShotInRate,     //真实命中率
-	shootingEffiency,   //投篮效率
+	shootingEfficiency,   //投篮效率
 	reboundRate,        //篮板率
 	offensiveReboundRate,//进攻篮板率
 	defensiveReboundRate,//防守篮板率
