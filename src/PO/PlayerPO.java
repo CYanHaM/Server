@@ -15,7 +15,7 @@ public class PlayerPO implements Serializable{
 	public double weight;          //体重（磅）
 	public String birth;           //生日（月 日，年）
 	public int age;                //年龄
-	public double exp;             //球龄
+	public int exp;             //球龄
 	public String school;          //毕业学校
 	
 	
