@@ -20,8 +20,8 @@ public class MatchPO implements Serializable{
 	public String score4;                                 //第四节比分
 	public String scoreExtra;                             //加时赛比分
 	public ArrayList<PlayerTechMPO> playerStatistic;      //球员技术统计
-	public boolean ifHomeTeamWin;                         //主队是否胜利
-	
+	public int ifHomeTeamWin;                         //主队是否胜利
+	public int ifGuestTeamWin;                        //客队是否胜利
 	
 	
 
