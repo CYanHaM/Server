@@ -13,8 +13,8 @@ import PO.TeamPO;
 /*
  * 原始信息的处理（包括比赛信息，球员基本信息和球队基本信息）
  * @cao
- * 2015年3月19日16:38:17
- *
+ * 2015-3-20 01:34:53
+ *修改次数5
  */
 public class DataProcessing implements DataToSQL{
 	
@@ -89,7 +89,7 @@ public class DataProcessing implements DataToSQL{
 					PlayerTechMPO ptmp=new PlayerTechMPO();
 					ptmp.name=data[k][0];
 					ptmp.position=data[k][1];
-					ptmp.time=Integer.parseInt(data[k][2].split(":")[0])*60+Integer.parseInt(data[k][2].split(":")[1]);
+					ptmp.time=Integer.parseInt(data[k][2].split(":")[0])+Integer.parseInt(data[k][2].split(":")[1])/60;
 					ptmp.shotIn=Integer.parseInt(data[k][3]);
 					ptmp.shot=Integer.parseInt(data[k][4]);
 					ptmp.threeShotIn=Integer.parseInt(data[k][5]);
@@ -106,10 +106,16 @@ public class DataProcessing implements DataToSQL{
 					ptmp.fault=Integer.parseInt(data[k][16]);
 					ptmp.score=Integer.parseInt(data[k][17]);
 					ptmp.team=data[2][0];
+					
 					if(k>=3&&k<=7)
 						ptmp.ifFirstLineUp=1;
 					else
 						ptmp.ifFirstLineUp=0;
+					
+					if(ptmp.time>0)
+						ptmp.ifParticipate=1;
+					else
+						ptmp.ifParticipate=0;
 					matchpo.playerStatistic.add(ptmp);
 										
 				}
@@ -136,10 +142,16 @@ public class DataProcessing implements DataToSQL{
 					ptmp.fault=Integer.parseInt(data[k][16]);
 					ptmp.score=Integer.parseInt(data[k][17]);
 					ptmp.team=data[2][0];
+					
 					if(k>=homeTeamTip+1&&k<=homeTeamTip+5)
 						ptmp.ifFirstLineUp=1;
 					else
 						ptmp.ifFirstLineUp=0;
+					
+					if(ptmp.time>0)
+						ptmp.ifParticipate=1;
+					else
+						ptmp.ifParticipate=0;
 					matchpo.playerStatistic.add(ptmp);
 					
 				}
