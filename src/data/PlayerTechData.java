@@ -31,8 +31,15 @@ public class PlayerTechData implements PlayerTechDataService {
 			if(!conn.isClosed()){
 				System.out.println("Succeeded connecting to the Database!");
 			}
-			PreparedStatement cmd = connection.
-					prepareStatement("select * from t_team where ?=?");
+			PreparedStatement cmd = conn.
+					prepareStatement("select * from t_team order by ?");
+			switch(list) {
+				case name:
+					break;
+				case 
+					
+			}
+			
 		return null;
 	}
 	

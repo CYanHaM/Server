@@ -22,9 +22,9 @@ public enum TeamTechEnum {
 	penaltyShotInRate,               //罚球命中率
 	winningRate,                     //胜率
 	offensiveRound,                  //进攻回合
-	offensiveEffiency,               //进攻效率
-	defensiveEffiency,               //防守效率
-	reboundEffiency,                 //篮板效率
-	stealEffiency,                   //抢断效率
-	secondaryAttackEffiency;         //助攻效率
+	offensiveEfficiency,               //进攻效率
+	defensiveEfficiency,               //防守效率
+	reboundEfficiency,                 //篮板效率
+	stealEfficiency,                   //抢断效率
+	secondaryAttackEfficiency;         //助攻效率
 }
