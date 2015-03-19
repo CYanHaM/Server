@@ -35,8 +35,74 @@ public class PlayerTechData implements PlayerTechDataService {
 					prepareStatement("select * from t_team order by ?");
 			switch(list) {
 				case name:
+					cmd.setString(1, "name");
 					break;
-				case 
+				case team:
+					cmd.setString(1, "team");
+					break;
+				case gameNum:
+					cmd.setString(1, "gameNum");
+					break;
+				case startingNum:
+					cmd.setString(1, "startingNum");
+					break;
+				case rebound:
+					cmd.setString(1, "rebound");
+					break;
+				case secondaryAttack:
+					cmd.setString(1, "secondaryAttack");
+					break;
+				case time:
+					cmd.setString(1, "time");
+					break;
+				case shotInRate:
+					cmd.setString(1, "shotInRate");
+					break;
+				case threeshotInRate:
+					cmd.setString(1, "threeshotInRate");
+					break;
+				case penaltyShotInRate:
+					cmd.setString(1, "penaltyShotInRate");
+					break;
+				case offensiveNum:
+					cmd.setString(1, "offensiveNum");
+					break;
+				case defensiveNum:
+					cmd.setString(1, "defensiveNum");
+					break;
+				case steal:
+					cmd.setString(1, "steal");
+					break;
+				case blockShot:
+					cmd.setString(1, "blockShot");
+					break;
+				case fault:
+					cmd.setString(1, "fault");
+					break;
+				case foul:
+					cmd.setString(1, "foul");
+					break;
+				case score:
+					cmd.setString(1, "score");
+					break;
+				case efficiency:
+					cmd.setString(1, "efficiency");
+					break;
+				case GmScEfficiency:
+					cmd.setString(1, "GmScEfficiency");
+					break;
+				case trueShotInRate:
+					cmd.setString(1, "trueShotInRate");
+					break;
+				case shootingEfficiency:
+					cmd.setString(1, "shootingEfficiency");
+					break;
+				case reboundRate:
+					cmd.setString(1, "reboundRate");
+					break;
+				default:
+					System.out.println("wrong enum value");
+			}
 					
 			}
 			
