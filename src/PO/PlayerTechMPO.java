@@ -27,7 +27,8 @@ public class PlayerTechMPO implements Serializable{
 	public int fault;                        //失误数
 	public int foul;                         //犯规数
 	public int score;                        //个人得分
-	
+	public int ifFirstLineUp;                 //是否先发
+
 	
 	
 

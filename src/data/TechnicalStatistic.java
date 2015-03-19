@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import PO.TeamTechPO;
 
-public class technicalStatistic {
+public class TechnicalStatistic {
 	public ArrayList<TeamTechPO> teamTechGenerating(ArrayList<TeamTechPO> ttplist){
 		
 		

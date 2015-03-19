@@ -16,7 +16,7 @@ import PO.TeamPO;
  * 2015年3月19日16:38:17
  *
  */
-public class dataProcessing {
+public class DataProcessing implements DataToSQL{
 	
 	ArrayList<MatchPO>mlist=new ArrayList<MatchPO>();
 	ArrayList<PlayerPO>plist=new ArrayList<PlayerPO>();
@@ -63,10 +63,17 @@ public class dataProcessing {
 				//录入胜负情况
 				int guestTeamScore=Integer.parseInt(matchpo.score.split("-")[0]);
 				int homeTeamScore=Integer.parseInt(matchpo.score.split("-")[1]);
-				if(homeTeamScore>guestTeamScore)
-					matchpo.ifHomeTeamWin=true;
-				else
-					matchpo.ifHomeTeamWin=false;
+				if(homeTeamScore>guestTeamScore){
+					matchpo.ifHomeTeamWin=1;
+					matchpo.ifGuestTeamWin=0;
+				}
+				else if(homeTeamScore<guestTeamScore){
+					matchpo.ifHomeTeamWin=0;
+					matchpo.ifGuestTeamWin=1;
+				}else if(homeTeamScore==guestTeamScore){
+					matchpo.ifHomeTeamWin=0;
+					matchpo.ifGuestTeamWin=0;
+				}
 				
 				//录入球员技术信息（标记第二个队的行数）
 				int homeTeamTip=0;
@@ -82,23 +89,27 @@ public class dataProcessing {
 					PlayerTechMPO ptmp=new PlayerTechMPO();
 					ptmp.name=data[k][0];
 					ptmp.position=data[k][1];
-					ptmp.time=Double.valueOf(data[k][2]);
-					ptmp.shotIn=Double.valueOf(data[k][3]);
-					ptmp.shot=Double.valueOf(data[k][4]);
-					ptmp.threeShotIn=Double.valueOf(data[k][5]);
-					ptmp.threeShot=Double.valueOf(data[k][6]);
-					ptmp.penaltyShotIn=Double.valueOf(data[k][7]);
-					ptmp.penaltyShot=Double.valueOf(data[k][8]);
-					ptmp.offensiveRebound=Double.valueOf(data[k][9]);
-					ptmp.defensiveRebound=Double.valueOf(data[k][10]);
-					ptmp.rebound=Double.valueOf(data[k][11]);
-					ptmp.secondaryAttack=Double.valueOf(data[k][12]);
-					ptmp.steal=Double.valueOf(data[k][13]);
-					ptmp.blockShot=Double.valueOf(data[k][14]);
-					ptmp.foul=Double.valueOf(data[k][15]);
-					ptmp.fault=Double.valueOf(data[k][16]);
-					ptmp.score=Double.valueOf(data[k][17]);
+					ptmp.time=Integer.parseInt(data[k][2].split(":")[0])*60+Integer.parseInt(data[k][2].split(":")[1]);
+					ptmp.shotIn=Integer.parseInt(data[k][3]);
+					ptmp.shot=Integer.parseInt(data[k][4]);
+					ptmp.threeShotIn=Integer.parseInt(data[k][5]);
+					ptmp.threeShot=Integer.parseInt(data[k][6]);
+					ptmp.penaltyShotIn=Integer.parseInt(data[k][7]);
+					ptmp.penaltyShot=Integer.parseInt(data[k][8]);
+					ptmp.offensiveRebound=Integer.parseInt(data[k][9]);
+					ptmp.defensiveRebound=Integer.parseInt(data[k][10]);
+					ptmp.rebound=Integer.parseInt(data[k][11]);
+					ptmp.secondaryAttack=Integer.parseInt(data[k][12]);
+					ptmp.steal=Integer.parseInt(data[k][13]);
+					ptmp.blockShot=Integer.parseInt(data[k][14]);
+					ptmp.foul=Integer.parseInt(data[k][15]);
+					ptmp.fault=Integer.parseInt(data[k][16]);
+					ptmp.score=Integer.parseInt(data[k][17]);
 					ptmp.team=data[2][0];
+					if(k>=3&&k<=7)
+						ptmp.ifFirstLineUp=1;
+					else
+						ptmp.ifFirstLineUp=0;
 					matchpo.playerStatistic.add(ptmp);
 										
 				}
@@ -108,23 +119,27 @@ public class dataProcessing {
 					PlayerTechMPO ptmp=new PlayerTechMPO();
 					ptmp.name=data[k][0];
 					ptmp.position=data[k][1];
-					ptmp.time=Double.valueOf(data[k][2]);
-					ptmp.shotIn=Double.valueOf(data[k][3]);
-					ptmp.shot=Double.valueOf(data[k][4]);
-					ptmp.threeShotIn=Double.valueOf(data[k][5]);
-					ptmp.threeShot=Double.valueOf(data[k][6]);
-					ptmp.penaltyShotIn=Double.valueOf(data[k][7]);
-					ptmp.penaltyShot=Double.valueOf(data[k][8]);
-					ptmp.offensiveRebound=Double.valueOf(data[k][9]);
-					ptmp.defensiveRebound=Double.valueOf(data[k][10]);
-					ptmp.rebound=Double.valueOf(data[k][11]);
-					ptmp.secondaryAttack=Double.valueOf(data[k][12]);
-					ptmp.steal=Double.valueOf(data[k][13]);
-					ptmp.blockShot=Double.valueOf(data[k][14]);
-					ptmp.foul=Double.valueOf(data[k][15]);
-					ptmp.fault=Double.valueOf(data[k][16]);
-					ptmp.score=Double.valueOf(data[k][17]);
-					ptmp.team=data[homeTeamTip][0];
+					ptmp.time=Integer.parseInt(data[k][2].split(":")[0])*60+Integer.parseInt(data[k][2].split(":")[1]);
+					ptmp.shotIn=Integer.parseInt(data[k][3]);
+					ptmp.shot=Integer.parseInt(data[k][4]);
+					ptmp.threeShotIn=Integer.parseInt(data[k][5]);
+					ptmp.threeShot=Integer.parseInt(data[k][6]);
+					ptmp.penaltyShotIn=Integer.parseInt(data[k][7]);
+					ptmp.penaltyShot=Integer.parseInt(data[k][8]);
+					ptmp.offensiveRebound=Integer.parseInt(data[k][9]);
+					ptmp.defensiveRebound=Integer.parseInt(data[k][10]);
+					ptmp.rebound=Integer.parseInt(data[k][11]);
+					ptmp.secondaryAttack=Integer.parseInt(data[k][12]);
+					ptmp.steal=Integer.parseInt(data[k][13]);
+					ptmp.blockShot=Integer.parseInt(data[k][14]);
+					ptmp.foul=Integer.parseInt(data[k][15]);
+					ptmp.fault=Integer.parseInt(data[k][16]);
+					ptmp.score=Integer.parseInt(data[k][17]);
+					ptmp.team=data[2][0];
+					if(k>=homeTeamTip+1&&k<=homeTeamTip+5)
+						ptmp.ifFirstLineUp=1;
+					else
+						ptmp.ifFirstLineUp=0;
 					matchpo.playerStatistic.add(ptmp);
 					
 				}
