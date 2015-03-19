@@ -18,7 +18,7 @@ public class PlayerData implements PlayerDataService{
 	 * */
 	public PlayerPO find(PlayerPO ppo) {
 		// TODO Auto-generated method stub
-		String[] name = ppo.name.split("\\s+");
+		String name = ppo.name;
 		
 		//连接至数据库
 		//驱动程序名
@@ -42,8 +42,7 @@ public class PlayerData implements PlayerDataService{
 			// statement用来执行SQL语句
 			Statement statement = conn.createStatement();
 			// 要执行的SQL语句
-			String sql = "SELECT 1 FROM t_player WHERE first_name = '"+name[0]+"'"
-					+ "AND last_name = '"+name[1]+"'";
+			String sql = "SELECT 1 FROM t_player WHERE first_name = '"+name+"'";
 			ResultSet rs = statement.executeQuery(sql);  
 			while(rs.next()) {  
 				ppo.uniformNum = rs.getInt(3);//第三列 no
@@ -55,7 +54,7 @@ public class PlayerData implements PlayerDataService{
 				ppo.birth = new String(rs.getString(7).getBytes("ISO-8859-1"),"utf-8");
 				//System.out.println(temp);
 				ppo.age = rs.getInt(8);
-				ppo.exp = rs.getDouble(9);
+				ppo.exp = rs.getInt(9);
 				ppo.school = new String(rs.getString(10).getBytes("ISO-8859-1"),"utf-8");
 			}
 			rs.close();  
@@ -101,7 +100,7 @@ public class PlayerData implements PlayerDataService{
 			String sql = "SELECT * FROM t_player WHERE team = '"+abb+"'";
 			ResultSet rs = statement.executeQuery(sql);  
 			while(rs.next()) {  
-				PlayerPO po;
+				PlayerPO po = new PlayerPO();
 				String first = new String(rs.getString(1).getBytes("ISO-8859-1"),"utf-8");
 				String last = new String(rs.getString(2).getBytes("ISO-8859-1"),"utf-8");
 				po.name = first + " " + last;
@@ -114,7 +113,7 @@ public class PlayerData implements PlayerDataService{
 				po.birth = new String(rs.getString(7).getBytes("ISO-8859-1"),"utf-8");
 				//System.out.println(temp);
 				po.age = rs.getInt(8);
-				po.exp = rs.getDouble(9);
+				po.exp = rs.getInt(9);
 				po.school = new String(rs.getString(10).getBytes("ISO-8859-1"),"utf-8");
 				list.add(po);
 			}
