@@ -30,6 +30,7 @@ public class TeamTechPO implements Serializable {
 	public double threeShotInRate;                 //三分命中率
 	public double penaltyShotInRate;               //罚球命中率
 	public double winningRate;                     //胜率
+	public int winningNum;                         //胜场数
 	public double offensiveRound;                  //进攻回合
 	public double offensiveEfficiency;               //进攻效率
 	public double defensiveEfficiency;               //防守效率
