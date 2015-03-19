@@ -9,7 +9,7 @@ public class PlayerPO implements Serializable{
 	 */
 	public static final long serialVersionUID = 1L;
 	public String name;            //ĞÕÃû
-	public String uniformNum;      //ÇòÒÂºÅÂë
+	public int uniformNum;      //ÇòÒÂºÅÂë
 	public String position;        //Î»ÖÃ
 	public String height;          //Éí¸ß£¨Ó¢³ß-Ó¢´ç£©
 	public double weight;          //ÌåÖØ£¨°õ£©
