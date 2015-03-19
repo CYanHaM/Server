@@ -33,7 +33,7 @@ public class PlayerTechData implements PlayerTechDataService {
 				System.out.println("Succeeded connecting to the Database!");
 			}
 			PreparedStatement cmd = conn.
-					prepareStatement("select * from t_team order by ?");
+					prepareStatement("select * from t_playerdata order by ?");
 			switch(en) {
 				case name:
 					cmd.setString(1, "name");
@@ -113,7 +113,7 @@ public class PlayerTechData implements PlayerTechDataService {
 				po.startingNum = rs.getInt(4);
 				po.rebound = rs.getInt(5);
 				po.secondaryAttackRate = rs.getInt(6);
-				po.time = rs.getString(7);
+				po.time = rs.getInt(7);
 				po.shotInRate = rs.getDouble(8);
 				po.threeShotInRate = rs.getDouble(9);
 				po.penaltyShotInRate = rs.getDouble(10);
@@ -173,7 +173,7 @@ public class PlayerTechData implements PlayerTechDataService {
 				System.out.println("Succeeded connecting to the Database!");
 			}
 			PreparedStatement cmd = conn.
-					prepareStatement("select * from t_team order by ? DESC");
+					prepareStatement("select * from t_playerdata order by ? DESC");
 			switch(en) {
 				case name:
 					cmd.setString(1, "name");
@@ -253,7 +253,7 @@ public class PlayerTechData implements PlayerTechDataService {
 				po.startingNum = rs.getInt(4);
 				po.rebound = rs.getInt(5);
 				po.secondaryAttackRate = rs.getInt(6);
-				po.time = rs.getString(7);
+				po.time = rs.getInt(7);
 				po.shotInRate = rs.getDouble(8);
 				po.threeShotInRate = rs.getDouble(9);
 				po.penaltyShotInRate = rs.getDouble(10);
@@ -294,7 +294,40 @@ public class PlayerTechData implements PlayerTechDataService {
 
 	@Override
 	public ArrayList<PlayerTechPO> sift(PlayerTechPO ptpo) {
-		// TODO Auto-generated method stub
+		/* 根据条件筛选并排序
+		 * 可用作筛选条件的有：球员位置，球员联盟
+		 * 可用作排序条件的有：球员名称，所属球队，参赛场数，先发场数，篮板数，助攻数，在场时间，投篮命中率，三分命中率，罚球命中率，进攻数，防守数，抢断数，盖帽数，失误数，犯规数，得分，效率，GmSc效率值，真实命中率，投篮效率，篮板率，进攻篮板率，防守篮板率，助攻率，抢断率，盖帽率，失误率，使用率
+		 * 筛选条件作为特定属性存入ptpo
+		 * 排序条件则为该项属性非0
+		 * */
+		ArrayList<PlayerTechPO> list = new ArrayList<PlayerTechPO>();
+		//驱动程序名
+				String driver = "com.mysql.jdbc.Driver";
+				//URL指向要访问的数据库名nba
+				String url = "jdbc:mysql://127.0.0.1:3306/nba";
+				// MySQL配置时的用户名
+				String user = "root";
+				// Java连接MySQL配置时的密码
+				String password = "";
+				try {
+					// 加载驱动程序
+					Class.forName(driver);
+					// 连续数据库
+					Connection conn = DriverManager.getConnection(url, user, password);
+					if(!conn.isClosed()){
+						System.out.println("Succeeded connecting to the Database!");
+					}
+					// statement用来执行SQL语句
+					Statement statement = conn.createStatement();
+					String sql = "select player_id from `t_player` where position='"+ptpo.+"'";
+				}catch(ClassNotFoundException e) {   
+			        System.out.println("Sorry,can`t find the Driver!");   
+			        e.printStackTrace();   
+		        } catch(SQLException e) {   
+			        e.printStackTrace();   
+		    	} catch(Exception e) {   
+			        e.printStackTrace();   
+		    	} 
 		return null;
 	}
 	
