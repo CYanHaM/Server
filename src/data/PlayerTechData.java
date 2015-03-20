@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import PO.PlayerPO;
 import PO.PlayerTechPO;
 import TypeEnum.PlayerTechEnum;
 import dataservice.PlayerTechDataService;
@@ -293,7 +294,8 @@ public class PlayerTechData implements PlayerTechDataService {
 	}
 
 	@Override
-	public ArrayList<PlayerTechPO> sift(String position, String division) {
+	public ArrayList<PlayerTechPO> sift(String position, String division,
+			PlayerTechPO ptpo) {
 		/* 根据条件筛选并排序
 		 * 可用作筛选条件的有：球员位置，球员联盟
 		 * 可用作排序条件的有：球员名称，所属球队，参赛场数，先发场数，篮板数，助攻数，在场时间，投篮命中率，三分命中率，罚球命中率，进攻数，防守数，抢断数，盖帽数，失误数，犯规数，得分，效率，GmSc效率值，真实命中率，投篮效率，篮板率，进攻篮板率，防守篮板率，助攻率，抢断率，盖帽率，失误率，使用率
@@ -318,9 +320,65 @@ public class PlayerTechData implements PlayerTechDataService {
 				System.out.println("Succeeded connecting to the Database!");
 			}
 			// statement用来执行SQL语句
-			Statement statement = conn.createStatement();
-			String sql = "select from t_playerdata where name in(select t_player.name from `t_player` where t_player.position='"+position+"')AND team in (select name from t_team where division='"+division+"'))";//待补充
-	    	ResultSet rs = statement.executeQuery(sql);
+			PreparedStatement cmd = conn.
+					prepareStatement("select from t_playerdata where name in(select t_player.name from `t_player` where t_player.position='"+position+"')AND team in (select name from t_team where division='"+division+"') order by ? DESC");
+		
+			if(ptpo.gameNum!=0){
+				cmd.setInt(1, ptpo.gameNum);
+			}else if(ptpo.startingNum!=0){
+				cmd.setInt(1,ptpo.startingNum);
+			}else if(ptpo.rebound!=0){
+				cmd.setInt(1,ptpo.rebound);
+			}else if(ptpo.secondaryAttack!=0){
+				cmd.setInt(1,ptpo.secondaryAttack);
+			}else if(ptpo.time!=0){
+				cmd.setInt(1,ptpo.time);
+			}else if(ptpo.shotInRate!=0){
+				cmd.setDouble(1, ptpo.shotInRate);
+			}else if(ptpo.threeShotInRate!=0){
+				cmd.setDouble(1, ptpo.threeShotInRate);
+			}else if(ptpo.penaltyShotInRate!=0){
+				cmd.setDouble(1, ptpo.penaltyShotInRate);
+			}else if(ptpo.offensiveNum!=0){
+				cmd.setInt(1,ptpo.offensiveNum);
+			}else if(ptpo.defensiveNum!=0){
+				cmd.setInt(1, ptpo.defensiveNum);
+			}else if(ptpo.steal!=0){
+				cmd.setInt(1, ptpo.steal);
+			}else if(ptpo.blockShot!=0){
+				cmd.setInt(1, ptpo.blockShot);
+			}else if(ptpo.fault!=0){
+				cmd.setInt(1, ptpo.fault);
+			}else if(ptpo.foul!=0){
+				cmd.setInt(1, ptpo.foul);
+			}else if(ptpo.score!=0){
+				cmd.setInt(1, ptpo.score);
+			}else if(ptpo.efficiency!=0){
+				cmd.setDouble(1, ptpo.efficiency);
+			}else if(ptpo.GmScEfficiency!=0){
+				cmd.setDouble(1, ptpo.GmScEfficiency);
+			}else if(ptpo.trueShotInRate!=0){
+				cmd.setDouble(1, ptpo.trueShotInRate);
+			}else if(ptpo.shootingEfficiency!=0){
+				cmd.setDouble(1, ptpo.shootingEfficiency);
+			}else if(ptpo.reboundRate!=0){
+				cmd.setDouble(1, ptpo.reboundRate);
+			}else if(ptpo.offensiveReboundRate!=0){
+				cmd.setDouble(1, ptpo.offensiveReboundRate);
+			}else if(ptpo.defensiveReboundRate!=0){
+				cmd.setDouble(1, ptpo.defensiveReboundRate);
+			}else if(ptpo.secondaryAttackRate!=0){
+				cmd.setDouble(1, ptpo.secondaryAttackRate);
+			}else if(ptpo.stealRate!=0){
+				cmd.setDouble(1, ptpo.stealRate);
+			}else if(ptpo.blockShotRate!=0){
+				cmd.setDouble(1, ptpo.blockShotRate);
+			}else if(ptpo.faultRate!=0){
+				cmd.setDouble(1, ptpo.faultRate);
+			}else if(ptpo.usageRate!=0){
+				cmd.setDouble(1, ptpo.usageRate);
+			}
+			ResultSet rs = cmd.executeQuery();
 			while(rs.next()){
 				PlayerTechPO po = new PlayerTechPO();
 				po.name = rs.getString(1);
@@ -368,5 +426,4 @@ public class PlayerTechData implements PlayerTechDataService {
 		return list;
 	}
 	
-
 }
