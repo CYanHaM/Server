@@ -302,33 +302,70 @@ public class PlayerTechData implements PlayerTechDataService {
 		 * */
 		ArrayList<PlayerTechPO> list = new ArrayList<PlayerTechPO>();
 		//驱动程序名
-				String driver = "com.mysql.jdbc.Driver";
-				//URL指向要访问的数据库名nba
-				String url = "jdbc:mysql://127.0.0.1:3306/nba";
-				// MySQL配置时的用户名
-				String user = "root";
-				// Java连接MySQL配置时的密码
-				String password = "";
-				try {
-					// 加载驱动程序
-					Class.forName(driver);
-					// 连续数据库
-					Connection conn = DriverManager.getConnection(url, user, password);
-					if(!conn.isClosed()){
-						System.out.println("Succeeded connecting to the Database!");
-					}
-					// statement用来执行SQL语句
-					Statement statement = conn.createStatement();
-					String sql = "select player_id from `t_player` where position='"+ptpo.+"'";
-				}catch(ClassNotFoundException e) {   
-			        System.out.println("Sorry,can`t find the Driver!");   
-			        e.printStackTrace();   
-		        } catch(SQLException e) {   
-			        e.printStackTrace();   
-		    	} catch(Exception e) {   
-			        e.printStackTrace();   
-		    	} 
-		return null;
+		String driver = "com.mysql.jdbc.Driver";
+		//URL指向要访问的数据库名nba
+		String url = "jdbc:mysql://127.0.0.1:3306/nba";
+		// MySQL配置时的用户名
+		String user = "root";
+		// Java连接MySQL配置时的密码
+		String password = "";
+		try {
+			// 加载驱动程序
+			Class.forName(driver);
+			// 连续数据库
+			Connection conn = DriverManager.getConnection(url, user, password);
+			if(!conn.isClosed()){
+				System.out.println("Succeeded connecting to the Database!");
+			}
+			// statement用来执行SQL语句
+			Statement statement = conn.createStatement();
+			String sql = "select from t_playerdata where name in(select t_player.name from `t_player` where t_player.position='"+position+"')AND team in (select name from t_team where division='"+division+"'))";//待补充
+	    	ResultSet rs = statement.executeQuery(sql);
+			while(rs.next()){
+				PlayerTechPO po = new PlayerTechPO();
+				po.name = rs.getString(1);
+				po.season = rs.getString(2);
+				po.team = rs.getString(3);
+				po.gameNum = rs.getInt(4);
+				po.startingNum = rs.getInt(5);
+				po.rebound = rs.getInt(6);
+				po.secondaryAttack = rs.getInt(7);
+				po.time = rs.getInt(8);
+				po.shotInRate = rs.getDouble(9);
+				po.threeShotInRate = rs.getDouble(10);
+				po.penaltyShotInRate = rs.getDouble(11);
+				po.offensiveNum = rs.getInt(12);
+				po.defensiveNum = rs.getInt(13);
+				po.steal = rs.getInt(14);
+				po.blockShot = rs.getInt(15);
+				po.fault = rs.getInt(16);
+				po.foul = rs.getInt(17);
+				po.score = rs.getInt(18);
+				po.efficiency = rs.getDouble(19);
+				po.GmScEfficiency = rs.getDouble(20);
+				po.trueShotInRate = rs.getDouble(21);
+				po.shootingEfficiency = rs.getDouble(22);
+				po.reboundRate = rs.getDouble(23);
+				po.offensiveReboundRate = rs.getDouble(24);
+				po.defensiveReboundRate = rs.getDouble(25);
+				po.secondaryAttackRate = rs.getDouble(26);
+				po.stealRate = rs.getDouble(27);
+				po.blockShotRate = rs.getDouble(28);
+				po.faultRate = rs.getDouble(29);
+				po.usageRate = rs.getDouble(30);
+				list.add(po);
+			}
+			rs.close();
+			conn.close();
+		}catch(ClassNotFoundException e) {   
+			   System.out.println("Sorry,can`t find the Driver!");   
+			   e.printStackTrace();   
+        } catch(SQLException e) {   
+		       e.printStackTrace();   
+		} catch(Exception e) {   
+			   e.printStackTrace();   
+		} 
+		return list;
 	}
 	
 
