@@ -6,7 +6,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import PO.MatchPO;
 import PO.PlayerPO;
+import PO.PlayerTechMPO;
 import PO.TeamPO;
 /*
  * 供初始化数据库时调用
@@ -94,6 +96,13 @@ public class sqlInitial {
 	}
 	
 	public void match(){
+		ArrayList<MatchPO> list = dts.matchRead();
+		int size = list.size();
+		for(int i=0;i<size;i++){
+			ArrayList<PlayerTechMPO> mpoList = list.get(i).playerStatistic;
+			int n = mpoList.size();
+			
+		}
 	
 	}
 
