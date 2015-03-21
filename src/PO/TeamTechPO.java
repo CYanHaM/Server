@@ -37,6 +37,12 @@ public class TeamTechPO implements Serializable {
 	public double reboundEfficiency;                 //篮板效率
 	public double stealEfficiency;                   //抢断效率
 	public double secondaryAttackEfficiency;         //助攻效率
+	public int opponentDefensiveRebound;          //对方防守篮板
+	public int opponentOffensiveRebound;          //对方进攻篮板
+	public double opponentOffensiveRound;        //对方进攻回合
+	public int opponentScore;        //对方得分
+
+
 	
 	
 }

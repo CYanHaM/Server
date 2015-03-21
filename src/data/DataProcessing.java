@@ -49,6 +49,8 @@ public class DataProcessing implements DataToSQL{
 				matchpo.guestTeam=data[0][1].split("-")[0];
 				matchpo.homeTeam=data[0][1].split("-")[1];
 				matchpo.score=data[0][2];
+				matchpo.guestScore=Integer.parseInt(data[0][2].split("-")[0]);
+				matchpo.homeScore=Integer.parseInt(data[0][2].split("-")[1]);
 				matchpo.score1=data[1][0];
 				matchpo.score2=data[1][1];
 				matchpo.score3=data[1][2];
@@ -153,7 +155,64 @@ public class DataProcessing implements DataToSQL{
 					else
 						ptmp.ifParticipate=0;
 					matchpo.playerStatistic.add(ptmp);
+					//计算主客队进攻防守篮板数
+					int homeDeRebound=0;
+					int guestDeRebound=0;
+					int homeOfRebound=0;
+					int guestOfRebound=0;
+					int homeShot=0;
+					int guestShot=0;
+					int homeShotin=0;
+					int guestShotin=0;
+					int homethreeshot=0;
+					int guestthreeshot=0;
+					int homePShot=0;
+					int guestPShot=0;
+					int homeFoul=0;
+					int guestFoul=0;
+					int homeTime=0;
+					int guestTime=0;
 					
+					for(int j=0;j<homeTeamTip-3;j++){
+						guestDeRebound=guestDeRebound+matchpo.playerStatistic.get(j).defensiveRebound;
+						guestOfRebound=guestOfRebound+matchpo.playerStatistic.get(j).offensiveRebound;
+						guestShot=guestShot+matchpo.playerStatistic.get(j).shot;
+						guestShotin=guestShotin+matchpo.playerStatistic.get(j).shotIn;
+						guestthreeshot=guestthreeshot+matchpo.playerStatistic.get(j).threeShot;
+						guestPShot=guestPShot+matchpo.playerStatistic.get(j).penaltyShot;
+						guestFoul=guestFoul+matchpo.playerStatistic.get(j).foul;
+						guestTime=guestTime+matchpo.playerStatistic.get(j).time;
+
+					}
+					for(int j=homeTeamTip-3;j<info.size()-4;j++){
+						homeDeRebound=homeDeRebound+matchpo.playerStatistic.get(j).defensiveRebound;
+						homeOfRebound=homeOfRebound+matchpo.playerStatistic.get(j).offensiveRebound;
+						homeShot=homeShot+matchpo.playerStatistic.get(j).shot;
+						homeShotin=homeShotin+matchpo.playerStatistic.get(j).shotIn;
+						homethreeshot=homethreeshot+matchpo.playerStatistic.get(j).threeShot;
+						homePShot=homePShot+matchpo.playerStatistic.get(j).penaltyShot;
+						homeFoul=homeFoul+matchpo.playerStatistic.get(j).foul;
+						homeTime=homeTime+matchpo.playerStatistic.get(j).time;
+
+					}
+					matchpo.homeShotIn=homeShotin;
+					matchpo.guestShotIn=guestShotin;
+					matchpo.homeTwoShot=homeShot-homethreeshot;
+					matchpo.guestTwoShot=guestShot-guestthreeshot;
+					matchpo.homePenaltyShot=homePShot;
+					matchpo.guestPenaltyShot=guestPShot;
+					matchpo.homeFoul=homeFoul;
+					matchpo.guestFoul=guestFoul;
+					matchpo.guestTeamDeffensiveRebound=guestDeRebound;
+					matchpo.homeTeamDeffensiveRebound=homeDeRebound;
+					matchpo.guestTeamOffensiveRebound=guestOfRebound;
+					matchpo.homeTeamOffensiveRebound=homeOfRebound;
+					matchpo.homeAllTime=homeTime;
+					matchpo.guestAllTime=guestTime;
+					//计算主客队进攻回合
+					matchpo.homeTeamOffensiveRound=(double)homeShot+0.4*(double)homePShot-1.07*((double)homeOfRebound/((double)homeOfRebound+(double)guestDeRebound)*((double)homeShot-(double)homeShotin))+1.07*(double)homeFoul;
+					matchpo.guestTeamOffensiveRound=(double)guestShot+0.4*(double)guestPShot-1.07*((double)guestOfRebound/((double)guestOfRebound+(double)homeDeRebound)*((double)guestShot-(double)guestShotin))+1.07*(double)guestFoul;
+
 				}
 				mlist.add(matchpo);
 				

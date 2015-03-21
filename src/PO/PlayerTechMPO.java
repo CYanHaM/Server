@@ -17,7 +17,7 @@ public class PlayerTechMPO implements Serializable{
 	public int threeShotIn;                  //三分命中数
 	public int threeShot;                    //三分出手数
 	public int penaltyShotIn;                //罚球命中数
-	public int penaltyShot;                  //发球出手数
+	public int penaltyShot;                  //罚球出手数
 	public int offensiveRebound;             //前场篮板数
 	public int defensiveRebound;             //后场篮板数
 	public int rebound;                      //总篮板数
