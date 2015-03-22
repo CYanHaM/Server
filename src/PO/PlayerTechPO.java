@@ -50,7 +50,7 @@ public class PlayerTechPO implements Serializable{
 	public int opponentDefensiveRebound;                //对手防守篮板
 	public int teamShotIn;                             //全队进球数
 	public int opponentOffensiveNum;                     //对手进攻次数
-	public int opponentTwoShot;                     //对手进攻两分球出手次数
+	public int opponentTwoShot;                     //对手两分球出手次数
 	public int teamShot;                          //全队出手次数
 	public int teamPenaltyShot;                   //全队罚球次数
 	public int teamFoul;                          //全队失误次数    
