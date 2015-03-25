@@ -112,8 +112,8 @@ public class DataProcessing implements DataToSQL{
 					ptmp.secondaryAttack=Integer.parseInt(data[k][12]);
 					ptmp.steal=Integer.parseInt(data[k][13]);
 					ptmp.blockShot=Integer.parseInt(data[k][14]);
-					ptmp.foul=Integer.parseInt(data[k][15]);
-					ptmp.fault=Integer.parseInt(data[k][16]);
+					ptmp.fault=Integer.parseInt(data[k][15]);
+					ptmp.foul=Integer.parseInt(data[k][16]);
 					try{
 						ptmp.score=Integer.parseInt(data[k][17]);
 					}catch(NumberFormatException e){
@@ -157,8 +157,8 @@ public class DataProcessing implements DataToSQL{
 					ptmp.secondaryAttack=Integer.parseInt(data[k][12]);
 					ptmp.steal=Integer.parseInt(data[k][13]);
 					ptmp.blockShot=Integer.parseInt(data[k][14]);
-					ptmp.foul=Integer.parseInt(data[k][15]);
-					ptmp.fault=Integer.parseInt(data[k][16]);
+					ptmp.fault=Integer.parseInt(data[k][15]);
+					ptmp.foul=Integer.parseInt(data[k][16]);
 					try{
 						ptmp.score=Integer.parseInt(data[k][17]);
 					}catch(NumberFormatException e){
@@ -191,8 +191,8 @@ public class DataProcessing implements DataToSQL{
 				int guestthreeshot=0;
 				int homePShot=0;
 				int guestPShot=0;
-				int homeFoul=0;
-				int guestFoul=0;
+				int homeFault=0;
+				int guestFault=0;
 				int homeTime=0;
 				int guestTime=0;
 				
@@ -203,7 +203,7 @@ public class DataProcessing implements DataToSQL{
 					guestShotin=guestShotin+matchpo.playerStatistic.get(j).shotIn;
 					guestthreeshot=guestthreeshot+matchpo.playerStatistic.get(j).threeShot;
 					guestPShot=guestPShot+matchpo.playerStatistic.get(j).penaltyShot;
-					guestFoul=guestFoul+matchpo.playerStatistic.get(j).foul;
+					guestFault=guestFault+matchpo.playerStatistic.get(j).fault;
 					guestTime=guestTime+matchpo.playerStatistic.get(j).time;
 					
 				}
@@ -215,7 +215,7 @@ public class DataProcessing implements DataToSQL{
 					homeShotin=homeShotin+matchpo.playerStatistic.get(j).shotIn;
 					homethreeshot=homethreeshot+matchpo.playerStatistic.get(j).threeShot;
 					homePShot=homePShot+matchpo.playerStatistic.get(j).penaltyShot;
-					homeFoul=homeFoul+matchpo.playerStatistic.get(j).foul;
+					homeFault=homeFault+matchpo.playerStatistic.get(j).fault;
 					homeTime=homeTime+matchpo.playerStatistic.get(j).time;
 					
 				}
@@ -225,8 +225,8 @@ public class DataProcessing implements DataToSQL{
 				matchpo.guestTwoShot=guestShot-guestthreeshot;
 				matchpo.homePenaltyShot=homePShot;
 				matchpo.guestPenaltyShot=guestPShot;
-				matchpo.homeFoul=homeFoul;
-				matchpo.guestFoul=guestFoul;
+				matchpo.homeFoul=homeFault;
+				matchpo.guestFoul=guestFault;
 				matchpo.guestTeamDeffensiveRebound=guestDeRebound;
 				matchpo.homeTeamDeffensiveRebound=homeDeRebound;
 				matchpo.guestTeamOffensiveRebound=guestOfRebound;
@@ -234,8 +234,8 @@ public class DataProcessing implements DataToSQL{
 				matchpo.homeAllTime=homeTime;
 				matchpo.guestAllTime=guestTime;
 				//计算主客队进攻回合
-				matchpo.homeTeamOffensiveRound=(double)homeShot+0.4*(double)homePShot-1.07*((double)homeOfRebound/((double)homeOfRebound+(double)guestDeRebound)*((double)homeShot-(double)homeShotin))+1.07*(double)homeFoul;
-				matchpo.guestTeamOffensiveRound=(double)guestShot+0.4*(double)guestPShot-1.07*((double)guestOfRebound/((double)guestOfRebound+(double)homeDeRebound)*((double)guestShot-(double)guestShotin))+1.07*(double)guestFoul;
+				matchpo.homeTeamOffensiveRound=(double)homeShot+0.4*(double)homePShot-1.07*((double)homeOfRebound/((double)homeOfRebound+(double)guestDeRebound)*((double)homeShot-(double)homeShotin))+1.07*(double)homeFault;
+				matchpo.guestTeamOffensiveRound=(double)guestShot+0.4*(double)guestPShot-1.07*((double)guestOfRebound/((double)guestOfRebound+(double)homeDeRebound)*((double)guestShot-(double)guestShotin))+1.07*(double)guestFault;
 				
 				
 				mlist.add(matchpo);

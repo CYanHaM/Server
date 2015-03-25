@@ -35,7 +35,7 @@ public class PlayerTechPO implements Serializable{
 	public double secondaryAttackRate;             //助攻率
 	public double stealRate;                       //抢断率
 	public double blockShotRate;                   //盖帽率
-	public double foulRate;                       //失误率	
+	public double faultRate;                       //失误率	
 	public double usageRate;                       //使用率
 	public int shotIn;                       //投篮命中数
 	public int shot;                         //投篮出手数
@@ -53,6 +53,6 @@ public class PlayerTechPO implements Serializable{
 	public int opponentTwoShot;                     //对手两分球出手次数
 	public int teamShot;                          //全队出手次数
 	public int teamPenaltyShot;                   //全队罚球次数
-	public int teamFoul;                          //全队失误次数    
+	public int teamFault;                          //全队失误次数    
 
 }
