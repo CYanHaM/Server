@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+
 import PO.MatchPO;
 import PO.PlayerPO;
 import PO.PlayerTechMPO;
@@ -26,13 +27,13 @@ public class DataProcessing implements DataToSQL{
 		try {
 			String encoding = "GBK";
 			File file = new File("matchData");
-			String filelist[]=file.list();
+			File filelist[]=file.listFiles();
 			for(int i=0;i<filelist.length;i++){
 				
 				MatchPO matchpo=new MatchPO();
 				ArrayList<String>info=new ArrayList<String>();
 				
-				InputStreamReader read = new InputStreamReader(new FileInputStream(filelist[i]),encoding);
+				InputStreamReader read = new InputStreamReader(new FileInputStream(filelist[i].getAbsolutePath()),encoding);
 				BufferedReader bufferedReader = new BufferedReader(read);
 				String line = null;
 				while((line = bufferedReader.readLine())!=null) {
@@ -56,11 +57,11 @@ public class DataProcessing implements DataToSQL{
 				matchpo.score3=data[1][2];
 				matchpo.score4=data[1][3];
 				if(data[1].length>4){
-					matchpo.scoreExtra=data[1][5];
+					matchpo.scoreExtra=data[1][data[1].length-1];
 				}else{
 					matchpo.scoreExtra=null;
 				}
-				matchpo.season=filelist[i].split("-")[0];
+				matchpo.season=filelist[i].getName().split("-")[0];
 				
 				//录入胜负情况
 				int guestTeamScore=Integer.parseInt(matchpo.score.split("-")[0]);
@@ -86,12 +87,19 @@ public class DataProcessing implements DataToSQL{
 					}
 					
 				}
+				ArrayList<PlayerTechMPO>ptmlist =new ArrayList<PlayerTechMPO>();
+				matchpo.playerStatistic=ptmlist;
 				for(int k=3;k<homeTeamTip;k++){
 					
 					PlayerTechMPO ptmp=new PlayerTechMPO();
 					ptmp.name=data[k][0];
 					ptmp.position=data[k][1];
-					ptmp.time=Integer.parseInt(data[k][2].split(":")[0])+Integer.parseInt(data[k][2].split(":")[1])/60;
+					try{
+						ptmp.time=Integer.parseInt(data[k][2].split(":")[0]);
+					}catch (NumberFormatException e){
+						ptmp.time=0;
+					}
+					System.out.println(ptmp.time);
 					ptmp.shotIn=Integer.parseInt(data[k][3]);
 					ptmp.shot=Integer.parseInt(data[k][4]);
 					ptmp.threeShotIn=Integer.parseInt(data[k][5]);
@@ -106,7 +114,12 @@ public class DataProcessing implements DataToSQL{
 					ptmp.blockShot=Integer.parseInt(data[k][14]);
 					ptmp.foul=Integer.parseInt(data[k][15]);
 					ptmp.fault=Integer.parseInt(data[k][16]);
-					ptmp.score=Integer.parseInt(data[k][17]);
+					try{
+						ptmp.score=Integer.parseInt(data[k][17]);
+					}catch(NumberFormatException e){
+						ptmp.score=0;
+						
+					}
 					ptmp.team=data[2][0];
 					
 					if(k>=3&&k<=7)
@@ -119,7 +132,7 @@ public class DataProcessing implements DataToSQL{
 					else
 						ptmp.ifParticipate=0;
 					matchpo.playerStatistic.add(ptmp);
-										
+					
 				}
 				
 				for(int k=homeTeamTip+1;k<info.size();k++){
@@ -127,7 +140,11 @@ public class DataProcessing implements DataToSQL{
 					PlayerTechMPO ptmp=new PlayerTechMPO();
 					ptmp.name=data[k][0];
 					ptmp.position=data[k][1];
-					ptmp.time=Integer.parseInt(data[k][2].split(":")[0])*60+Integer.parseInt(data[k][2].split(":")[1]);
+					try{
+						ptmp.time=Integer.parseInt(data[k][2].split(":")[0]);
+					}catch (NumberFormatException e){
+						ptmp.time=0;
+					}					
 					ptmp.shotIn=Integer.parseInt(data[k][3]);
 					ptmp.shot=Integer.parseInt(data[k][4]);
 					ptmp.threeShotIn=Integer.parseInt(data[k][5]);
@@ -142,7 +159,12 @@ public class DataProcessing implements DataToSQL{
 					ptmp.blockShot=Integer.parseInt(data[k][14]);
 					ptmp.foul=Integer.parseInt(data[k][15]);
 					ptmp.fault=Integer.parseInt(data[k][16]);
-					ptmp.score=Integer.parseInt(data[k][17]);
+					try{
+						ptmp.score=Integer.parseInt(data[k][17]);
+					}catch(NumberFormatException e){
+						ptmp.score=0;
+						
+					}
 					ptmp.team=data[2][0];
 					
 					if(k>=homeTeamTip+1&&k<=homeTeamTip+5)
@@ -155,65 +177,67 @@ public class DataProcessing implements DataToSQL{
 					else
 						ptmp.ifParticipate=0;
 					matchpo.playerStatistic.add(ptmp);
-					//计算主客队进攻防守篮板数
-					int homeDeRebound=0;
-					int guestDeRebound=0;
-					int homeOfRebound=0;
-					int guestOfRebound=0;
-					int homeShot=0;
-					int guestShot=0;
-					int homeShotin=0;
-					int guestShotin=0;
-					int homethreeshot=0;
-					int guestthreeshot=0;
-					int homePShot=0;
-					int guestPShot=0;
-					int homeFoul=0;
-					int guestFoul=0;
-					int homeTime=0;
-					int guestTime=0;
-					
-					for(int j=0;j<homeTeamTip-3;j++){
-						guestDeRebound=guestDeRebound+matchpo.playerStatistic.get(j).defensiveRebound;
-						guestOfRebound=guestOfRebound+matchpo.playerStatistic.get(j).offensiveRebound;
-						guestShot=guestShot+matchpo.playerStatistic.get(j).shot;
-						guestShotin=guestShotin+matchpo.playerStatistic.get(j).shotIn;
-						guestthreeshot=guestthreeshot+matchpo.playerStatistic.get(j).threeShot;
-						guestPShot=guestPShot+matchpo.playerStatistic.get(j).penaltyShot;
-						guestFoul=guestFoul+matchpo.playerStatistic.get(j).foul;
-						guestTime=guestTime+matchpo.playerStatistic.get(j).time;
-
-					}
-					for(int j=homeTeamTip-3;j<info.size()-4;j++){
-						homeDeRebound=homeDeRebound+matchpo.playerStatistic.get(j).defensiveRebound;
-						homeOfRebound=homeOfRebound+matchpo.playerStatistic.get(j).offensiveRebound;
-						homeShot=homeShot+matchpo.playerStatistic.get(j).shot;
-						homeShotin=homeShotin+matchpo.playerStatistic.get(j).shotIn;
-						homethreeshot=homethreeshot+matchpo.playerStatistic.get(j).threeShot;
-						homePShot=homePShot+matchpo.playerStatistic.get(j).penaltyShot;
-						homeFoul=homeFoul+matchpo.playerStatistic.get(j).foul;
-						homeTime=homeTime+matchpo.playerStatistic.get(j).time;
-
-					}
-					matchpo.homeShotIn=homeShotin;
-					matchpo.guestShotIn=guestShotin;
-					matchpo.homeTwoShot=homeShot-homethreeshot;
-					matchpo.guestTwoShot=guestShot-guestthreeshot;
-					matchpo.homePenaltyShot=homePShot;
-					matchpo.guestPenaltyShot=guestPShot;
-					matchpo.homeFoul=homeFoul;
-					matchpo.guestFoul=guestFoul;
-					matchpo.guestTeamDeffensiveRebound=guestDeRebound;
-					matchpo.homeTeamDeffensiveRebound=homeDeRebound;
-					matchpo.guestTeamOffensiveRebound=guestOfRebound;
-					matchpo.homeTeamOffensiveRebound=homeOfRebound;
-					matchpo.homeAllTime=homeTime;
-					matchpo.guestAllTime=guestTime;
-					//计算主客队进攻回合
-					matchpo.homeTeamOffensiveRound=(double)homeShot+0.4*(double)homePShot-1.07*((double)homeOfRebound/((double)homeOfRebound+(double)guestDeRebound)*((double)homeShot-(double)homeShotin))+1.07*(double)homeFoul;
-					matchpo.guestTeamOffensiveRound=(double)guestShot+0.4*(double)guestPShot-1.07*((double)guestOfRebound/((double)guestOfRebound+(double)homeDeRebound)*((double)guestShot-(double)guestShotin))+1.07*(double)guestFoul;
-
 				}
+				//计算主客队进攻防守篮板数
+				int homeDeRebound=0;
+				int guestDeRebound=0;
+				int homeOfRebound=0;
+				int guestOfRebound=0;
+				int homeShot=0;
+				int guestShot=0;
+				int homeShotin=0;
+				int guestShotin=0;
+				int homethreeshot=0;
+				int guestthreeshot=0;
+				int homePShot=0;
+				int guestPShot=0;
+				int homeFoul=0;
+				int guestFoul=0;
+				int homeTime=0;
+				int guestTime=0;
+				
+				for(int j=0;j<homeTeamTip-3;j++){
+					guestDeRebound=guestDeRebound+matchpo.playerStatistic.get(j).defensiveRebound;
+					guestOfRebound=guestOfRebound+matchpo.playerStatistic.get(j).offensiveRebound;
+					guestShot=guestShot+matchpo.playerStatistic.get(j).shot;
+					guestShotin=guestShotin+matchpo.playerStatistic.get(j).shotIn;
+					guestthreeshot=guestthreeshot+matchpo.playerStatistic.get(j).threeShot;
+					guestPShot=guestPShot+matchpo.playerStatistic.get(j).penaltyShot;
+					guestFoul=guestFoul+matchpo.playerStatistic.get(j).foul;
+					guestTime=guestTime+matchpo.playerStatistic.get(j).time;
+					
+				}
+				
+				for(int j=homeTeamTip-3;j<info.size()-4;j++){
+					homeDeRebound=homeDeRebound+matchpo.playerStatistic.get(j).defensiveRebound;
+					homeOfRebound=homeOfRebound+matchpo.playerStatistic.get(j).offensiveRebound;
+					homeShot=homeShot+matchpo.playerStatistic.get(j).shot;
+					homeShotin=homeShotin+matchpo.playerStatistic.get(j).shotIn;
+					homethreeshot=homethreeshot+matchpo.playerStatistic.get(j).threeShot;
+					homePShot=homePShot+matchpo.playerStatistic.get(j).penaltyShot;
+					homeFoul=homeFoul+matchpo.playerStatistic.get(j).foul;
+					homeTime=homeTime+matchpo.playerStatistic.get(j).time;
+					
+				}
+				matchpo.homeShotIn=homeShotin;
+				matchpo.guestShotIn=guestShotin;
+				matchpo.homeTwoShot=homeShot-homethreeshot;
+				matchpo.guestTwoShot=guestShot-guestthreeshot;
+				matchpo.homePenaltyShot=homePShot;
+				matchpo.guestPenaltyShot=guestPShot;
+				matchpo.homeFoul=homeFoul;
+				matchpo.guestFoul=guestFoul;
+				matchpo.guestTeamDeffensiveRebound=guestDeRebound;
+				matchpo.homeTeamDeffensiveRebound=homeDeRebound;
+				matchpo.guestTeamOffensiveRebound=guestOfRebound;
+				matchpo.homeTeamOffensiveRebound=homeOfRebound;
+				matchpo.homeAllTime=homeTime;
+				matchpo.guestAllTime=guestTime;
+				//计算主客队进攻回合
+				matchpo.homeTeamOffensiveRound=(double)homeShot+0.4*(double)homePShot-1.07*((double)homeOfRebound/((double)homeOfRebound+(double)guestDeRebound)*((double)homeShot-(double)homeShotin))+1.07*(double)homeFoul;
+				matchpo.guestTeamOffensiveRound=(double)guestShot+0.4*(double)guestPShot-1.07*((double)guestOfRebound/((double)guestOfRebound+(double)homeDeRebound)*((double)guestShot-(double)guestShotin))+1.07*(double)guestFoul;
+				
+				
 				mlist.add(matchpo);
 				
 			}
@@ -230,34 +254,36 @@ public class DataProcessing implements DataToSQL{
 		try {
 			String encoding = "GBK";
 			File file = new File("playerData");
-			String filelist[]=file.list();
+			File filelist[]=file.listFiles();
 			for(int i=0;i<filelist.length;i++){
 				
 				PlayerPO playerpo=new PlayerPO();
 				ArrayList<String>info=new ArrayList<String>();
 				
-				InputStreamReader read = new InputStreamReader(new FileInputStream(filelist[i]),encoding);
+				InputStreamReader read = new InputStreamReader(new FileInputStream(filelist[i].getAbsolutePath()),encoding);
 				BufferedReader bufferedReader = new BufferedReader(read);
 				String line = null;
 				while((line = bufferedReader.readLine())!=null) {
 					info.add(line);
-					
+					System.out.println(line);
 				}
 				read.close();
 				
-				String[][]data=new String [info.size()][];
-				for(int j=0;j<info.size();j++){
-					data[j]=info.get(j).split("║");
+				String[][]data=new String [9][];
+				for(int j=1;j<info.size()-1;j=j+2){
+					data[(j-1)/2]=info.get(j).split("║");
+					System.out.println(data[j][0]);
 				}
-				playerpo.name=data[1][1].split("│")[1];
-				playerpo.uniformNum=Integer.parseInt(data[3][1].split("│")[1]);
-				playerpo.position=data[5][1].split("│")[1];
-				playerpo.height=data[7][1].split("│")[1];
-				playerpo.weight=Double.valueOf(data[9][1].split("│")[1]);
-				playerpo.birth=data[11][1].split("│")[1];
-				playerpo.age=Integer.parseInt(data[13][1].split("│")[1]);
-				playerpo.exp=Integer.parseInt(data[15][1].split("│")[1]);
-				playerpo.school=data[17][1].split("│")[1];
+				
+				playerpo.name=data[0][1].split("│")[1];
+				playerpo.uniformNum=Integer.parseInt(data[1][1].split("│")[1]);
+				playerpo.position=data[2][1].split("│")[1];
+				playerpo.height=data[3][1].split("│")[1];
+				playerpo.weight=Double.valueOf(data[4][1].split("│")[1]);
+				playerpo.birth=data[5][1].split("│")[1];
+				playerpo.age=Integer.parseInt(data[6][1].split("│")[1]);
+				playerpo.exp=Integer.parseInt(data[7][1].split("│")[1]);
+				playerpo.school=data[8][1].split("│")[1];
 				plist.add(playerpo);
 				
 			}
@@ -273,7 +299,7 @@ public class DataProcessing implements DataToSQL{
 	public ArrayList<TeamPO> teamRead(){
 		try {
 			String encoding = "GBK";
-			File file = new File("teamData");
+			File file = new File("/teamData/teams");
 			ArrayList<String>info=new ArrayList<String>();					
 			InputStreamReader read = new InputStreamReader(new FileInputStream(file),encoding);
 			BufferedReader bufferedReader = new BufferedReader(read);
@@ -305,6 +331,19 @@ public class DataProcessing implements DataToSQL{
 		
 	}
 	
+	public static void main(String args[]){
+		DataProcessing d=new DataProcessing();
+		ArrayList<MatchPO> nn=new ArrayList<MatchPO>();
+		ArrayList<PlayerPO> pn=new ArrayList<PlayerPO>();
+
+	//	nn=d.matchRead();
+		pn=d.playerRead();
+		for (int i = 0; i < nn.size(); i++) {
+	//		System.out.println(nn.get(i).date);
+			System.out.println(pn.get(i).school);
+
+			
+		}
+	}
 }
 
-	
