@@ -189,6 +189,10 @@ public class DataProcessing implements DataToSQL{
 				int guestShotin=0;
 				int homethreeshot=0;
 				int guestthreeshot=0;
+				int homethreeshotIn=0;
+				int guestthreeshotIn=0;
+				int homePShotIn=0;
+				int guestPShotIn=0;
 				int homePShot=0;
 				int guestPShot=0;
 				int homeFault=0;
@@ -202,7 +206,9 @@ public class DataProcessing implements DataToSQL{
 					guestShot=guestShot+matchpo.playerStatistic.get(j).shot;
 					guestShotin=guestShotin+matchpo.playerStatistic.get(j).shotIn;
 					guestthreeshot=guestthreeshot+matchpo.playerStatistic.get(j).threeShot;
+					guestthreeshotIn=guestthreeshotIn+matchpo.playerStatistic.get(j).threeShotIn;
 					guestPShot=guestPShot+matchpo.playerStatistic.get(j).penaltyShot;
+					guestPShotIn=guestPShotIn+matchpo.playerStatistic.get(j).penaltyShotIn;
 					guestFault=guestFault+matchpo.playerStatistic.get(j).fault;
 					guestTime=guestTime+matchpo.playerStatistic.get(j).time;
 					
@@ -214,7 +220,9 @@ public class DataProcessing implements DataToSQL{
 					homeShot=homeShot+matchpo.playerStatistic.get(j).shot;
 					homeShotin=homeShotin+matchpo.playerStatistic.get(j).shotIn;
 					homethreeshot=homethreeshot+matchpo.playerStatistic.get(j).threeShot;
+					homethreeshotIn=homethreeshotIn+matchpo.playerStatistic.get(j).threeShotIn;
 					homePShot=homePShot+matchpo.playerStatistic.get(j).penaltyShot;
+					homePShotIn=homePShotIn+matchpo.playerStatistic.get(j).penaltyShotIn;
 					homeFault=homeFault+matchpo.playerStatistic.get(j).fault;
 					homeTime=homeTime+matchpo.playerStatistic.get(j).time;
 					
@@ -223,8 +231,12 @@ public class DataProcessing implements DataToSQL{
 				matchpo.guestShotIn=guestShotin;
 				matchpo.homeTwoShot=homeShot-homethreeshot;
 				matchpo.guestTwoShot=guestShot-guestthreeshot;
+				matchpo.homeTwoShotIn=homeShotin-homethreeshotIn;
+				matchpo.guestTwoShotIn=guestShotin-guestthreeshotIn;
 				matchpo.homePenaltyShot=homePShot;
 				matchpo.guestPenaltyShot=guestPShot;
+				matchpo.homePenaltyShotIn=homePShotIn;
+				matchpo.guestPenaltyShotIn=guestPShotIn;
 				matchpo.homeFoul=homeFault;
 				matchpo.guestFoul=guestFault;
 				matchpo.guestTeamDeffensiveRebound=guestDeRebound;
@@ -263,10 +275,13 @@ public class DataProcessing implements DataToSQL{
 				InputStreamReader read = new InputStreamReader(new FileInputStream(filelist[i].getAbsolutePath()),encoding);
 				BufferedReader bufferedReader = new BufferedReader(read);
 				String line = null;
-				while((line = bufferedReader.readLine())!=null) {
-					info.add(line);
-					System.out.println(line);
-				}
+				System.out.println(bufferedReader.readLine());
+				System.out.println(bufferedReader.readLine());
+				System.out.println(bufferedReader.readLine());
+//				while((line = bufferedReader.readLine())!=null) {
+//					info.add(line);
+//					System.out.println(line);
+//				}
 				read.close();
 				
 				String[][]data=new String [9][];
