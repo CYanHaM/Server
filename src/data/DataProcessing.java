@@ -275,19 +275,15 @@ public class DataProcessing implements DataToSQL{
 				InputStreamReader read = new InputStreamReader(new FileInputStream(filelist[i].getAbsolutePath()),encoding);
 				BufferedReader bufferedReader = new BufferedReader(read);
 				String line = null;
-				System.out.println(bufferedReader.readLine());
-				System.out.println(bufferedReader.readLine());
-				System.out.println(bufferedReader.readLine());
-//				while((line = bufferedReader.readLine())!=null) {
-//					info.add(line);
-//					System.out.println(line);
-//				}
+				while((line = bufferedReader.readLine())!=null) {
+					info.add(line);
+					System.out.println(line);
+				}
 				read.close();
 				
 				String[][]data=new String [9][];
 				for(int j=1;j<info.size()-1;j=j+2){
 					data[(j-1)/2]=info.get(j).split("¨U");
-					System.out.println(data[j][0]);
 				}
 				
 				playerpo.name=data[0][1].split("©¦")[1];
