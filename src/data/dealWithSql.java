@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import PO.PlayerTechPO;
 import PO.TeamTechPO;
 
+/*
+ * 提供给曹志伟的半成品的两个po,无法计算的值为0
+ */
 public class dealWithSql implements SQLservice {
 
 	@Override
@@ -38,12 +41,13 @@ public class dealWithSql implements SQLservice {
 			// statement用来执行SQL语句
 			Statement statement = conn.createStatement();
 			// 要执行的SQL语句
-			String sql = "SELECT FROM t_playerdata";
+			String sql = "SELECT * FROM t_playerdata";
 			ResultSet rs = statement.executeQuery(sql);
 			while(rs.next()){
 				PlayerTechPO po = new PlayerTechPO();
-				po.name = rs.getString(1);
-				po.team = rs.getString(2);
+				po.name = new String(rs.getString(0).getBytes("ISO-8859-1"),"utf-8");
+				po.season = new String(rs.getString(1).getBytes("ISO-8859-1"),"utf-8");
+				po.team = new String(rs.getString(2).getBytes("ISO-8859-1"),"utf-8");
 				po.gameNum = rs.getInt(3);
 				po.startingNum = rs.getInt(4);
 				po.rebound = rs.getInt(5);
@@ -71,6 +75,23 @@ public class dealWithSql implements SQLservice {
 				po.blockShotRate = rs.getDouble(27);
 				po.faultRate = rs.getDouble(28);
 				po.usageRate = rs.getDouble(29);
+				po.shotIn = rs.getInt(30);
+				po.shot = rs.getInt(31);
+				po.threeShotIn = rs.getInt(32);
+				po.threeShot = rs.getInt(33);
+				po.penaltyShotIn = rs.getInt(34);
+				po.penaltyShot = rs.getInt(35);
+				po.teamAllTime = rs.getInt(36);
+				po.teamOffensiveRebound = rs.getInt(37);
+				po.teamDefensiveRebound = rs.getInt(38);
+				po.opponentOffensiveRebound = rs.getInt(39);
+				po.opponentDefensiveRebound = rs.getInt(40);
+				po.teamShotIn = rs.getInt(41);
+				po.opponentOffensiveNum = rs.getInt(42);
+				po.opponentTwoShot = rs.getInt(43);
+				po.teamShot = rs.getInt(44);
+				po.teamPenaltyShot = rs.getInt(45);
+				po.teamFault = rs.getInt(46);
 				list.add(po);
 			}
 			rs.close();
@@ -112,12 +133,12 @@ public class dealWithSql implements SQLservice {
 			// statement用来执行SQL语句
 			Statement statement = conn.createStatement();
 			// 要执行的SQL语句
-			String sql = "SELECT FROM t_playerdata";
+			String sql = "SELECT * FROM t_seasondata";
 			ResultSet rs = statement.executeQuery(sql);
 			while(rs.next()){
 				TeamTechPO po = new TeamTechPO();
-				po.name = rs.getString(0);
-				po.season = rs.getString(1);
+				po.name = new String(rs.getString(0).getBytes("ISO-8859-1"),"utf-8");
+				po.season = new String(rs.getString(1).getBytes("ISO-8859-1"),"utf-8");
 				po.gameNum = rs.getInt(2);
 				po.shotInNum = rs.getInt(3);
 				po.shotNum =  rs.getInt(4);
@@ -138,11 +159,17 @@ public class dealWithSql implements SQLservice {
 				po.threeShotInRate = rs.getDouble(19);
 				po.penaltyShotInRate = rs.getDouble(20);
 				po.winningRate = rs.getDouble(21);
-				po.offensiveEfficiency = rs.getDouble(22);
-				po.defensiveEfficiency = rs.getDouble(23);
-				po.reboundEfficiency = rs.getDouble(24);
-				po.stealEfficiency = rs.getDouble(25);
-				po.secondaryAttackEfficiency = rs.getDouble(26);
+				po.winningRate = rs.getDouble(22);
+				po.offensiveRound = rs.getDouble(23);
+				po.offensiveEfficiency = rs.getDouble(24);
+				po.defensiveEfficiency = rs.getDouble(25);
+				po.reboundEfficiency = rs.getDouble(26);
+				po.stealEfficiency = rs.getDouble(27);
+				po.secondaryAttackEfficiency = rs.getDouble(28);
+				po.opponentDefensiveRebound = rs.getInt(29);
+				po.opponentOffensiveRebound = rs.getInt(30);
+				po.opponentOffensiveRound = rs.getInt(31);
+				po.opponentScore = rs.getInt(32);
 				list.add(po);
 			}
 			rs.close();

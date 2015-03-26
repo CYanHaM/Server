@@ -114,8 +114,8 @@ public class TeamTechData implements TeamTechDataService{
 			ResultSet rs = cmd.executeQuery();
 			while(rs.next()){
 				TeamTechPO po = new TeamTechPO();
-				po.name = rs.getString(0);
-				po.season = rs.getString(1);
+				po.name = new String(rs.getString(0).getBytes("ISO-8859-1"),"utf-8");
+				po.season = new String(rs.getString(1).getBytes("ISO-8859-1"),"utf-8");
 				po.gameNum = rs.getInt(2);
 				po.shotInNum = rs.getInt(3);
 				po.shotNum =  rs.getInt(4);
@@ -136,11 +136,17 @@ public class TeamTechData implements TeamTechDataService{
 				po.threeShotInRate = rs.getDouble(19);
 				po.penaltyShotInRate = rs.getDouble(20);
 				po.winningRate = rs.getDouble(21);
-				po.offensiveEfficiency = rs.getDouble(22);
-				po.defensiveEfficiency = rs.getDouble(23);
-				po.reboundEfficiency = rs.getDouble(24);
-				po.stealEfficiency = rs.getDouble(25);
-				po.secondaryAttackEfficiency = rs.getDouble(26);
+				po.winningRate = rs.getDouble(22);
+				po.offensiveRound = rs.getDouble(23);
+				po.offensiveEfficiency = rs.getDouble(24);
+				po.defensiveEfficiency = rs.getDouble(25);
+				po.reboundEfficiency = rs.getDouble(26);
+				po.stealEfficiency = rs.getDouble(27);
+				po.secondaryAttackEfficiency = rs.getDouble(28);
+				po.opponentDefensiveRebound = rs.getInt(29);
+				po.opponentOffensiveRebound = rs.getInt(30);
+				po.opponentOffensiveRound = rs.getInt(31);
+				po.opponentScore = rs.getInt(32);
 				list.add(po);
 			}
 			rs.close();
@@ -258,8 +264,8 @@ public class TeamTechData implements TeamTechDataService{
 			ResultSet rs = cmd.executeQuery();
 			while(rs.next()){
 				TeamTechPO po = new TeamTechPO();
-				po.name = rs.getString(0);
-				po.season = rs.getString(1);
+				po.name = new String(rs.getString(0).getBytes("ISO-8859-1"),"utf-8");
+				po.season = new String(rs.getString(1).getBytes("ISO-8859-1"),"utf-8");
 				po.gameNum = rs.getInt(2);
 				po.shotInNum = rs.getInt(3);
 				po.shotNum =  rs.getInt(4);
@@ -280,11 +286,17 @@ public class TeamTechData implements TeamTechDataService{
 				po.threeShotInRate = rs.getDouble(19);
 				po.penaltyShotInRate = rs.getDouble(20);
 				po.winningRate = rs.getDouble(21);
-				po.offensiveEfficiency = rs.getDouble(22);
-				po.defensiveEfficiency = rs.getDouble(23);
-				po.reboundEfficiency = rs.getDouble(24);
-				po.stealEfficiency = rs.getDouble(25);
-				po.secondaryAttackEfficiency = rs.getDouble(26);
+				po.winningRate = rs.getDouble(22);
+				po.offensiveRound = rs.getDouble(23);
+				po.offensiveEfficiency = rs.getDouble(24);
+				po.defensiveEfficiency = rs.getDouble(25);
+				po.reboundEfficiency = rs.getDouble(26);
+				po.stealEfficiency = rs.getDouble(27);
+				po.secondaryAttackEfficiency = rs.getDouble(28);
+				po.opponentDefensiveRebound = rs.getInt(29);
+				po.opponentOffensiveRebound = rs.getInt(30);
+				po.opponentOffensiveRound = rs.getInt(31);
+				po.opponentScore = rs.getInt(32);
 				list.add(po);
 			}
 			rs.close();

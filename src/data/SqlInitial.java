@@ -14,12 +14,22 @@ import PO.TeamPO;
 /*
  * 供初始化数据库时调用
  */
-public class sqlInitial {
+public class SqlInitial {
+	
+	public static void main(String[] args){
+		SqlInitial si = new SqlInitial();
+		si.player();
+	//	si.team();
+	//	si.match();
+	//	si.teamTech();
+	//	si.playerTech();
+	}
+	
 	DataToSQL dts = new DataProcessing();
 	
-	//player和team使用普通插入方式，待优化
 	public void player(){
 		ArrayList<PlayerPO> list = dts.playerRead();
+	//	ArrayList<PlayerPO> list = new ArrayList<PlayerPO>();
 		int size = list.size();
 		//连接至数据库
 		//驱动程序名
@@ -41,12 +51,12 @@ public class sqlInitial {
 			}
 			// statement用来执行SQL语句
 			Statement statement = conn.createStatement();
-			
+			String sql = "insert into t_player values ";
 			for(int i=0;i<size;i++){
 				PlayerPO po = list.get(i);
-				String sql = "insert into t_player (name,uniformNum,position,height,weight,birth,age,exp,school) values ('"+po.name+"','"+po.uniformNum+"','"+po.position+"','"+po.height+"','"+po.weight+"','"+po.birth+"','"+po.age+"','"+po.age+"','"+po.exp+"','"+po.school+"')";
-				statement.executeQuery(sql);
+				sql += "('"+po.name+"','"+po.uniformNum+"','"+po.position+"','"+po.height+"','"+po.weight+"','"+po.birth+"','"+po.age+"','"+po.age+"','"+po.exp+"','"+po.school+"')";
 			}
+			statement.executeUpdate(sql);
 			conn.close();
 		} catch(ClassNotFoundException e) {   
 	        System.out.println("Sorry,can`t find the Driver!");   
@@ -81,12 +91,12 @@ public class sqlInitial {
 			}
 			// statement用来执行SQL语句
 			Statement statement = conn.createStatement();
-			
+			String sql = "insert into t_team values ";
 			for(int i=0;i<size;i++){
 				TeamPO po = list.get(i);
-				String sql = "insert into t_team (fullName,abbreviation,location,division,partition,homeCourt,time) values ('"+po.fullName+"','"+po.abbreviation+"','"+po.location+"','"+po.division+"','"+po.partition+"','"+po.homeCourt+"','"+po.time+"')";
-				statement.executeQuery(sql);
+				sql += "('"+po.fullName+"','"+po.abbreviation+"','"+po.location+"','"+po.division+"','"+po.partition+"','"+po.homeCourt+"','"+po.time+"') ";
 			}
+			statement.executeQuery(sql);
 			conn.close();
 		} catch(ClassNotFoundException e) {   
 	        System.out.println("Sorry,can`t find the Driver!");   
@@ -125,11 +135,11 @@ public class sqlInitial {
 	    	for(int i=0;i<size;i++){
 	    		MatchPO temp = list.get(i);
 	    		//生成t_match
-	    		sql2=sql2+"("+temp.season+","+temp.date+","+temp.homeTeam+","+temp.guestTeam+","+temp.score+","+temp.score1+","+temp.score2+","+temp.score3
-	    				+","+temp.score4+","+temp.scoreExtra+","+temp.ifHomeTeamWin+","+temp.ifGuestTeamWin+","+temp.homeTeamDeffensiveRebound+","+temp.guestTeamDeffensiveRebound+","+
-	    				temp.homeTeamOffensiveRebound+","+temp.guestTeamOffensiveRebound+","+temp.homeTeamOffensiveRound+","+temp.guestTeamOffensiveRound+","+temp.homeScore+","+temp.guestScore
-	    				+","+temp.homeAllTime+","+temp.guestAllTime+","+temp.homeShotIn+","+temp.guestShotIn+","+temp.homeTwoShot+","+temp.guestTwoShot+","+temp.homeShot+","+temp.guestShot+","+
-	    				temp.homePenaltyShot+","+temp.guestPenaltyShot+","+temp.homeFoul+","+temp.guestFoul+") ";
+	    		sql2+="('"+temp.season+"','"+temp.date+"','"+temp.homeTeam+"','"+temp.guestTeam+"','"+temp.score+"','"+temp.score1+"','"+temp.score2+"','"+temp.score3
+	    				+"','"+temp.score4+"','"+temp.scoreExtra+"','"+temp.ifHomeTeamWin+"','"+temp.ifGuestTeamWin+"','"+temp.homeTeamDeffensiveRebound+"','"+temp.guestTeamDeffensiveRebound+"','"+
+	    				temp.homeTeamOffensiveRebound+"','"+temp.guestTeamOffensiveRebound+"','"+temp.homeTeamOffensiveRound+"','"+temp.guestTeamOffensiveRound+"','"+temp.homeScore+"','"+temp.guestScore
+	    				+"','"+temp.homeAllTime+"','"+temp.guestAllTime+"','"+temp.homeShotIn+"','"+temp.guestShotIn+"','"+temp.homeTwoShot+"','"+temp.guestTwoShot+"','"+temp.homeShot+"','"+temp.guestShot+"','"+
+	    				temp.homePenaltyShot+"','"+temp.guestPenaltyShot+"','"+temp.homeFoul+"','"+temp.guestFoul+"') ";
 	    		
 	    		//生成t_detail
 		    	ArrayList<PlayerTechMPO> mpoList = temp.playerStatistic;
@@ -137,10 +147,10 @@ public class sqlInitial {
 		    	String sql1 = "insert into t_detail values ";
 		    	for(int j=0;j<n;j++){
 			    	PlayerTechMPO mpo = mpoList.get(j);
-			    	sql1=sql1+"("+mpo.name+","+mpo.team+","+temp.season+","+mpo.position+","+mpo.time+","+
-		         		mpo.shotIn+","+mpo.shot+","+mpo.threeShotIn+","+mpo.threeShot+","+mpo.penaltyShotIn+","+mpo.penaltyShot+","+
-						mpo.offensiveRebound+","+mpo.defensiveRebound+","+mpo.rebound+","+mpo.secondaryAttack+","+mpo.steal+","+
-			        	mpo.blockShot+","+mpo.fault+","+mpo.foul+","+mpo.score+","+mpo.ifFirstLineUp+","+mpo.ifParticipate+") ";
+			    	sql1+="('"+mpo.name+"','"+mpo.team+"','"+temp.season+"','"+mpo.position+"','"+mpo.time+"','"+
+		         		mpo.shotIn+"','"+mpo.shot+"','"+mpo.threeShotIn+"','"+mpo.threeShot+"','"+mpo.penaltyShotIn+"','"+mpo.penaltyShot+"','"+
+						mpo.offensiveRebound+"','"+mpo.defensiveRebound+"','"+mpo.rebound+"','"+mpo.secondaryAttack+"','"+mpo.steal+"','"+
+			        	mpo.blockShot+"','"+mpo.fault+"','"+mpo.foul+"','"+mpo.score+"','"+mpo.ifFirstLineUp+"','"+mpo.ifParticipate+"') ";
 		     	}
 			    statement.executeQuery(sql1);
 	    	}
@@ -156,7 +166,7 @@ public class sqlInitial {
      	}
 	}
 	
-	//生成TeamTechPO,待优化
+	//生成TeamTechPO,有两个重复使用的查询语句，待优化。
 	public void teamTech(){
 		String teamName = "";                            //球队名称
 		String season = "";                          //赛季
@@ -172,25 +182,25 @@ public class sqlInitial {
 		int offensiveRebound = 0;                //前场篮板数
 		int defensiveRebound = 0;                //后场篮板数
 		int rebound = 0;                         //总篮板数
+		int fault = 0;                           //失误数
+		
 		int secondaryAttack = 0;                 //助攻数
 	    int steal = 0;                           //抢断数
 		int blockShot = 0;                       //盖帽数
-		int fault = 0;                           //失误数
 		int foul = 0;                            //犯规数
+		
 		int score = 0;                           //比赛得分
-	/*	double shotInRate = 0;                      //投篮命中率
+		double shotInRate = 0;                      //投篮命中率
 		double threeShotInRate = 0;                 //三分命中率
 		double penaltyShotInRate = 0;               //罚球命中率
-		double winningRate = 0;                     //胜率
-	*/
+		double winningRate = 0;                     //胜率	
 		int winningNum = 0;                         //胜场数
 		double offensiveRound = 0;                  //进攻回合
-	/*	double offensiveEfficiency = 0;               //进攻效率
+		double offensiveEfficiency = 0;               //进攻效率
 		double defensiveEfficiency = 0;               //防守效率
 		double reboundEfficiency = 0;                 //篮板效率
 		double stealEfficiency = 0;                   //抢断效率
 		double secondaryAttackEfficiency = 0;         //助攻效率
-	*/
 		int opponentDefensiveRebound = 0;          //对方防守篮板
 		int opponentOffensiveRebound = 0;          //对方进攻篮板
 		double opponentOffensiveRound = 0;        //对方进攻回合
@@ -215,99 +225,72 @@ public class sqlInitial {
 			}
 			// statement用来执行SQL语句
 			Statement statement = conn.createStatement();
-			
-			ResultSet rs = statement.executeQuery("select distinct homeTeam,season from t_match");
-			//挨个处理每一只球队
 			String sql = "insert into t_seasondata values ";
-			while(rs.next()){
-				teamName = rs.getString(0);
-				season = rs.getString(1);
-				ResultSet rs1 = statement.executeQuery("select COUNT(*) as num from t_match where homeTeam='"+teamName+"'");
-				while(rs1.next())
-					gameNum = rs1.getInt("num");
-				ResultSet rs2 = statement.executeQuery("select COUNT(*) as num from t_match where guestTeam='"+teamName+"'");
-				while(rs2.next())
-					gameNum+=rs2.getInt("num");
-				
-			    ResultSet rs3 = statement.executeQuery("select NUM(homeShotInNum),NUM(homeShotNum),NUM(homeTwoShotInNum),NUM(homeTwoShotNum),NUM(homePenaltyShotInNum),NUM(homePenaltyShotNum),"
-			    		+ "NUM(homeOffensiveRebound),NUM(homeDefensiveRebound),NUM(homeScore) where homeTeam='"+teamName+"'");
-			    while(rs3.next()){
-			    	shotInNum = rs3.getInt("0");
-			    	shotNum = rs3.getInt(1);
-			    	twoShotInNum = rs3.getInt(2);
-			    	twoShotNum = rs3.getInt(3);
-			    	penaltyShotInNum = rs3.getInt(4);
-			    	penaltyShotNum = rs3.getInt(5);
-			    	offensiveRebound = rs3.getInt(6);
-			    	defensiveRebound = rs3.getInt(7);
-			    	score = rs3.getInt(8);
-			    }
-			    ResultSet rs4 = statement.executeQuery("select NUM(guestShotInNum),NUM(guestShotNum),NUM(guestTwoShotInNum),NUM(guestTwoShotNum),NUMguestPenaltyShotInNum),NUM(guestPenaltyShotNum),"
-			    		+ "NUM(guestOffensiveRebound),NUM(guestDefensiveRebound),NUM(guestScore) where guestTeam='"+teamName+"'");
-			    while(rs4.next()){
-			    	shotInNum += rs4.getInt("0");
-			    	shotNum += rs4.getInt(1);
-			    	twoShotInNum += rs4.getInt(2);
-			    	twoShotNum += rs4.getInt(3);
-			    	penaltyShotInNum += rs4.getInt(4);
-			    	penaltyShotNum += rs4.getInt(5);
-			    	offensiveRebound += rs4.getInt(6);
-			    	defensiveRebound += rs4.getInt(7);
-			    	score += rs4.getInt(8);
-			    }
-			    rebound = offensiveRebound + defensiveRebound;
-			    threeShotInNum = shotInNum - twoShotInNum;
-			    threeShotNum = shotNum - twoShotNum;
-			    //遍历detail，找到属于该队的球员数据
-			    ResultSet rs5 = statement.executeQuery("select NUM(secondaryAttack),NUM(steal),NUM(blockShot),NUM(fault),NUM(foul) from t_detail where abbreviation='"+teamName+"'");
-			    while(rs5.next()){
-			    	secondaryAttack = rs5.getInt(0);
-			    	steal = rs5.getInt(1);
-			    	blockShot = rs5.getInt(2);
-			    	fault = rs5.getInt(3);
-			    	foul = rs5.getInt(4);
-			    }
-			    ResultSet rs6 = statement.executeQuery("select NUM(ifHomeTeamWin) from t_match where homeTeam='"+teamName+"'");
-			    while(rs6.next())
-			    	winningNum = rs6.getInt(0);
-			    ResultSet rs7 = statement.executeQuery("select NUM(ifGuestTeamWin) from t_match where guestTeam='"+teamName+"'");
-			    while(rs7.next())
-			    	winningNum += rs7.getInt(0);
-			    //opponentDefensiveRebound
-			    ResultSet rs8 = statement.executeQuery("select NUM(guestDefensiveRebound) from t_match where homeTeam='"+teamName+"'");
-			    while(rs8.next())
-			    	opponentDefensiveRebound = rs8.getInt(0);
-			    ResultSet rs9 = statement.executeQuery("select NUM(homeDefensiveRebound) from t_match where guestTeam='"+teamName+"'");
-			    while(rs9.next())
-			    	opponentDefensiveRebound += rs9.getInt(0);
-			    //opponentOffensiveRebound
-			    ResultSet rs10 = statement.executeQuery("select NUM(guestOffensiveRebound) from t_match where homeTeam='"+teamName+"'");
-			    while(rs10.next())
-			    	opponentOffensiveRebound = rs10.getInt(0);
-			    ResultSet rs11 = statement.executeQuery("select NUM(homeOffensiveRebound) from t_match where guestTeam='"+teamName+"'");
-			    while(rs11.next())
-			    	opponentOffensiveRebound += rs11.getInt(0);
-			    //opponentOffensiveRound
-			    ResultSet rs12 = statement.executeQuery("select NUM(guestOffensiveRound) from t_match where homeTeam='"+teamName+"'");
-			    while(rs12.next())
-			    	opponentOffensiveRound = rs12.getInt(0);
-			    ResultSet rs13 = statement.executeQuery("select NUM(homeOffensiveRound) from t_match where guestTeam='"+teamName+"'");
-			    while(rs13.next())
-			    	opponentOffensiveRound += rs13.getInt(0);
-			    //opponentScore
-			    ResultSet rs14 = statement.executeQuery("select NUM(guestScore) from t_match where homeTeam='"+teamName+"'");
-			    while(rs14.next())
-			    	opponentScore = rs14.getInt(0);
-			    ResultSet rs15 = statement.executeQuery("select NUM(homeScore) from t_match where guestTeam='"+teamName+"'");
-			    while(rs15.next())
-			    	opponentScore += rs15.getInt(0);
-			    
-			    sql+="("+teamName+","+season+","+gameNum+","+shotInNum+","+shotNum+","+threeShotInNum+","+threeShotNum+","+penaltyShotInNum+","+
-			    penaltyShotNum+","+offensiveRebound+","+defensiveRebound+","+rebound+","+secondaryAttack+","+steal+","+blockShot+","+fault+","+
-			    		foul+","+score+","+null+","+null+","+null+","+null+","+winningNum+","+offensiveRound+","
-			    +null+","+null+","+null+","+null+","+null+","+opponentDefensiveRebound+","+
-			    		opponentOffensiveRebound+","+opponentOffensiveRound+","+opponentScore+") ";
+	
+			ResultSet rs1 = statement.executeQuery("select homeTeam,season, NUM(homeShotIn),NUM(homeShot),NUM(homeTwoShotIn),NUM(homeTwoShot),NUM(homePenaltyShotIn),NUM(homePenaltyShot),"
+					+ "NUM(homeOffensiveRebound),NUM(homeDefensiveRebound),NUM(homeFoul),NUM(homeScore),NUM(ifHomeTeamWin),NUM(homeTeamOffensiveRound),NUM(guestDefensiveRebound),"
+					+ "NUM(guestOffensiveRebound),NUM(guestOffensiveRound),NUM(guestScore) from t_seansondata GROUP BY homeTeam)");
+			while(rs1.next()){
+				teamName = new String(rs1.getString(0).getBytes("ISO-8859-1"),"utf-8");
+				ResultSet rs4 = statement.executeQuery("select COUNT(homeTeam) from t_match where homeTeam='"+teamName+"'");
+				ResultSet rs5 = statement.executeQuery("select COUNT(guestTeam) from t_match where guestTeam='"+teamName+"'");
+				gameNum = rs4.getInt(0)+rs5.getInt(0);
+				season = new String(rs1.getString(1).getBytes("ISO-8859-1"),"utf-8");
+				shotInNum = rs1.getInt(2);
+				shotNum = rs1.getInt(3);
+				twoShotInNum = rs1.getInt(4);
+				twoShotNum = rs1.getInt(5);
+				penaltyShotInNum = rs1.getInt(6);
+				penaltyShotNum = rs1.getInt(7);
+				offensiveRebound = rs1.getInt(8);
+				defensiveRebound = rs1.getInt(9);
+				fault = rs1.getInt(10);
+				score = rs1.getInt(11);
+				winningNum = rs1.getInt(12);
+				offensiveRound = rs1.getInt(13);
+				opponentDefensiveRebound = rs1.getInt(14);
+				opponentOffensiveRebound = rs1.getInt(15);
+				opponentOffensiveRound = rs1.getDouble(16);
+				opponentScore = rs1.getInt(17);
+				ResultSet rs2 = statement.executeQuery("select * from (select guestTeam, NUM(guestShotIn),NUM(guestShot),NUM(guestTwoShotIn),NUM(guestTwoShot),NUM(guestPenaltyShotIn),NUM(guestPenaltyShot),"
+						+ "NUM(guestOffensiveRebound),NUM(guestDefensiveRebound),NUM(guestFoul),NUM(guestScore),NUM(ifGuestTeamWin),NUM(guestTeamOffensiveRound),NUM(homeDefensiveRebound),"
+						+ "NUM(homeOffensiveRebound),NUM(homeOffensiveRound),NUM(homeScore) from t_seansondata GROUP BY (guestTeam)) where guestTeam='"+teamName+"'");
+				while(rs2.next()){
+					shotInNum += rs2.getInt(2);
+					shotNum += rs2.getInt(3);
+					twoShotInNum += rs2.getInt(4);
+					twoShotNum += rs2.getInt(5);
+					penaltyShotInNum += rs2.getInt(6);
+					penaltyShotNum += rs2.getInt(7);
+					offensiveRebound += rs2.getInt(8);
+					defensiveRebound += rs2.getInt(9);
+					fault += rs2.getInt(10);
+					score += rs2.getInt(11);
+					winningNum += rs2.getInt(12);
+					offensiveRound += rs2.getInt(13);
+					opponentDefensiveRebound += rs2.getInt(14);
+					opponentOffensiveRebound += rs2.getInt(15);
+					opponentOffensiveRound += rs2.getDouble(16);
+					opponentScore += rs2.getInt(17);
+				}
+				threeShotInNum = shotInNum - twoShotInNum;
+				threeShotNum = shotNum - twoShotNum;
+				rebound = offensiveRebound+defensiveRebound;
+		
+				ResultSet rs3 = statement.executeQuery("select * from(select team, NUM(secondaryAttack),NUM(steal),NUM(blockShot),NUM(foul) from t_detail GROUP BY (team)) where team='"+teamName+"'");
+				while(rs3.next()){
+					secondaryAttack = rs3.getInt(1);
+					steal = rs3.getInt(2);
+					blockShot = rs3.getInt(3);
+					foul = rs3.getInt(4);
+				}
 			}
+		    sql+="('"+teamName+"','"+season+"','"+gameNum+"','"+shotInNum+"','"+shotNum+"','"+threeShotInNum+"','"+threeShotNum+"','"+penaltyShotInNum+"','"+
+		    penaltyShotNum+"','"+offensiveRebound+"','"+defensiveRebound+"','"+rebound+"','"+secondaryAttack+"','"+steal+"','"+blockShot+"','"+fault+"','"+
+		    		foul+"','"+score+"','"+shotInRate+"','"+threeShotInRate+"','"+penaltyShotInRate+"','"+winningRate+"','"+winningNum+"','"+offensiveRound+"','"
+		    +offensiveEfficiency+"','"+defensiveEfficiency+"','"+reboundEfficiency+"','"+stealEfficiency+"','"+secondaryAttackEfficiency+"','"+opponentDefensiveRebound+"','"+
+		    		opponentOffensiveRebound+"','"+opponentOffensiveRound+"','"+opponentScore+"') ";
+		
 			statement.executeUpdate(sql);
 			conn.close();
 		}catch(ClassNotFoundException e) {   
@@ -330,10 +313,9 @@ public class sqlInitial {
 		int rebound = 0;                         //篮板数
 		int secondaryAttack = 0;                 //助攻数
 		int time = 0;                            //在场时间
-	/*	double shotInRate = 0;                      //投篮命中率
+		double shotInRate = 0;                      //投篮命中率
 		double threeShotInRate = 0;                 //三分命中率
 		double penaltyShotInRate = 0;               //罚球命中率
-	*/
 		int offensiveNum = 0;                    //进攻数
 		int defensiveNum = 0;                    //防守数
 		int steal = 0;                           //抢断数
@@ -341,7 +323,7 @@ public class sqlInitial {
 		int fault = 0;                           //失误数
 		int foul = 0;                            //犯规数
 		int score = 0;                           //得分
-	/*	double efficiency = 0;                        //效率
+		double efficiency = 0;                        //效率
 		double GmScEfficiency = 0;                    //GmSc效率值
 		double trueShotInRate = 0;                  //真实命中率
 		double shootingEfficiency = 0;                //投篮效率
@@ -353,7 +335,6 @@ public class sqlInitial {
 		double blockShotRate = 0;                   //盖帽率
 		double faultRate = 0;                       //失误率	
 		double usageRate = 0;                       //使用率
-		*/
 		int shotIn = 0;                       //投篮命中数
 		int shot = 0;                         //投篮出手数
 		int threeShotIn = 0;                  //三分命中数
@@ -397,9 +378,9 @@ public class sqlInitial {
 					+ "NUM(secondaryAttack),NUM(time),NUM(offensiveRebound),NUM(defensiveRebound),NUM(steal),NUM(blockShot),NUM(fault),NUM(foul),"
 					+ "NUM(score),NUM(shotIn),NUM(shot),NUM(threeShotIn),NUM(threeShot),NUM(penaltyShotIn),NUM(penaltyShot) GROUP BY(name)");
 			while(rs1.next()){
-				name = rs1.getString(0);
-				season = rs1.getString(1);
-				team = rs1.getString(2);
+				name = new String(rs1.getString(0).getBytes("ISO-8859-1"),"utf-8");
+				season = new String(rs1.getString(1).getBytes("ISO-8859-1"),"utf-8");
+				team = new String(rs1.getString(2).getBytes("ISO-8859-1"),"utf-8");
 				gameNum = rs1.getInt(3);
 				startingNum = rs1.getInt(4);
 				rebound = rs1.getInt(5);
@@ -450,9 +431,9 @@ public class sqlInitial {
 					teamPenaltyShot += rs3.getInt(10);
 					teamFault += rs3.getInt(11);
 				}
-			sql+="("+name+","+season+","+team+","+gameNum+","+startingNum+","+rebound+","+secondaryAttack+","+time+","+null+","+null+","+null+","+offensiveNum+","+defensiveNum+","+steal+","+blockShot+","+fault+","+foul+","+score+","+
-				null+","+null+","+null+","+null+","+null+","+null+","+null+","+null+","+null+","+null+","+null+","+null+","+shotIn+","+shot+","+threeShotIn+","+threeShot+","+penaltyShotIn+","+penaltyShot+","+teamAllTime+","+teamOffensiveRebound
-				+","+teamDefensiveRebound+","+opponentOffensiveRebound+","+opponentDefensiveRebound+","+teamShotIn+","+opponentOffensiveNum+","+opponentTwoShot+","+teamShot+","+teamPenaltyShot+","+teamFault+")";
+			sql+="('"+name+"','"+season+"','"+team+"','"+gameNum+"','"+startingNum+"','"+rebound+"','"+secondaryAttack+"','"+time+"','"+shotInRate+"','"+threeShotInRate+"','"+penaltyShotInRate+"','"+offensiveNum+"','"+defensiveNum+"','"+steal+"','"+blockShot+"','"+fault+"','"+foul+"','"+score+"','"+
+					efficiency+"','"+GmScEfficiency+"','"+trueShotInRate+"','"+shootingEfficiency+"','"+reboundRate+"','"+offensiveReboundRate+"','"+defensiveReboundRate+"','"+secondaryAttackRate+"','"+stealRate+"','"+blockShotRate+"','"+faultRate+"','"+usageRate+"','"+shotIn+"','"+shot+"','"+threeShotIn+"','"+threeShot+"','"+penaltyShotIn+"','"+penaltyShot+"','"+teamAllTime+"','"+teamOffensiveRebound
+				+"','"+teamDefensiveRebound+"','"+opponentOffensiveRebound+"','"+opponentDefensiveRebound+"','"+teamShotIn+"','"+opponentOffensiveNum+"','"+opponentTwoShot+"','"+teamShot+"','"+teamPenaltyShot+"','"+teamFault+"') ";
 			}
 			statement.executeUpdate(sql);
 			conn.close();

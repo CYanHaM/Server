@@ -32,7 +32,7 @@ public class PlayerTechData implements PlayerTechDataService {
 				System.out.println("Succeeded connecting to the Database!");
 			}
 			PreparedStatement cmd = conn.
-					prepareStatement("select * from t_playerdata order by ? limit 50");
+					prepareStatement("select * from t_playerdata order by ? ");
 			switch(en) {
 				case name:
 					cmd.setString(1, "name");
@@ -190,7 +190,7 @@ public class PlayerTechData implements PlayerTechDataService {
 				System.out.println("Succeeded connecting to the Database!");
 			}
 			PreparedStatement cmd = conn.
-					prepareStatement("select * from t_playerdata order by ? DESC limit 50");
+					prepareStatement("select * from t_playerdata order by ? DESC");
 			switch(en) {
 				case name:
 					cmd.setString(1, "name");
