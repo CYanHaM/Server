@@ -42,20 +42,19 @@ public class PlayerData implements PlayerDataService{
 			// statement用来执行SQL语句
 			Statement statement = conn.createStatement();
 			// 要执行的SQL语句
-			String sql = "SELECT 1 FROM t_player WHERE first_name = '"+name+"'";
+			String sql = "SELECT * FROM t_player WHERE name = '"+name+"' limit 1";
 			ResultSet rs = statement.executeQuery(sql);  
 			while(rs.next()) {  
-				ppo.uniformNum = rs.getInt(3);//第三列 no
+				ppo.uniformNum = rs.getInt(1);
 				// 首先使用ISO-8859-1字符集将name解码为字节序列并将结果存储新的字节数组中。
 				// 然后使用字符集解码指定的字节数组
-				ppo.position = new String(rs.getString(4).getBytes("ISO-8859-1"),"utf-8");
-				ppo.height = new String(rs.getString(5).getBytes("ISO-8859-1"),"utf-8");
-				ppo.weight = rs.getDouble(6);
-				ppo.birth = new String(rs.getString(7).getBytes("ISO-8859-1"),"utf-8");
-				//System.out.println(temp);
-				ppo.age = rs.getInt(8);
-				ppo.exp = rs.getInt(9);
-				ppo.school = new String(rs.getString(10).getBytes("ISO-8859-1"),"utf-8");
+				ppo.position = new String(rs.getString(2).getBytes("ISO-8859-1"),"utf-8");
+				ppo.height = new String(rs.getString(3).getBytes("ISO-8859-1"),"utf-8");
+				ppo.weight = rs.getDouble(4);
+				ppo.birth = new String(rs.getString(5).getBytes("ISO-8859-1"),"utf-8");
+				ppo.age = rs.getInt(6);
+				ppo.exp = rs.getInt(7);
+				ppo.school = new String(rs.getString(8).getBytes("ISO-8859-1"),"utf-8");
 			}
 			rs.close();  
 			conn.close();   
@@ -97,24 +96,19 @@ public class PlayerData implements PlayerDataService{
 			// statement用来执行SQL语句
 	    	Statement statement = conn.createStatement();
 			// 要执行的SQL语句
-			String sql = "SELECT * FROM t_player WHERE team = '"+abb+"'";
+			String sql = "SELECT name,uniform,position,height,weight,birth,age,exp,school FROM (t_player join t_detail) WHERE team = '"+abb+"'";
 			ResultSet rs = statement.executeQuery(sql);  
 			while(rs.next()) {  
 				PlayerPO po = new PlayerPO();
-				String first = new String(rs.getString(1).getBytes("ISO-8859-1"),"utf-8");
-				String last = new String(rs.getString(2).getBytes("ISO-8859-1"),"utf-8");
-				po.name = first + " " + last;
-				po.uniformNum = rs.getInt(3);//第三列 no
-				// 首先使用ISO-8859-1字符集将name解码为字节序列并将结果存储新的字节数组中。
-				// 然后使用字符集解码指定的字节数组
-				po.position = new String(rs.getString(4).getBytes("ISO-8859-1"),"utf-8");
-				po.height = new String(rs.getString(5).getBytes("ISO-8859-1"),"utf-8");
-				po.weight = rs.getDouble(6);
-				po.birth = new String(rs.getString(7).getBytes("ISO-8859-1"),"utf-8");
-				//System.out.println(temp);
-				po.age = rs.getInt(8);
-				po.exp = rs.getInt(9);
-				po.school = new String(rs.getString(10).getBytes("ISO-8859-1"),"utf-8");
+				po.name = new String(rs.getString(0).getBytes("ISO-8859-1"),"utf-8");
+				po.uniformNum = rs.getInt(1);
+				po.position = new String(rs.getString(2).getBytes("ISO-8859-1"),"utf-8");
+				po.height = new String(rs.getString(3).getBytes("ISO-8859-1"),"utf-8");
+				po.weight = rs.getDouble(4);
+				po.birth = new String(rs.getString(5).getBytes("ISO-8859-1"),"utf-8");
+				po.age = rs.getInt(6);
+				po.exp = rs.getInt(7);
+				po.school = new String(rs.getString(8).getBytes("ISO-8859-1"),"utf-8");
 				list.add(po);
 			}
 			rs.close();  

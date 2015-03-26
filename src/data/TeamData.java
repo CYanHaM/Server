@@ -15,7 +15,8 @@ public class TeamData implements TeamDataService{
 	public TeamPO find(TeamPO tpo) {
 		// TODO Auto-generated method stub
         String name = tpo.abbreviation;
-		//连接至数据库
+		
+        //连接至数据库
 		//驱动程序名
 		String driver = "com.mysql.jdbc.Driver";
 
@@ -37,10 +38,10 @@ public class TeamData implements TeamDataService{
 			// statement用来执行SQL语句
 			Statement statement = conn.createStatement();
 			// 要执行的SQL语句
-			String sql = "SELECT 1 FROM t_team WHERE acronym = '"+name+"'";
+			String sql = "SELECT * FROM t_team WHERE abbreviation = '"+name+"'";
 			ResultSet rs = statement.executeQuery(sql);  
 			while(rs.next()) {
-				tpo.fullName = new String(rs.getString(1).getBytes("ISO-8859-1"),"utf-8");
+				tpo.fullName = new String(rs.getString(0).getBytes("ISO-8859-1"),"utf-8");
 				tpo.location = new String(rs.getString(2).getBytes("ISO-8859-1"),"utf-8");
 				tpo.division = new String(rs.getString(3).getBytes("ISO-8859-1"),"utf-8");
 				tpo.partition = new String(rs.getString(4).getBytes("ISO-8859-1"),"utf-8");
