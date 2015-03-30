@@ -4,31 +4,31 @@ import java.io.Serializable;
 public class PlayerTechMPO implements Serializable{
 	
 	/**
-	 *Ã¿³¡±ÈÈüÇòÔ±¼¼ÊõÍ³¼Æ 
+	 *æ¯åœºæ¯”èµ›çƒå‘˜æŠ€æœ¯ç»Ÿè®¡ 
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	public String name;                         //ĞÕÃû
-	public String team;                         //¶ÓÎé
-	public String position;                     //Î»ÖÃ
-	public int time;                         //ÔÚ³¡Ê±¼ä
-	public int shotIn;                       //Í¶ÀºÃüÖĞÊı
-	public int shot;                         //Í¶Àº³öÊÖÊı
-	public int threeShotIn;                  //Èı·ÖÃüÖĞÊı
-	public int threeShot;                    //Èı·Ö³öÊÖÊı
-	public int penaltyShotIn;                //·£ÇòÃüÖĞÊı
-	public int penaltyShot;                  //·£Çò³öÊÖÊı
-	public int offensiveRebound;             //Ç°³¡Àº°åÊı
-	public int defensiveRebound;             //ºó³¡Àº°åÊı
-	public int rebound;                      //×ÜÀº°åÊı
-	public int secondaryAttack;              //Öú¹¥Êı
-	public int steal;                        //ÇÀ¶ÏÊı
-	public int blockShot;                    //¸ÇÃ±Êı
-	public int fault;                        //Ê§ÎóÊı
-	public int foul;                         //·¸¹æÊı
-	public int score;                        //¸öÈËµÃ·Ö
-	public int ifFirstLineUp;                 //ÊÇ·ñÏÈ·¢
-	public int ifParticipate;                 //ÊÇ·ñ²ÎÈü
+	public String name;                         //å§“å
+	public String team;                         //é˜Ÿä¼
+	public String position;                     //ä½ç½®
+	public int time;                         //åœ¨åœºæ—¶é—´
+	public int shotIn;                       //æŠ•ç¯®å‘½ä¸­æ•°
+	public int shot;                         //æŠ•ç¯®å‡ºæ‰‹æ•°
+	public int threeShotIn;                  //ä¸‰åˆ†å‘½ä¸­æ•°
+	public int threeShot;                    //ä¸‰åˆ†å‡ºæ‰‹æ•°
+	public int penaltyShotIn;                //ç½šçƒå‘½ä¸­æ•°
+	public int penaltyShot;                  //ç½šçƒå‡ºæ‰‹æ•°
+	public int offensiveRebound;             //å‰åœºç¯®æ¿æ•°
+	public int defensiveRebound;             //ååœºç¯®æ¿æ•°
+	public int rebound;                      //æ€»ç¯®æ¿æ•°
+	public int secondaryAttack;              //åŠ©æ”»æ•°
+	public int steal;                        //æŠ¢æ–­æ•°
+	public int blockShot;                    //ç›–å¸½æ•°
+	public int fault;                        //å¤±è¯¯æ•°
+	public int foul;                         //çŠ¯è§„æ•°
+	public int score;                        //ä¸ªäººå¾—åˆ†
+	public int ifFirstLineUp;                 //æ˜¯å¦å…ˆå‘
+	public int ifParticipate;                 //æ˜¯å¦å‚èµ›
 
 	
 	

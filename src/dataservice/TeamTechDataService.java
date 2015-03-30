@@ -9,8 +9,8 @@ import TypeEnum.TeamTechEnum;
 
 public interface TeamTechDataService extends Remote{
 	public ArrayList<TeamTechPO> ascend(TeamTechEnum type)throws RemoteException;
-	// °´ÕÕtype ËùÊ¾Ìõ¼şÉıĞòÅÅĞò
+	// æŒ‰ç…§type æ‰€ç¤ºæ¡ä»¶å‡åºæ’åº
 	
 	public ArrayList<TeamTechPO> descend(TeamTechEnum type)throws RemoteException;
-	//°´ÕÕtypeËùÊ¾Ìõ¼ş½µĞòÅÅĞò
+	//æŒ‰ç…§typeæ‰€ç¤ºæ¡ä»¶é™åºæ’åº
 }

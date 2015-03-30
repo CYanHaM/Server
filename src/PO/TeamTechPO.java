@@ -5,42 +5,42 @@ import java.io.Serializable;
 public class TeamTechPO implements Serializable {
 	
 	/**
-	 * Èü¼¾Çò¶Ó×ÜÊı¾İ
+	 * èµ›å­£çƒé˜Ÿæ€»æ•°æ®
 	 */
 	public static final long serialVersionUID = 1L;
-	public String name;                            //Çò¶ÓÃû³Æ
-	public String season;                          //Èü¼¾
-	public int gameNum;                         //±ÈÈü³¡Êı
-	public int shotInNum;                       //Í¶ÀºÃüÖĞÊı
-	public int shotNum;                         //Í¶Àº³öÊÖÊı
-	public int threeShotInNum;                  //Èı·ÖÃüÖĞÊı
-	public int threeShotNum;                    //Èı·Ö³öÊÖÊı
-	public int penaltyShotInNum;                //·£ÇòÃüÖĞÊı
-	public int penaltyShotNum;                  //·£Çò³öÊÖÊı
-	public int offensiveRebound;                //Ç°³¡Àº°åÊı
-	public int defensiveRebound;                //ºó³¡Àº°åÊı
-	public int rebound;                         //×ÜÀº°åÊı
-	public int secondaryAttack;                 //Öú¹¥Êı
-	public int steal;                           //ÇÀ¶ÏÊı
-	public int blockShot;                       //¸ÇÃ±Êı
-	public int fault;                           //Ê§ÎóÊı
-	public int foul;                            //·¸¹æÊı
-	public int score;                           //±ÈÈüµÃ·Ö
-	public double shotInRate;                      //Í¶ÀºÃüÖĞÂÊ
-	public double threeShotInRate;                 //Èı·ÖÃüÖĞÂÊ
-	public double penaltyShotInRate;               //·£ÇòÃüÖĞÂÊ
-	public double winningRate;                     //Ê¤ÂÊ
-	public int winningNum;                         //Ê¤³¡Êı
-	public double offensiveRound;                  //½ø¹¥»ØºÏ
-	public double offensiveEfficiency;               //½ø¹¥Ğ§ÂÊ
-	public double defensiveEfficiency;               //·ÀÊØĞ§ÂÊ
-	public double reboundEfficiency;                 //Àº°åĞ§ÂÊ
-	public double stealEfficiency;                   //ÇÀ¶ÏĞ§ÂÊ
-	public double secondaryAttackEfficiency;         //Öú¹¥Ğ§ÂÊ
-	public int opponentDefensiveRebound;          //¶Ô·½·ÀÊØÀº°å
-	public int opponentOffensiveRebound;          //¶Ô·½½ø¹¥Àº°å
-	public double opponentOffensiveRound;        //¶Ô·½½ø¹¥»ØºÏ
-	public int opponentScore;        //¶Ô·½µÃ·Ö
+	public String name;                            //çƒé˜Ÿåç§°
+	public String season;                          //èµ›å­£
+	public int gameNum;                         //æ¯”èµ›åœºæ•°
+	public int shotInNum;                       //æŠ•ç¯®å‘½ä¸­æ•°
+	public int shotNum;                         //æŠ•ç¯®å‡ºæ‰‹æ•°
+	public int threeShotInNum;                  //ä¸‰åˆ†å‘½ä¸­æ•°
+	public int threeShotNum;                    //ä¸‰åˆ†å‡ºæ‰‹æ•°
+	public int penaltyShotInNum;                //ç½šçƒå‘½ä¸­æ•°
+	public int penaltyShotNum;                  //ç½šçƒå‡ºæ‰‹æ•°
+	public int offensiveRebound;                //å‰åœºç¯®æ¿æ•°
+	public int defensiveRebound;                //ååœºç¯®æ¿æ•°
+	public int rebound;                         //æ€»ç¯®æ¿æ•°
+	public int secondaryAttack;                 //åŠ©æ”»æ•°
+	public int steal;                           //æŠ¢æ–­æ•°
+	public int blockShot;                       //ç›–å¸½æ•°
+	public int fault;                           //å¤±è¯¯æ•°
+	public int foul;                            //çŠ¯è§„æ•°
+	public int score;                           //æ¯”èµ›å¾—åˆ†
+	public double shotInRate;                      //æŠ•ç¯®å‘½ä¸­ç‡
+	public double threeShotInRate;                 //ä¸‰åˆ†å‘½ä¸­ç‡
+	public double penaltyShotInRate;               //ç½šçƒå‘½ä¸­ç‡
+	public double winningRate;                     //èƒœç‡
+	public int winningNum;                         //èƒœåœºæ•°
+	public double offensiveRound;                  //è¿›æ”»å›åˆ
+	public double offensiveEfficiency;               //è¿›æ”»æ•ˆç‡
+	public double defensiveEfficiency;               //é˜²å®ˆæ•ˆç‡
+	public double reboundEfficiency;                 //ç¯®æ¿æ•ˆç‡
+	public double stealEfficiency;                   //æŠ¢æ–­æ•ˆç‡
+	public double secondaryAttackEfficiency;         //åŠ©æ”»æ•ˆç‡
+	public int opponentDefensiveRebound;          //å¯¹æ–¹é˜²å®ˆç¯®æ¿
+	public int opponentOffensiveRebound;          //å¯¹æ–¹è¿›æ”»ç¯®æ¿
+	public double opponentOffensiveRound;        //å¯¹æ–¹è¿›æ”»å›åˆ
+	public int opponentScore;        //å¯¹æ–¹å¾—åˆ†
 
 
 	

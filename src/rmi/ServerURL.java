@@ -6,12 +6,12 @@ import java.net.UnknownHostException;
 public class ServerURL {
 	/**
 	 * @author hentai
-	 * @date 2014Äê12ÔÂ26ÈÕ15:30:48
+	 * @date 2014å¹´12æœˆ26æ—¥15:30:48
 	 * @version 1
 	 */
-	//·şÎñÆ÷µØÖ·£¬Ëæ×ÅÖ÷»úÒÔ¼°ÍøÂçµÄ±ä»¯ËæÊ±»á¸Ä±ä
+	//æœåŠ¡å™¨åœ°å€ï¼Œéšç€ä¸»æœºä»¥åŠç½‘ç»œçš„å˜åŒ–éšæ—¶ä¼šæ”¹å˜
 	String Host;
-	//ËùÓĞservice¶ÔÓ¦¶Ë¿ÚºÅ£¬Ò»°ãÇé¿öÏÂ²»»áĞŞ¸Ä
+	//æ‰€æœ‰serviceå¯¹åº”ç«¯å£å·ï¼Œä¸€èˆ¬æƒ…å†µä¸‹ä¸ä¼šä¿®æ”¹
 	String PlayerPort="5000";
 	String TeamPort="5001";
 	String PlayerTechPort="5002";

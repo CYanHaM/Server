@@ -13,13 +13,13 @@ import dataservice.TeamTechDataService;
 
 public class StartTeamTechService {
 	/**
-	 * ×¢²áÔ¶³Ì½Ó¿ÚPlayerDataService
+	 * æ³¨å†Œè¿œç¨‹æ¥å£PlayerDataService
 	 * @author Ni_Xiaofan
-	 * @date 2014Äê12ÔÂ23ÈÕ
+	 * @date 2014å¹´12æœˆ23æ—¥
 	 * @version 1
 	 */
 
-	//¶¨Òå¹«¿ªµÄIPµØÖ·ºÍ¶Ë¿Ú£¬·½±ã¶àÓÃ»§µÇÂ¼£¬²¢ÓĞsetÓëget·½·¨
+	//å®šä¹‰å…¬å¼€çš„IPåœ°å€å’Œç«¯å£ï¼Œæ–¹ä¾¿å¤šç”¨æˆ·ç™»å½•ï¼Œå¹¶æœ‰setä¸getæ–¹æ³•
 	String host;
 	String port;
 	Remote reg=null;
@@ -28,12 +28,12 @@ public class StartTeamTechService {
 		host = server.getHost();
 		System.out.println("host:"+host);
 		port = server.getTeamTechPort();
-		//°Ñ¶Ë¿ÚºÍÔ¶³Ì¶ÔÏóUserData×¢²áµ½RMI×¢²á·şÎñÆ÷ÉÏ
+		//æŠŠç«¯å£å’Œè¿œç¨‹å¯¹è±¡UserDataæ³¨å†Œåˆ°RMIæ³¨å†ŒæœåŠ¡å™¨ä¸Š
 		reg=LocateRegistry.createRegistry(Integer.valueOf(port));
 		TeamTechDataService teamtechdata = new TeamTechData();
-		//°ó¶¨µÄURL±ê×¼¸ñÊ½Îª£ºrmi://host:port/name(Ğ­ÒéÃûrmi¿ÉÒÔÊ¡ÂÔ)
+		//ç»‘å®šçš„URLæ ‡å‡†æ ¼å¼ä¸ºï¼šrmi://host:port/name(åè®®årmiå¯ä»¥çœç•¥)
 		Naming.rebind("//"+host+":"+port+"/TeamData", teamtechdata);
-		System.out.println(">>>>>INFO:Ô¶³ÌTeamTechData¶ÔÏó°ó¶¨³É¹¦£¡");
+		System.out.println(">>>>>INFO:è¿œç¨‹TeamTechDataå¯¹è±¡ç»‘å®šæˆåŠŸï¼");
 	}
 	
 	public void shutdown(){

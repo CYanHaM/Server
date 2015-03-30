@@ -4,16 +4,16 @@ import java.io.Serializable;
 
 public class TeamPO implements Serializable{
 	/**
-	 * 球队基本信息
+	 * 鐞冮槦鍩烘湰淇℃伅
 	 */
 	public static final long serialVersionUID = 1L;
-	public String fullName;            //球队全名
-	public String abbreviation;        //缩写
-	public String location;            //所在地
-	public String division;            //赛区
-	public String partition;           //分区
-	public String homeCourt;           //主场
-	public String time;                //建立时间
+	public String fullName;            //鐞冮槦鍏ㄥ悕
+	public String abbreviation;        //缂╁啓
+	public String location;            //鎵�鍦ㄥ湴
+	public String division;            //璧涘尯
+	public String partition;           //鍒嗗尯
+	public String homeCourt;           //涓诲満
+	public String time;                //寤虹珛鏃堕棿
 	
 	
 

@@ -6,45 +6,45 @@ import java.util.ArrayList;
 public class MatchPO implements Serializable{
 	
 	/**
-	 * Ã¿³¡±ÈÈüµÄÊı¾İ
+	 * æ¯åœºæ¯”èµ›çš„æ•°æ®
 	 */
 	public static final long serialVersionUID = 1L;
-	public String season;                                 //Èü¼¾
-	public String date;                                   //ÈÕÆÚ
-	public String homeTeam;                               //Ö÷³¡¶ÓÎé
-	public String guestTeam;                              //¿Í³¡¶ÓÎé
-	public String score;                                  //±È·Ö
-	public String score1;                                 //µÚÒ»½Ú±È·Ö
-	public String score2;                                 //µÚ¶ş½Ú±È·Ö
-	public String score3;                                 //µÚÈı½Ú±È·Ö
-	public String score4;                                 //µÚËÄ½Ú±È·Ö
-	public String scoreExtra;                             //¼ÓÊ±Èü±È·Ö
-	public ArrayList<PlayerTechMPO> playerStatistic;      //ÇòÔ±¼¼ÊõÍ³¼Æ
-	public int ifHomeTeamWin;                         //Ö÷¶ÓÊÇ·ñÊ¤Àû
-	public int ifGuestTeamWin;                        //¿Í¶ÓÊÇ·ñÊ¤Àû
-	public int homeTeamDeffensiveRebound;              //Ö÷¶Ó·ÀÊØÀº°å
-	public int guestTeamDeffensiveRebound;              //¿Í¶Ó·ÀÊØÀº°å
-	public int homeTeamOffensiveRebound;              //Ö÷¶Ó½ø¹¥Àº°å
-	public int guestTeamOffensiveRebound;              //¿Í¶Ó½ø¹¥Àº°å
-	public double homeTeamOffensiveRound;              //Ö÷¶Ó½ø¹¥»ØºÏ
-	public double guestTeamOffensiveRound;              //¿Í¶Ó½ø¹¥»ØºÏ
-	public int homeScore;               //Ö÷¶ÓµÃ·Ö
-	public int guestScore;               //¿Í¶ÓµÃ·Ö
-	public int homeAllTime;              //Ö÷¶ÓÈ«Ô±ÉÏ³¡Ê±¼ä
-	public int guestAllTime;             //¿Í¶ÓÈ«Ô±ÉÏ³¡Ê±¼ä
-	public int homeShotIn;              //Ö÷¶Ó×Ü½øÇòÊı
-	public int guestShotIn;              //¿Í¶Ó×Ü½øÇòÊı
-	public int homeTwoShot;             //Ö÷¶ÓÁ½·Ö³öÊÖ´ÎÊı
-	public int guestTwoShot;            //¿Í¶ÓÁ½·Ö³öÊÖ´ÎÊı
-	public int homeTwoShotIn;             //Ö÷¶ÓÁ½·ÖÃüÖĞ´ÎÊı
-	public int guestTwoShotIn;            //¿Í¶ÓÁ½·ÖÃüÖĞ´ÎÊı
-	public int homeShot;             //Ö÷¶Ó³öÊÖ´ÎÊı
-	public int guestShot;            //¿Í¶Ó³öÊÖ´ÎÊı
-	public int homePenaltyShot;         //Ö÷¶Ó·£Çò´ÎÊı
-	public int guestPenaltyShot;        //¿Í¶Ó·£Çò´ÎÊı
-	public int homePenaltyShotIn;         //Ö÷¶Ó·£Çò´ÎÊı
-	public int guestPenaltyShotIn;        //¿Í¶Ó·£Çò´ÎÊı
-	public int homeFoul;                //Ö÷¶ÓÊ§Îó´ÎÊı
-	public int guestFoul;               //¿Í¶ÓÊ§Îó´ÎÊı
+	public String season;                                 //èµ›å­£
+	public String date;                                   //æ—¥æœŸ
+	public String homeTeam;                               //ä¸»åœºé˜Ÿä¼
+	public String guestTeam;                              //å®¢åœºé˜Ÿä¼
+	public String score;                                  //æ¯”åˆ†
+	public String score1;                                 //ç¬¬ä¸€èŠ‚æ¯”åˆ†
+	public String score2;                                 //ç¬¬äºŒèŠ‚æ¯”åˆ†
+	public String score3;                                 //ç¬¬ä¸‰èŠ‚æ¯”åˆ†
+	public String score4;                                 //ç¬¬å››èŠ‚æ¯”åˆ†
+	public String scoreExtra;                             //åŠ æ—¶èµ›æ¯”åˆ†
+	public ArrayList<PlayerTechMPO> playerStatistic;      //çƒå‘˜æŠ€æœ¯ç»Ÿè®¡
+	public int ifHomeTeamWin;                         //ä¸»é˜Ÿæ˜¯å¦èƒœåˆ©
+	public int ifGuestTeamWin;                        //å®¢é˜Ÿæ˜¯å¦èƒœåˆ©
+	public int homeTeamDeffensiveRebound;              //ä¸»é˜Ÿé˜²å®ˆç¯®æ¿
+	public int guestTeamDeffensiveRebound;              //å®¢é˜Ÿé˜²å®ˆç¯®æ¿
+	public int homeTeamOffensiveRebound;              //ä¸»é˜Ÿè¿›æ”»ç¯®æ¿
+	public int guestTeamOffensiveRebound;              //å®¢é˜Ÿè¿›æ”»ç¯®æ¿
+	public double homeTeamOffensiveRound;              //ä¸»é˜Ÿè¿›æ”»å›åˆ
+	public double guestTeamOffensiveRound;              //å®¢é˜Ÿè¿›æ”»å›åˆ
+	public int homeScore;               //ä¸»é˜Ÿå¾—åˆ†
+	public int guestScore;               //å®¢é˜Ÿå¾—åˆ†
+	public int homeAllTime;              //ä¸»é˜Ÿå…¨å‘˜ä¸Šåœºæ—¶é—´
+	public int guestAllTime;             //å®¢é˜Ÿå…¨å‘˜ä¸Šåœºæ—¶é—´
+	public int homeShotIn;              //ä¸»é˜Ÿæ€»è¿›çƒæ•°
+	public int guestShotIn;              //å®¢é˜Ÿæ€»è¿›çƒæ•°
+	public int homeTwoShot;             //ä¸»é˜Ÿä¸¤åˆ†å‡ºæ‰‹æ¬¡æ•°
+	public int guestTwoShot;            //å®¢é˜Ÿä¸¤åˆ†å‡ºæ‰‹æ¬¡æ•°
+	public int homeTwoShotIn;             //ä¸»é˜Ÿä¸¤åˆ†å‘½ä¸­æ¬¡æ•°
+	public int guestTwoShotIn;            //å®¢é˜Ÿä¸¤åˆ†å‘½ä¸­æ¬¡æ•°
+	public int homeShot;             //ä¸»é˜Ÿå‡ºæ‰‹æ¬¡æ•°
+	public int guestShot;            //å®¢é˜Ÿå‡ºæ‰‹æ¬¡æ•°
+	public int homePenaltyShot;         //ä¸»é˜Ÿç½šçƒæ¬¡æ•°
+	public int guestPenaltyShot;        //å®¢é˜Ÿç½šçƒæ¬¡æ•°
+	public int homePenaltyShotIn;         //ä¸»é˜Ÿç½šçƒæ¬¡æ•°
+	public int guestPenaltyShotIn;        //å®¢é˜Ÿç½šçƒæ¬¡æ•°
+	public int homeFoul;                //ä¸»é˜Ÿå¤±è¯¯æ¬¡æ•°
+	public int guestFoul;               //å®¢é˜Ÿå¤±è¯¯æ¬¡æ•°
 
 }

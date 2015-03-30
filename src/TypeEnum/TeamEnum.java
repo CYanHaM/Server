@@ -1,11 +1,11 @@
 package TypeEnum;
 
 public enum TeamEnum {
-	fullName,            //球队全名
-	abbreviation,        //缩写
-	location,            //所在地
-	division,            //赛区
-	partition,           //分区
-	homeCourt,           //主场
-	time;                //建立时间
+	fullName,            //鐞冮槦鍏ㄥ悕
+	abbreviation,        //缂╁啓
+	location,            //鎵�鍦ㄥ湴
+	division,            //璧涘尯
+	partition,           //鍒嗗尯
+	homeCourt,           //涓诲満
+	time;                //寤虹珛鏃堕棿
 }

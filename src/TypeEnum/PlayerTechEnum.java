@@ -1,33 +1,33 @@
 package TypeEnum;
 
 public enum PlayerTechEnum {
-	name,               //ĞÕÃû
-	team,               //ËùÊôÇò¶Ó
-	gameNum,            //²ÎÈü³¡Êı
-	startingNum,        //Ê×·¢³¡Êı
-	rebound,            //Àº°åÊı
-	secondaryAttack,    //Öú¹¥Êı
-	time,               //ÔÚ³¡Ê±¼ä
-	shotInRate,         //Í¶ÀºÃüÖĞÂÊ
-	threeshotInRate,    //Èı·ÖÃüÖĞÂÊ
-	penaltyShotInRate,  //·£ÇòÃüÖĞÂÊ
-	offensiveNum,       //½ø¹¥Êı
-	defensiveNum,       //·ÀÊØÊı
-	steal,              //ÇÀ¶ÏÊı
-	blockShot,          //¸ÇÃ±Êı
-	fault,              //Ê§ÎóÊı
-	foul,               //·¸¹æÊı
-	score,              //µÃ·Ö
-	efficiency,           //Ğ§ÂÊ
-	GmScEfficiency,       //GmScĞ§ÂÊÖµ
-	trueShotInRate,     //ÕæÊµÃüÖĞÂÊ
-	shootingEfficiency,   //Í¶ÀºĞ§ÂÊ
-	reboundRate,        //Àº°åÂÊ
-	offensiveReboundRate,//½ø¹¥Àº°åÂÊ
-	defensiveReboundRate,//·ÀÊØÀº°åÂÊ
-	secondaryAttackRate,//Öú¹¥Êı
-	stealRate,          //ÇÀ¶ÏÊı
-	blockShotRate,      //¸ÇÃ±Êı
-	faultRate,          //Ê§ÎóÊı	
-	usageRate,          //Ê¹ÓÃÂÊ
+	name,               //å§“å
+	team,               //æ‰€å±çƒé˜Ÿ
+	gameNum,            //å‚èµ›åœºæ•°
+	startingNum,        //é¦–å‘åœºæ•°
+	rebound,            //ç¯®æ¿æ•°
+	secondaryAttack,    //åŠ©æ”»æ•°
+	time,               //åœ¨åœºæ—¶é—´
+	shotInRate,         //æŠ•ç¯®å‘½ä¸­ç‡
+	threeshotInRate,    //ä¸‰åˆ†å‘½ä¸­ç‡
+	penaltyShotInRate,  //ç½šçƒå‘½ä¸­ç‡
+	offensiveNum,       //è¿›æ”»æ•°
+	defensiveNum,       //é˜²å®ˆæ•°
+	steal,              //æŠ¢æ–­æ•°
+	blockShot,          //ç›–å¸½æ•°
+	fault,              //å¤±è¯¯æ•°
+	foul,               //çŠ¯è§„æ•°
+	score,              //å¾—åˆ†
+	efficiency,           //æ•ˆç‡
+	GmScEfficiency,       //GmScæ•ˆç‡å€¼
+	trueShotInRate,     //çœŸå®å‘½ä¸­ç‡
+	shootingEfficiency,   //æŠ•ç¯®æ•ˆç‡
+	reboundRate,        //ç¯®æ¿ç‡
+	offensiveReboundRate,//è¿›æ”»ç¯®æ¿ç‡
+	defensiveReboundRate,//é˜²å®ˆç¯®æ¿ç‡
+	secondaryAttackRate,//åŠ©æ”»æ•°
+	stealRate,          //æŠ¢æ–­æ•°
+	blockShotRate,      //ç›–å¸½æ•°
+	faultRate,          //å¤±è¯¯æ•°	
+	usageRate,          //ä½¿ç”¨ç‡
 }

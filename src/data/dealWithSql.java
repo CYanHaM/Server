@@ -10,44 +10,40 @@ import java.util.ArrayList;
 import PO.PlayerTechPO;
 import PO.TeamTechPO;
 
-/*
- * Ìá¹©¸ø²ÜÖ¾Î°µÄ°ë³ÉÆ·µÄÁ½¸öpo,ÎŞ·¨¼ÆËãµÄÖµÎª0
- */
 public class dealWithSql implements SQLservice {
 
 	@Override
 	public ArrayList<PlayerTechPO> getPlayerTech() {
 		// TODO Auto-generated method stub
 		ArrayList<PlayerTechPO> list = new ArrayList<PlayerTechPO>();
-		//Á¬½ÓÖÁÊı¾İ¿â
-		//Çı¶¯³ÌĞòÃû
+		//è¿æ¥è‡³æ•°æ®åº“
+		//é©±åŠ¨ç¨‹åºå
 		String driver = "com.mysql.jdbc.Driver";
 
-		//URLÖ¸ÏòÒª·ÃÎÊµÄÊı¾İ¿âÃûnba
+		//URLæŒ‡å‘è¦è®¿é—®çš„æ•°æ®åº“ånba
 		String url = "jdbc:mysql://127.0.0.1:3306/nba";
-		// MySQLÅäÖÃÊ±µÄÓÃ»§Ãû
+		// MySQLé…ç½®æ—¶çš„ç”¨æˆ·å
 		String user = "root";
-		// JavaÁ¬½ÓMySQLÅäÖÃÊ±µÄÃÜÂë
+		// Javaè¿æ¥MySQLé…ç½®æ—¶çš„å¯†ç 
 		String password = "";
 						
 		try {
-			// ¼ÓÔØÇı¶¯³ÌĞò
+			// åŠ è½½é©±åŠ¨ç¨‹åº
 			Class.forName(driver);
-			// Á¬ĞøÊı¾İ¿â
+			// è¿ç»­æ•°æ®åº“
 			Connection conn = DriverManager.getConnection(url, user, password);
 			if(!conn.isClosed()){
 				System.out.println("Succeeded connecting to the Database!");
 			}
-			// statementÓÃÀ´Ö´ĞĞSQLÓï¾ä
+			// statementç”¨æ¥æ‰§è¡ŒSQLè¯­å¥
 			Statement statement = conn.createStatement();
-			// ÒªÖ´ĞĞµÄSQLÓï¾ä
-			String sql = "SELECT * FROM t_playerdata";
+			// è¦æ‰§è¡Œçš„SQLè¯­å¥
+			String sql = "SELECT FROM t_playerdata";
 			ResultSet rs = statement.executeQuery(sql);
 			while(rs.next()){
 				PlayerTechPO po = new PlayerTechPO();
-				po.name = new String(rs.getString(0).getBytes("ISO-8859-1"),"utf-8");
-				po.season = new String(rs.getString(1).getBytes("ISO-8859-1"),"utf-8");
-				po.team = new String(rs.getString(2).getBytes("ISO-8859-1"),"utf-8");
+				po.name = rs.getString(1);
+				po.team = rs.getString(2);
 				po.gameNum = rs.getInt(3);
 				po.startingNum = rs.getInt(4);
 				po.rebound = rs.getInt(5);
@@ -75,23 +71,6 @@ public class dealWithSql implements SQLservice {
 				po.blockShotRate = rs.getDouble(27);
 				po.faultRate = rs.getDouble(28);
 				po.usageRate = rs.getDouble(29);
-				po.shotIn = rs.getInt(30);
-				po.shot = rs.getInt(31);
-				po.threeShotIn = rs.getInt(32);
-				po.threeShot = rs.getInt(33);
-				po.penaltyShotIn = rs.getInt(34);
-				po.penaltyShot = rs.getInt(35);
-				po.teamAllTime = rs.getInt(36);
-				po.teamOffensiveRebound = rs.getInt(37);
-				po.teamDefensiveRebound = rs.getInt(38);
-				po.opponentOffensiveRebound = rs.getInt(39);
-				po.opponentDefensiveRebound = rs.getInt(40);
-				po.teamShotIn = rs.getInt(41);
-				po.opponentOffensiveNum = rs.getInt(42);
-				po.opponentTwoShot = rs.getInt(43);
-				po.teamShot = rs.getInt(44);
-				po.teamPenaltyShot = rs.getInt(45);
-				po.teamFault = rs.getInt(46);
 				list.add(po);
 			}
 			rs.close();
@@ -111,34 +90,34 @@ public class dealWithSql implements SQLservice {
 	public ArrayList<TeamTechPO> getTeamTech() {
 		// TODO Auto-generated method stub
 		ArrayList<TeamTechPO> list = new ArrayList<TeamTechPO>();
-		//Á¬½ÓÖÁÊı¾İ¿â
-		//Çı¶¯³ÌĞòÃû
+		//è¿æ¥è‡³æ•°æ®åº“
+		//é©±åŠ¨ç¨‹åºå
 		String driver = "com.mysql.jdbc.Driver";
 
-		//URLÖ¸ÏòÒª·ÃÎÊµÄÊı¾İ¿âÃûnba
+		//URLæŒ‡å‘è¦è®¿é—®çš„æ•°æ®åº“ånba
 		String url = "jdbc:mysql://127.0.0.1:3306/nba";
-		// MySQLÅäÖÃÊ±µÄÓÃ»§Ãû
+		// MySQLé…ç½®æ—¶çš„ç”¨æˆ·å
 		String user = "root";
-		// JavaÁ¬½ÓMySQLÅäÖÃÊ±µÄÃÜÂë
+		// Javaè¿æ¥MySQLé…ç½®æ—¶çš„å¯†ç 
 		String password = "";
 						
 		try {
-			// ¼ÓÔØÇı¶¯³ÌĞò
+			// åŠ è½½é©±åŠ¨ç¨‹åº
 			Class.forName(driver);
-			// Á¬ĞøÊı¾İ¿â
+			// è¿ç»­æ•°æ®åº“
 			Connection conn = DriverManager.getConnection(url, user, password);
 			if(!conn.isClosed()){
 				System.out.println("Succeeded connecting to the Database!");
 			}
-			// statementÓÃÀ´Ö´ĞĞSQLÓï¾ä
+			// statementç”¨æ¥æ‰§è¡ŒSQLè¯­å¥
 			Statement statement = conn.createStatement();
-			// ÒªÖ´ĞĞµÄSQLÓï¾ä
-			String sql = "SELECT * FROM t_seasondata";
+			// è¦æ‰§è¡Œçš„SQLè¯­å¥
+			String sql = "SELECT FROM t_playerdata";
 			ResultSet rs = statement.executeQuery(sql);
 			while(rs.next()){
 				TeamTechPO po = new TeamTechPO();
-				po.name = new String(rs.getString(0).getBytes("ISO-8859-1"),"utf-8");
-				po.season = new String(rs.getString(1).getBytes("ISO-8859-1"),"utf-8");
+				po.name = rs.getString(0);
+				po.season = rs.getString(1);
 				po.gameNum = rs.getInt(2);
 				po.shotInNum = rs.getInt(3);
 				po.shotNum =  rs.getInt(4);
@@ -159,17 +138,11 @@ public class dealWithSql implements SQLservice {
 				po.threeShotInRate = rs.getDouble(19);
 				po.penaltyShotInRate = rs.getDouble(20);
 				po.winningRate = rs.getDouble(21);
-				po.winningRate = rs.getDouble(22);
-				po.offensiveRound = rs.getDouble(23);
-				po.offensiveEfficiency = rs.getDouble(24);
-				po.defensiveEfficiency = rs.getDouble(25);
-				po.reboundEfficiency = rs.getDouble(26);
-				po.stealEfficiency = rs.getDouble(27);
-				po.secondaryAttackEfficiency = rs.getDouble(28);
-				po.opponentDefensiveRebound = rs.getInt(29);
-				po.opponentOffensiveRebound = rs.getInt(30);
-				po.opponentOffensiveRound = rs.getInt(31);
-				po.opponentScore = rs.getInt(32);
+				po.offensiveEfficiency = rs.getDouble(22);
+				po.defensiveEfficiency = rs.getDouble(23);
+				po.reboundEfficiency = rs.getDouble(24);
+				po.stealEfficiency = rs.getDouble(25);
+				po.secondaryAttackEfficiency = rs.getDouble(26);
 				list.add(po);
 			}
 			rs.close();

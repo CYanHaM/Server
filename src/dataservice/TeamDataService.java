@@ -7,7 +7,7 @@ import PO.TeamPO;
 
 public interface TeamDataService extends Remote{
 	public TeamPO find(TeamPO tpo)throws RemoteException;
-	/* °´ÕÕÊôĞÔ²éÕÒÇò¶Ó£¬ÊôĞÔ´æ´¢ÔÚtpoÖĞ
-	 * ¿É²éÕÒµÄÌõ¼şÓĞ¶ÓÃû
+	/* æŒ‰ç…§å±æ€§æŸ¥æ‰¾çƒé˜Ÿï¼Œå±æ€§å­˜å‚¨åœ¨tpoä¸­
+	 * å¯æŸ¥æ‰¾çš„æ¡ä»¶æœ‰é˜Ÿå
 	 * */
 }

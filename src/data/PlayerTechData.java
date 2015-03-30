@@ -5,34 +5,36 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
+import PO.PlayerPO;
 import PO.PlayerTechPO;
 import TypeEnum.PlayerTechEnum;
 import dataservice.PlayerTechDataService;
 
 public class PlayerTechData implements PlayerTechDataService {
-	//Ñ¡ÔñÄ³¸öÌõ¼şÉıĞò,·µ»ØÉıĞòºóµÄÇòÔ±Êı¾İÁĞ±í
+	//é€‰æ‹©æŸä¸ªæ¡ä»¶å‡åº,è¿”å›å‡åºåçš„çƒå‘˜æ•°æ®åˆ—è¡¨
 	public ArrayList<PlayerTechPO> ascend(PlayerTechEnum en){
 		ArrayList<PlayerTechPO> list = new ArrayList<PlayerTechPO>();
-		//Çı¶¯³ÌĞòÃû
+		//é©±åŠ¨ç¨‹åºå
 		String driver = "com.mysql.jdbc.Driver";
-		//URLÖ¸ÏòÒª·ÃÎÊµÄÊı¾İ¿âÃûnba
+		//URLæŒ‡å‘è¦è®¿é—®çš„æ•°æ®åº“ånba
 		String url = "jdbc:mysql://127.0.0.1:3306/nba";
-		// MySQLÅäÖÃÊ±µÄÓÃ»§Ãû
+		// MySQLé…ç½®æ—¶çš„ç”¨æˆ·å
 		String user = "root";
-		// JavaÁ¬½ÓMySQLÅäÖÃÊ±µÄÃÜÂë
+		// Javaè¿æ¥MySQLé…ç½®æ—¶çš„å¯†ç 
 		String password = "";
 		try {
-			// ¼ÓÔØÇı¶¯³ÌĞò
+			// åŠ è½½é©±åŠ¨ç¨‹åº
 			Class.forName(driver);
-			// Á¬ĞøÊı¾İ¿â
+			// è¿ç»­æ•°æ®åº“
 			Connection conn = DriverManager.getConnection(url, user, password);
 			if(!conn.isClosed()){
 				System.out.println("Succeeded connecting to the Database!");
 			}
 			PreparedStatement cmd = conn.
-					prepareStatement("select * from t_playerdata order by ? ");
+					prepareStatement("select * from t_playerdata order by ?");
 			switch(en) {
 				case name:
 					cmd.setString(1, "name");
@@ -106,9 +108,8 @@ public class PlayerTechData implements PlayerTechDataService {
 			ResultSet rs = cmd.executeQuery();
 			while(rs.next()){
 				PlayerTechPO po = new PlayerTechPO();
-				po.name = new String(rs.getString(0).getBytes("ISO-8859-1"),"utf-8");
-				po.season = new String(rs.getString(1).getBytes("ISO-8859-1"),"utf-8");
-				po.team = new String(rs.getString(2).getBytes("ISO-8859-1"),"utf-8");
+				po.name = rs.getString(1);
+				po.team = rs.getString(2);
 				po.gameNum = rs.getInt(3);
 				po.startingNum = rs.getInt(4);
 				po.rebound = rs.getInt(5);
@@ -136,23 +137,6 @@ public class PlayerTechData implements PlayerTechDataService {
 				po.blockShotRate = rs.getDouble(27);
 				po.faultRate = rs.getDouble(28);
 				po.usageRate = rs.getDouble(29);
-				po.shotIn = rs.getInt(30);
-				po.shot = rs.getInt(31);
-				po.threeShotIn = rs.getInt(32);
-				po.threeShot = rs.getInt(33);
-				po.penaltyShotIn = rs.getInt(34);
-				po.penaltyShot = rs.getInt(35);
-				po.teamAllTime = rs.getInt(36);
-				po.teamOffensiveRebound = rs.getInt(37);
-				po.teamDefensiveRebound = rs.getInt(38);
-				po.opponentOffensiveRebound = rs.getInt(39);
-				po.opponentDefensiveRebound = rs.getInt(40);
-				po.teamShotIn = rs.getInt(41);
-				po.opponentOffensiveNum = rs.getInt(42);
-				po.opponentTwoShot = rs.getInt(43);
-				po.teamShot = rs.getInt(44);
-				po.teamPenaltyShot = rs.getInt(45);
-				po.teamFault = rs.getInt(46);
 				list.add(po);
 			}
 			rs.close();
@@ -170,21 +154,21 @@ public class PlayerTechData implements PlayerTechDataService {
 	}
 	
 
-	//Ñ¡ÔñÄ³¸öÌõ¼ş½µĞò,·µ»Ø½µĞòºóµÄÇòÔ±Êı¾İÁĞ±í
+	//é€‰æ‹©æŸä¸ªæ¡ä»¶é™åº,è¿”å›é™åºåçš„çƒå‘˜æ•°æ®åˆ—è¡¨
 	public ArrayList<PlayerTechPO>descend(PlayerTechEnum en){
 		ArrayList<PlayerTechPO> list = new ArrayList<PlayerTechPO>();
-		//Çı¶¯³ÌĞòÃû
+		//é©±åŠ¨ç¨‹åºå
 		String driver = "com.mysql.jdbc.Driver";
-		//URLÖ¸ÏòÒª·ÃÎÊµÄÊı¾İ¿âÃûnba
+		//URLæŒ‡å‘è¦è®¿é—®çš„æ•°æ®åº“ånba
 		String url = "jdbc:mysql://127.0.0.1:3306/nba";
-		// MySQLÅäÖÃÊ±µÄÓÃ»§Ãû
+		// MySQLé…ç½®æ—¶çš„ç”¨æˆ·å
 		String user = "root";
-		// JavaÁ¬½ÓMySQLÅäÖÃÊ±µÄÃÜÂë
+		// Javaè¿æ¥MySQLé…ç½®æ—¶çš„å¯†ç 
 		String password = "";
 		try {
-			// ¼ÓÔØÇı¶¯³ÌĞò
+			// åŠ è½½é©±åŠ¨ç¨‹åº
 			Class.forName(driver);
-			// Á¬ĞøÊı¾İ¿â
+			// è¿ç»­æ•°æ®åº“
 			Connection conn = DriverManager.getConnection(url, user, password);
 			if(!conn.isClosed()){
 				System.out.println("Succeeded connecting to the Database!");
@@ -264,9 +248,8 @@ public class PlayerTechData implements PlayerTechDataService {
 			ResultSet rs = cmd.executeQuery();
 			while(rs.next()){
 				PlayerTechPO po = new PlayerTechPO();
-				po.name = new String(rs.getString(0).getBytes("ISO-8859-1"),"utf-8");
-				po.season = new String(rs.getString(1).getBytes("ISO-8859-1"),"utf-8");
-				po.team = new String(rs.getString(2).getBytes("ISO-8859-1"),"utf-8");
+				po.name = rs.getString(1);
+				po.team = rs.getString(2);
 				po.gameNum = rs.getInt(3);
 				po.startingNum = rs.getInt(4);
 				po.rebound = rs.getInt(5);
@@ -294,23 +277,6 @@ public class PlayerTechData implements PlayerTechDataService {
 				po.blockShotRate = rs.getDouble(27);
 				po.faultRate = rs.getDouble(28);
 				po.usageRate = rs.getDouble(29);
-				po.shotIn = rs.getInt(30);
-				po.shot = rs.getInt(31);
-				po.threeShotIn = rs.getInt(32);
-				po.threeShot = rs.getInt(33);
-				po.penaltyShotIn = rs.getInt(34);
-				po.penaltyShot = rs.getInt(35);
-				po.teamAllTime = rs.getInt(36);
-				po.teamOffensiveRebound = rs.getInt(37);
-				po.teamDefensiveRebound = rs.getInt(38);
-				po.opponentOffensiveRebound = rs.getInt(39);
-				po.opponentDefensiveRebound = rs.getInt(40);
-				po.teamShotIn = rs.getInt(41);
-				po.opponentOffensiveNum = rs.getInt(42);
-				po.opponentTwoShot = rs.getInt(43);
-				po.teamShot = rs.getInt(44);
-				po.teamPenaltyShot = rs.getInt(45);
-				po.teamFault = rs.getInt(46);
 				list.add(po);
 			}
 			rs.close();
@@ -330,32 +296,32 @@ public class PlayerTechData implements PlayerTechDataService {
 	@Override
 	public ArrayList<PlayerTechPO> sift(String position, String division,
 			PlayerTechPO ptpo) {
-		/* ¸ù¾İÌõ¼şÉ¸Ñ¡²¢ÅÅĞò
-		 * ¿ÉÓÃ×÷É¸Ñ¡Ìõ¼şµÄÓĞ£ºÇòÔ±Î»ÖÃ£¬ÇòÔ±ÁªÃË
-		 * ¿ÉÓÃ×÷ÅÅĞòÌõ¼şµÄÓĞ£ºÇòÔ±Ãû³Æ£¬ËùÊôÇò¶Ó£¬²ÎÈü³¡Êı£¬ÏÈ·¢³¡Êı£¬Àº°åÊı£¬Öú¹¥Êı£¬ÔÚ³¡Ê±¼ä£¬Í¶ÀºÃüÖĞÂÊ£¬Èı·ÖÃüÖĞÂÊ£¬·£ÇòÃüÖĞÂÊ£¬½ø¹¥Êı£¬·ÀÊØÊı£¬ÇÀ¶ÏÊı£¬¸ÇÃ±Êı£¬Ê§ÎóÊı£¬·¸¹æÊı£¬µÃ·Ö£¬Ğ§ÂÊ£¬GmScĞ§ÂÊÖµ£¬ÕæÊµÃüÖĞÂÊ£¬Í¶ÀºĞ§ÂÊ£¬Àº°åÂÊ£¬½ø¹¥Àº°åÂÊ£¬·ÀÊØÀº°åÂÊ£¬Öú¹¥ÂÊ£¬ÇÀ¶ÏÂÊ£¬¸ÇÃ±ÂÊ£¬Ê§ÎóÂÊ£¬Ê¹ÓÃÂÊ
-		 * É¸Ñ¡Ìõ¼ş×÷ÎªÌØ¶¨ÊôĞÔ´æÈëptpo
-		 * ÅÅĞòÌõ¼şÔòÎª¸ÃÏîÊôĞÔ·Ç0
+		/* æ ¹æ®æ¡ä»¶ç­›é€‰å¹¶æ’åº
+		 * å¯ç”¨ä½œç­›é€‰æ¡ä»¶çš„æœ‰ï¼šçƒå‘˜ä½ç½®ï¼Œçƒå‘˜è”ç›Ÿ
+		 * å¯ç”¨ä½œæ’åºæ¡ä»¶çš„æœ‰ï¼šçƒå‘˜åç§°ï¼Œæ‰€å±çƒé˜Ÿï¼Œå‚èµ›åœºæ•°ï¼Œå…ˆå‘åœºæ•°ï¼Œç¯®æ¿æ•°ï¼ŒåŠ©æ”»æ•°ï¼Œåœ¨åœºæ—¶é—´ï¼ŒæŠ•ç¯®å‘½ä¸­ç‡ï¼Œä¸‰åˆ†å‘½ä¸­ç‡ï¼Œç½šçƒå‘½ä¸­ç‡ï¼Œè¿›æ”»æ•°ï¼Œé˜²å®ˆæ•°ï¼ŒæŠ¢æ–­æ•°ï¼Œç›–å¸½æ•°ï¼Œå¤±è¯¯æ•°ï¼ŒçŠ¯è§„æ•°ï¼Œå¾—åˆ†ï¼Œæ•ˆç‡ï¼ŒGmScæ•ˆç‡å€¼ï¼ŒçœŸå®å‘½ä¸­ç‡ï¼ŒæŠ•ç¯®æ•ˆç‡ï¼Œç¯®æ¿ç‡ï¼Œè¿›æ”»ç¯®æ¿ç‡ï¼Œé˜²å®ˆç¯®æ¿ç‡ï¼ŒåŠ©æ”»ç‡ï¼ŒæŠ¢æ–­ç‡ï¼Œç›–å¸½ç‡ï¼Œå¤±è¯¯ç‡ï¼Œä½¿ç”¨ç‡
+		 * ç­›é€‰æ¡ä»¶ä½œä¸ºç‰¹å®šå±æ€§å­˜å…¥ptpo
+		 * æ’åºæ¡ä»¶åˆ™ä¸ºè¯¥é¡¹å±æ€§é0
 		 * */
 		ArrayList<PlayerTechPO> list = new ArrayList<PlayerTechPO>();
-		//Çı¶¯³ÌĞòÃû
+		//é©±åŠ¨ç¨‹åºå
 		String driver = "com.mysql.jdbc.Driver";
-		//URLÖ¸ÏòÒª·ÃÎÊµÄÊı¾İ¿âÃûnba
+		//URLæŒ‡å‘è¦è®¿é—®çš„æ•°æ®åº“ånba
 		String url = "jdbc:mysql://127.0.0.1:3306/nba";
-		// MySQLÅäÖÃÊ±µÄÓÃ»§Ãû
+		// MySQLé…ç½®æ—¶çš„ç”¨æˆ·å
 		String user = "root";
-		// JavaÁ¬½ÓMySQLÅäÖÃÊ±µÄÃÜÂë
+		// Javaè¿æ¥MySQLé…ç½®æ—¶çš„å¯†ç 
 		String password = "";
 		try {
-			// ¼ÓÔØÇı¶¯³ÌĞò
+			// åŠ è½½é©±åŠ¨ç¨‹åº
 			Class.forName(driver);
-			// Á¬ĞøÊı¾İ¿â
+			// è¿ç»­æ•°æ®åº“
 			Connection conn = DriverManager.getConnection(url, user, password);
 			if(!conn.isClosed()){
 				System.out.println("Succeeded connecting to the Database!");
 			}
-			// statementÓÃÀ´Ö´ĞĞSQLÓï¾ä
+			// statementç”¨æ¥æ‰§è¡ŒSQLè¯­å¥
 			PreparedStatement cmd = conn.
-					prepareStatement("select * from t_playerdata where name in(select name from t_player where position='"+position+"')AND team in (select abbreviation from t_team where division='"+division+"') order by ? DESC limit 50");
+					prepareStatement("select from t_playerdata where name in(select t_player.name from `t_player` where t_player.position='"+position+"')AND team in (select name from t_team where division='"+division+"') order by ? DESC");
 		
 			if(ptpo.gameNum!=0){
 				cmd.setInt(1, ptpo.gameNum);
@@ -415,53 +381,36 @@ public class PlayerTechData implements PlayerTechDataService {
 			ResultSet rs = cmd.executeQuery();
 			while(rs.next()){
 				PlayerTechPO po = new PlayerTechPO();
-				po.name = new String(rs.getString(0).getBytes("ISO-8859-1"),"utf-8");
-				po.season = new String(rs.getString(1).getBytes("ISO-8859-1"),"utf-8");
-				po.team = new String(rs.getString(2).getBytes("ISO-8859-1"),"utf-8");
-				po.gameNum = rs.getInt(3);
-				po.startingNum = rs.getInt(4);
-				po.rebound = rs.getInt(5);
-				po.secondaryAttackRate = rs.getInt(6);
-				po.time = rs.getInt(7);
-				po.shotInRate = rs.getDouble(8);
-				po.threeShotInRate = rs.getDouble(9);
-				po.penaltyShotInRate = rs.getDouble(10);
-				po.offensiveNum = rs.getInt(11);
-				po.defensiveNum = rs.getInt(12);
-				po.steal = rs.getInt(13);
-				po.blockShot = rs.getInt(14);
-				po.fault = rs.getInt(15);
-				po.foul = rs.getInt(16);
-				po.score = rs.getInt(17);
-				po.efficiency = rs.getDouble(18);
-				po.GmScEfficiency = rs.getDouble(19);
-				po.trueShotInRate = rs.getDouble(20);
-				po.shootingEfficiency = rs.getDouble(21);
-				po.reboundRate = rs.getDouble(22);
-				po.offensiveReboundRate = rs.getDouble(23);
-				po.defensiveReboundRate = rs.getDouble(24);
-				po.secondaryAttackRate = rs.getDouble(25);
-				po.stealRate = rs.getDouble(26);
-				po.blockShotRate = rs.getDouble(27);
-				po.faultRate = rs.getDouble(28);
-				po.usageRate = rs.getDouble(29);
-				po.shotIn = rs.getInt(30);
-				po.shot = rs.getInt(31);
-				po.threeShotIn = rs.getInt(32);
-				po.threeShot = rs.getInt(33);
-				po.penaltyShotIn = rs.getInt(34);
-				po.penaltyShot = rs.getInt(35);
-				po.teamAllTime = rs.getInt(36);
-				po.teamOffensiveRebound = rs.getInt(37);
-				po.teamDefensiveRebound = rs.getInt(38);
-				po.opponentOffensiveRebound = rs.getInt(39);
-				po.opponentDefensiveRebound = rs.getInt(40);
-				po.teamShotIn = rs.getInt(41);
-				po.opponentOffensiveNum = rs.getInt(42);
-				po.opponentTwoShot = rs.getInt(43);
-				po.teamShot = rs.getInt(44);
-				po.teamPenaltyShot = rs.getInt(45);
-				po.teamFault = rs.getInt(46);
+				po.name = rs.getString(1);
+				po.season = rs.getString(2);
+				po.team = rs.getString(3);
+				po.gameNum = rs.getInt(4);
+				po.startingNum = rs.getInt(5);
+				po.rebound = rs.getInt(6);
+				po.secondaryAttack = rs.getInt(7);
+				po.time = rs.getInt(8);
+				po.shotInRate = rs.getDouble(9);
+				po.threeShotInRate = rs.getDouble(10);
+				po.penaltyShotInRate = rs.getDouble(11);
+				po.offensiveNum = rs.getInt(12);
+				po.defensiveNum = rs.getInt(13);
+				po.steal = rs.getInt(14);
+				po.blockShot = rs.getInt(15);
+				po.fault = rs.getInt(16);
+				po.foul = rs.getInt(17);
+				po.score = rs.getInt(18);
+				po.efficiency = rs.getDouble(19);
+				po.GmScEfficiency = rs.getDouble(20);
+				po.trueShotInRate = rs.getDouble(21);
+				po.shootingEfficiency = rs.getDouble(22);
+				po.reboundRate = rs.getDouble(23);
+				po.offensiveReboundRate = rs.getDouble(24);
+				po.defensiveReboundRate = rs.getDouble(25);
+				po.secondaryAttackRate = rs.getDouble(26);
+				po.stealRate = rs.getDouble(27);
+				po.blockShotRate = rs.getDouble(28);
+				po.faultRate = rs.getDouble(29);
+				po.usageRate = rs.getDouble(30);
 				list.add(po);
 			}
 			rs.close();

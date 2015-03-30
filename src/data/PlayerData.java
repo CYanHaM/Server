@@ -13,48 +13,49 @@ import dataservice.PlayerDataService;
 
 public class PlayerData implements PlayerDataService{
 	@Override
-	/* °´ÕÕÊôĞÔ²éÕÒÇòÔ±£¬²éÕÒÌõ¼ş´æ´¢ÔÚppoÖĞ
-	 * ¿É²éÕÒµÄÊôĞÔÓĞĞÕÃû
+	/* æŒ‰ç…§å±æ€§æŸ¥æ‰¾çƒå‘˜ï¼ŒæŸ¥æ‰¾æ¡ä»¶å­˜å‚¨åœ¨ppoä¸­
+	 * å¯æŸ¥æ‰¾çš„å±æ€§æœ‰å§“å
 	 * */
 	public PlayerPO find(PlayerPO ppo) {
 		// TODO Auto-generated method stub
 		String name = ppo.name;
 		
-		//Á¬½ÓÖÁÊı¾İ¿â
-		//Çı¶¯³ÌĞòÃû
+		//è¿æ¥è‡³æ•°æ®åº“
+		//é©±åŠ¨ç¨‹åºå
 		String driver = "com.mysql.jdbc.Driver";
 
-		//URLÖ¸ÏòÒª·ÃÎÊµÄÊı¾İ¿âÃûnba
+		//URLæŒ‡å‘è¦è®¿é—®çš„æ•°æ®åº“ånba
 		String url = "jdbc:mysql://127.0.0.1:3306/nba";
-		// MySQLÅäÖÃÊ±µÄÓÃ»§Ãû
+		// MySQLé…ç½®æ—¶çš„ç”¨æˆ·å
 		String user = "root";
-		// JavaÁ¬½ÓMySQLÅäÖÃÊ±µÄÃÜÂë
+		// Javaè¿æ¥MySQLé…ç½®æ—¶çš„å¯†ç 
 		String password = "";
 				
 		try {
-			// ¼ÓÔØÇı¶¯³ÌĞò
+			// åŠ è½½é©±åŠ¨ç¨‹åº
 			Class.forName(driver);
-			// Á¬ĞøÊı¾İ¿â
+			// è¿ç»­æ•°æ®åº“
 			Connection conn = DriverManager.getConnection(url, user, password);
 			if(!conn.isClosed()){
 				System.out.println("Succeeded connecting to the Database!");
 			}
-			// statementÓÃÀ´Ö´ĞĞSQLÓï¾ä
+			// statementç”¨æ¥æ‰§è¡ŒSQLè¯­å¥
 			Statement statement = conn.createStatement();
-			// ÒªÖ´ĞĞµÄSQLÓï¾ä
-			String sql = "SELECT * FROM t_player WHERE name = '"+name+"' limit 1";
+			// è¦æ‰§è¡Œçš„SQLè¯­å¥
+			String sql = "SELECT 1 FROM t_player WHERE first_name = '"+name+"'";
 			ResultSet rs = statement.executeQuery(sql);  
 			while(rs.next()) {  
-				ppo.uniformNum = rs.getInt(1);
-				// Ê×ÏÈÊ¹ÓÃISO-8859-1×Ö·û¼¯½«name½âÂëÎª×Ö½ÚĞòÁĞ²¢½«½á¹û´æ´¢ĞÂµÄ×Ö½ÚÊı×éÖĞ¡£
-				// È»ºóÊ¹ÓÃ×Ö·û¼¯½âÂëÖ¸¶¨µÄ×Ö½ÚÊı×é
-				ppo.position = new String(rs.getString(2).getBytes("ISO-8859-1"),"utf-8");
-				ppo.height = new String(rs.getString(3).getBytes("ISO-8859-1"),"utf-8");
-				ppo.weight = rs.getDouble(4);
-				ppo.birth = new String(rs.getString(5).getBytes("ISO-8859-1"),"utf-8");
-				ppo.age = rs.getInt(6);
-				ppo.exp = rs.getInt(7);
-				ppo.school = new String(rs.getString(8).getBytes("ISO-8859-1"),"utf-8");
+				ppo.uniformNum = rs.getInt(3);//ç¬¬ä¸‰åˆ— no
+				// é¦–å…ˆä½¿ç”¨ISO-8859-1å­—ç¬¦é›†å°†nameè§£ç ä¸ºå­—èŠ‚åºåˆ—å¹¶å°†ç»“æœå­˜å‚¨æ–°çš„å­—èŠ‚æ•°ç»„ä¸­ã€‚
+				// ç„¶åä½¿ç”¨å­—ç¬¦é›†è§£ç æŒ‡å®šçš„å­—èŠ‚æ•°ç»„
+				ppo.position = new String(rs.getString(4).getBytes("ISO-8859-1"),"utf-8");
+				ppo.height = new String(rs.getString(5).getBytes("ISO-8859-1"),"utf-8");
+				ppo.weight = rs.getDouble(6);
+				ppo.birth = new String(rs.getString(7).getBytes("ISO-8859-1"),"utf-8");
+				//System.out.println(temp);
+				ppo.age = rs.getInt(8);
+				ppo.exp = rs.getInt(9);
+				ppo.school = new String(rs.getString(10).getBytes("ISO-8859-1"),"utf-8");
 			}
 			rs.close();  
 			conn.close();   
@@ -74,41 +75,46 @@ public class PlayerData implements PlayerDataService{
 		// TODO Auto-generated method stub
 		String abb = tpo.abbreviation;
 		ArrayList<PlayerPO> list = new ArrayList<PlayerPO>();
-		//Á¬½ÓÖÁÊı¾İ¿â
-		//Çı¶¯³ÌĞòÃû
+		//è¿æ¥è‡³æ•°æ®åº“
+		//é©±åŠ¨ç¨‹åºå
 		String driver = "com.mysql.jdbc.Driver";
 
-		//URLÖ¸ÏòÒª·ÃÎÊµÄÊı¾İ¿âÃûnba
+		//URLæŒ‡å‘è¦è®¿é—®çš„æ•°æ®åº“ånba
 		String url = "jdbc:mysql://127.0.0.1:3306/nba";
-		// MySQLÅäÖÃÊ±µÄÓÃ»§Ãû
+		// MySQLé…ç½®æ—¶çš„ç”¨æˆ·å
 		String user = "root";
-		// JavaÁ¬½ÓMySQLÅäÖÃÊ±µÄÃÜÂë
+		// Javaè¿æ¥MySQLé…ç½®æ—¶çš„å¯†ç 
 		String password = "";
 						
 		try {
-			// ¼ÓÔØÇı¶¯³ÌĞò
+			// åŠ è½½é©±åŠ¨ç¨‹åº
 			Class.forName(driver);
-			// Á¬ĞøÊı¾İ¿â
+			// è¿ç»­æ•°æ®åº“
 			Connection conn = DriverManager.getConnection(url, user, password);
 			if(!conn.isClosed()){
 				System.out.println("Succeeded connecting to the Database!");
 			}
-			// statementÓÃÀ´Ö´ĞĞSQLÓï¾ä
+			// statementç”¨æ¥æ‰§è¡ŒSQLè¯­å¥
 	    	Statement statement = conn.createStatement();
-			// ÒªÖ´ĞĞµÄSQLÓï¾ä
-			String sql = "SELECT name,uniform,position,height,weight,birth,age,exp,school FROM (t_player join t_detail) WHERE team = '"+abb+"'";
+			// è¦æ‰§è¡Œçš„SQLè¯­å¥
+			String sql = "SELECT * FROM t_player WHERE team = '"+abb+"'";
 			ResultSet rs = statement.executeQuery(sql);  
 			while(rs.next()) {  
 				PlayerPO po = new PlayerPO();
-				po.name = new String(rs.getString(0).getBytes("ISO-8859-1"),"utf-8");
-				po.uniformNum = rs.getInt(1);
-				po.position = new String(rs.getString(2).getBytes("ISO-8859-1"),"utf-8");
-				po.height = new String(rs.getString(3).getBytes("ISO-8859-1"),"utf-8");
-				po.weight = rs.getDouble(4);
-				po.birth = new String(rs.getString(5).getBytes("ISO-8859-1"),"utf-8");
-				po.age = rs.getInt(6);
-				po.exp = rs.getInt(7);
-				po.school = new String(rs.getString(8).getBytes("ISO-8859-1"),"utf-8");
+				String first = new String(rs.getString(1).getBytes("ISO-8859-1"),"utf-8");
+				String last = new String(rs.getString(2).getBytes("ISO-8859-1"),"utf-8");
+				po.name = first + " " + last;
+				po.uniformNum = rs.getInt(3);//ç¬¬ä¸‰åˆ— no
+				// é¦–å…ˆä½¿ç”¨ISO-8859-1å­—ç¬¦é›†å°†nameè§£ç ä¸ºå­—èŠ‚åºåˆ—å¹¶å°†ç»“æœå­˜å‚¨æ–°çš„å­—èŠ‚æ•°ç»„ä¸­ã€‚
+				// ç„¶åä½¿ç”¨å­—ç¬¦é›†è§£ç æŒ‡å®šçš„å­—èŠ‚æ•°ç»„
+				po.position = new String(rs.getString(4).getBytes("ISO-8859-1"),"utf-8");
+				po.height = new String(rs.getString(5).getBytes("ISO-8859-1"),"utf-8");
+				po.weight = rs.getDouble(6);
+				po.birth = new String(rs.getString(7).getBytes("ISO-8859-1"),"utf-8");
+				//System.out.println(temp);
+				po.age = rs.getInt(8);
+				po.exp = rs.getInt(9);
+				po.school = new String(rs.getString(10).getBytes("ISO-8859-1"),"utf-8");
 				list.add(po);
 			}
 			rs.close();  

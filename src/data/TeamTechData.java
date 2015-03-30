@@ -17,18 +17,18 @@ public class TeamTechData implements TeamTechDataService{
 	public ArrayList<TeamTechPO> ascend(TeamTechEnum type) {
 		// TODO Auto-generated method stub
 		ArrayList<TeamTechPO> list = new ArrayList<TeamTechPO>();
-		//Çı¶¯³ÌĞòÃû
+		//é©±åŠ¨ç¨‹åºå
 		String driver = "com.mysql.jdbc.Driver";
-		//URLÖ¸ÏòÒª·ÃÎÊµÄÊı¾İ¿âÃûnba
+		//URLæŒ‡å‘è¦è®¿é—®çš„æ•°æ®åº“ånba
 		String url = "jdbc:mysql://127.0.0.1:3306/nba";
-		// MySQLÅäÖÃÊ±µÄÓÃ»§Ãû
+		// MySQLé…ç½®æ—¶çš„ç”¨æˆ·å
 		String user = "root";
-		// JavaÁ¬½ÓMySQLÅäÖÃÊ±µÄÃÜÂë
+		// Javaè¿æ¥MySQLé…ç½®æ—¶çš„å¯†ç 
 		String password = "";
 		try {
-			// ¼ÓÔØÇı¶¯³ÌĞò
+			// åŠ è½½é©±åŠ¨ç¨‹åº
 			Class.forName(driver);
-			// Á¬ĞøÊı¾İ¿â
+			// è¿ç»­æ•°æ®åº“
 			Connection conn = DriverManager.getConnection(url, user, password);
 			if(!conn.isClosed()){
 				System.out.println("Succeeded connecting to the Database!");
@@ -114,8 +114,8 @@ public class TeamTechData implements TeamTechDataService{
 			ResultSet rs = cmd.executeQuery();
 			while(rs.next()){
 				TeamTechPO po = new TeamTechPO();
-				po.name = new String(rs.getString(0).getBytes("ISO-8859-1"),"utf-8");
-				po.season = new String(rs.getString(1).getBytes("ISO-8859-1"),"utf-8");
+				po.name = rs.getString(0);
+				po.season = rs.getString(1);
 				po.gameNum = rs.getInt(2);
 				po.shotInNum = rs.getInt(3);
 				po.shotNum =  rs.getInt(4);
@@ -136,17 +136,11 @@ public class TeamTechData implements TeamTechDataService{
 				po.threeShotInRate = rs.getDouble(19);
 				po.penaltyShotInRate = rs.getDouble(20);
 				po.winningRate = rs.getDouble(21);
-				po.winningRate = rs.getDouble(22);
-				po.offensiveRound = rs.getDouble(23);
-				po.offensiveEfficiency = rs.getDouble(24);
-				po.defensiveEfficiency = rs.getDouble(25);
-				po.reboundEfficiency = rs.getDouble(26);
-				po.stealEfficiency = rs.getDouble(27);
-				po.secondaryAttackEfficiency = rs.getDouble(28);
-				po.opponentDefensiveRebound = rs.getInt(29);
-				po.opponentOffensiveRebound = rs.getInt(30);
-				po.opponentOffensiveRound = rs.getInt(31);
-				po.opponentScore = rs.getInt(32);
+				po.offensiveEfficiency = rs.getDouble(22);
+				po.defensiveEfficiency = rs.getDouble(23);
+				po.reboundEfficiency = rs.getDouble(24);
+				po.stealEfficiency = rs.getDouble(25);
+				po.secondaryAttackEfficiency = rs.getDouble(26);
 				list.add(po);
 			}
 			rs.close();
@@ -167,18 +161,18 @@ public class TeamTechData implements TeamTechDataService{
 	public ArrayList<TeamTechPO> descend(TeamTechEnum type) {
 		// TODO Auto-generated method stub
 		ArrayList<TeamTechPO> list = new ArrayList<TeamTechPO>();
-		//Çı¶¯³ÌĞòÃû
+		//é©±åŠ¨ç¨‹åºå
 		String driver = "com.mysql.jdbc.Driver";
-		//URLÖ¸ÏòÒª·ÃÎÊµÄÊı¾İ¿âÃûnba
+		//URLæŒ‡å‘è¦è®¿é—®çš„æ•°æ®åº“ånba
 		String url = "jdbc:mysql://127.0.0.1:3306/nba";
-		// MySQLÅäÖÃÊ±µÄÓÃ»§Ãû
+		// MySQLé…ç½®æ—¶çš„ç”¨æˆ·å
 		String user = "root";
-		// JavaÁ¬½ÓMySQLÅäÖÃÊ±µÄÃÜÂë
+		// Javaè¿æ¥MySQLé…ç½®æ—¶çš„å¯†ç 
 		String password = "";
 		try {
-			// ¼ÓÔØÇı¶¯³ÌĞò
+			// åŠ è½½é©±åŠ¨ç¨‹åº
 			Class.forName(driver);
-			// Á¬ĞøÊı¾İ¿â
+			// è¿ç»­æ•°æ®åº“
 			Connection conn = DriverManager.getConnection(url, user, password);
 			if(!conn.isClosed()){
 				System.out.println("Succeeded connecting to the Database!");
@@ -264,8 +258,8 @@ public class TeamTechData implements TeamTechDataService{
 			ResultSet rs = cmd.executeQuery();
 			while(rs.next()){
 				TeamTechPO po = new TeamTechPO();
-				po.name = new String(rs.getString(0).getBytes("ISO-8859-1"),"utf-8");
-				po.season = new String(rs.getString(1).getBytes("ISO-8859-1"),"utf-8");
+				po.name = rs.getString(0);
+				po.season = rs.getString(1);
 				po.gameNum = rs.getInt(2);
 				po.shotInNum = rs.getInt(3);
 				po.shotNum =  rs.getInt(4);
@@ -286,17 +280,11 @@ public class TeamTechData implements TeamTechDataService{
 				po.threeShotInRate = rs.getDouble(19);
 				po.penaltyShotInRate = rs.getDouble(20);
 				po.winningRate = rs.getDouble(21);
-				po.winningRate = rs.getDouble(22);
-				po.offensiveRound = rs.getDouble(23);
-				po.offensiveEfficiency = rs.getDouble(24);
-				po.defensiveEfficiency = rs.getDouble(25);
-				po.reboundEfficiency = rs.getDouble(26);
-				po.stealEfficiency = rs.getDouble(27);
-				po.secondaryAttackEfficiency = rs.getDouble(28);
-				po.opponentDefensiveRebound = rs.getInt(29);
-				po.opponentOffensiveRebound = rs.getInt(30);
-				po.opponentOffensiveRound = rs.getInt(31);
-				po.opponentScore = rs.getInt(32);
+				po.offensiveEfficiency = rs.getDouble(22);
+				po.defensiveEfficiency = rs.getDouble(23);
+				po.reboundEfficiency = rs.getDouble(24);
+				po.stealEfficiency = rs.getDouble(25);
+				po.secondaryAttackEfficiency = rs.getDouble(26);
 				list.add(po);
 			}
 			rs.close();

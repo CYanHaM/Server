@@ -5,18 +5,18 @@ import java.io.Serializable;
 public class PlayerPO implements Serializable{
 	
 	/**
-	 * ÇòÔ±»ù±¾ĞÅÏ¢
+	 * çƒå‘˜åŸºæœ¬ä¿¡æ¯
 	 */
 	public static final long serialVersionUID = 1L;
-	public String name;            //ĞÕÃû
-	public int uniformNum;      //ÇòÒÂºÅÂë
-	public String position;        //Î»ÖÃ
-	public String height;          //Éí¸ß£¨Ó¢³ß-Ó¢´ç£©
-	public double weight;          //ÌåÖØ£¨°õ£©
-	public String birth;           //ÉúÈÕ£¨ÔÂ ÈÕ£¬Äê£©
-	public int age;                //ÄêÁä
-	public int exp;             //ÇòÁä
-	public String school;          //±ÏÒµÑ§Ğ£
+	public String name;            //å§“å
+	public int uniformNum;      //çƒè¡£å·ç 
+	public String position;        //ä½ç½®
+	public String height;          //èº«é«˜ï¼ˆè‹±å°º-è‹±å¯¸ï¼‰
+	public double weight;          //ä½“é‡ï¼ˆç£…ï¼‰
+	public String birth;           //ç”Ÿæ—¥ï¼ˆæœˆ æ—¥ï¼Œå¹´ï¼‰
+	public int age;                //å¹´é¾„
+	public int exp;             //çƒé¾„
+	public String school;          //æ¯•ä¸šå­¦æ ¡
 	
 	
 }

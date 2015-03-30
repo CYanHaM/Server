@@ -4,21 +4,22 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 
+import PO.PlayerPO;
 import PO.PlayerTechPO;
 import TypeEnum.PlayerTechEnum;
 
 public interface PlayerTechDataService extends Remote{
 	public ArrayList<PlayerTechPO> ascend(PlayerTechEnum type)throws RemoteException;
-	//°´ÕÕtypeËùÊ¾Ìõ¼þÉýÐòÅÅÐò
+	//æŒ‰ç…§typeæ‰€ç¤ºæ¡ä»¶å‡åºæŽ’åº
 	
 	public ArrayList<PlayerTechPO> descend(PlayerTechEnum type)throws RemoteException;
-	//°´ÕÕtypeËùÊ¾Ìõ¼þ½µÐòÅÅÐò
+	//æŒ‰ç…§typeæ‰€ç¤ºæ¡ä»¶é™åºæŽ’åº
 	
 	public ArrayList<PlayerTechPO> sift(String position, String division, PlayerTechPO ptpo)throws RemoteException;
-	/* ¸ù¾ÝÌõ¼þÉ¸Ñ¡²¢ÅÅÐò
-	 * ¿ÉÓÃ×÷É¸Ñ¡Ìõ¼þµÄÓÐ£ºÇòÔ±Î»ÖÃ£¬ÇòÔ±ÁªÃË
-	 * ¿ÉÓÃ×÷ÅÅÐòÌõ¼þµÄÓÐ£ºÇòÔ±Ãû³Æ£¬ËùÊôÇò¶Ó£¬²ÎÈü³¡Êý£¬ÏÈ·¢³¡Êý£¬Àº°åÊý£¬Öú¹¥Êý£¬ÔÚ³¡Ê±¼ä£¬Í¶ÀºÃüÖÐÂÊ£¬Èý·ÖÃüÖÐÂÊ£¬·£ÇòÃüÖÐÂÊ£¬½ø¹¥Êý£¬·ÀÊØÊý£¬ÇÀ¶ÏÊý£¬¸ÇÃ±Êý£¬Ê§ÎóÊý£¬·¸¹æÊý£¬µÃ·Ö£¬Ð§ÂÊ£¬GmScÐ§ÂÊÖµ£¬ÕæÊµÃüÖÐÂÊ£¬Í¶ÀºÐ§ÂÊ£¬Àº°åÂÊ£¬½ø¹¥Àº°åÂÊ£¬·ÀÊØÀº°åÂÊ£¬Öú¹¥ÂÊ£¬ÇÀ¶ÏÂÊ£¬¸ÇÃ±ÂÊ£¬Ê§ÎóÂÊ£¬Ê¹ÓÃÂÊ
-	 * É¸Ñ¡Ìõ¼þ×÷ÎªÌØ¶¨ÊôÐÔ´æÈëptpo
-	 * ÅÅÐòÌõ¼þÔòÎª¸ÃÏîÊôÐÔ·Ç0
+	/* æ ¹æ®æ¡ä»¶ç­›é€‰å¹¶æŽ’åº
+	 * å¯ç”¨ä½œç­›é€‰æ¡ä»¶çš„æœ‰ï¼šçƒå‘˜ä½ç½®ï¼Œçƒå‘˜è”ç›Ÿ
+	 * å¯ç”¨ä½œæŽ’åºæ¡ä»¶çš„æœ‰ï¼šçƒå‘˜åç§°ï¼Œæ‰€å±žçƒé˜Ÿï¼Œå‚èµ›åœºæ•°ï¼Œå…ˆå‘åœºæ•°ï¼Œç¯®æ¿æ•°ï¼ŒåŠ©æ”»æ•°ï¼Œåœ¨åœºæ—¶é—´ï¼ŒæŠ•ç¯®å‘½ä¸­çŽ‡ï¼Œä¸‰åˆ†å‘½ä¸­çŽ‡ï¼Œç½šçƒå‘½ä¸­çŽ‡ï¼Œè¿›æ”»æ•°ï¼Œé˜²å®ˆæ•°ï¼ŒæŠ¢æ–­æ•°ï¼Œç›–å¸½æ•°ï¼Œå¤±è¯¯æ•°ï¼ŒçŠ¯è§„æ•°ï¼Œå¾—åˆ†ï¼Œæ•ˆçŽ‡ï¼ŒGmScæ•ˆçŽ‡å€¼ï¼ŒçœŸå®žå‘½ä¸­çŽ‡ï¼ŒæŠ•ç¯®æ•ˆçŽ‡ï¼Œç¯®æ¿çŽ‡ï¼Œè¿›æ”»ç¯®æ¿çŽ‡ï¼Œé˜²å®ˆç¯®æ¿çŽ‡ï¼ŒåŠ©æ”»çŽ‡ï¼ŒæŠ¢æ–­çŽ‡ï¼Œç›–å¸½çŽ‡ï¼Œå¤±è¯¯çŽ‡ï¼Œä½¿ç”¨çŽ‡
+	 * ç­›é€‰æ¡ä»¶ä½œä¸ºç‰¹å®šå±žæ€§å­˜å…¥ptpo
+	 * æŽ’åºæ¡ä»¶åˆ™ä¸ºè¯¥é¡¹å±žæ€§éž0
 	 * */
 }

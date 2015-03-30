@@ -3,6 +3,7 @@ package data;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 
@@ -12,17 +13,17 @@ import PO.PlayerTechMPO;
 import PO.TeamPO;
 
 /*
- * Ô­Ê¼ĞÅÏ¢µÄ´¦Àí£¨°üÀ¨±ÈÈüĞÅÏ¢£¬ÇòÔ±»ù±¾ĞÅÏ¢ºÍÇò¶Ó»ù±¾ĞÅÏ¢£©
+ * åŸå§‹ä¿¡æ¯çš„å¤„ç†ï¼ˆåŒ…æ‹¬æ¯”èµ›ä¿¡æ¯ï¼Œçƒå‘˜åŸºæœ¬ä¿¡æ¯å’Œçƒé˜ŸåŸºæœ¬ä¿¡æ¯ï¼‰
  * @cao
  * 2015-3-20 01:34:53
- *ĞŞ¸Ä´ÎÊı5
+ *ä¿®æ”¹æ¬¡æ•°5
  */
 public class DataProcessing implements DataToSQL{
 	
 	ArrayList<MatchPO>mlist=new ArrayList<MatchPO>();
 	ArrayList<PlayerPO>plist=new ArrayList<PlayerPO>();
 	ArrayList<TeamPO>tlist=new ArrayList<TeamPO>();
-	//±ÈÈüĞÅÏ¢¶ÁÈë
+	//æ¯”èµ›ä¿¡æ¯è¯»å…¥
 	public ArrayList<MatchPO> matchRead(){
 		try {
 			String encoding = "GBK";
@@ -63,7 +64,7 @@ public class DataProcessing implements DataToSQL{
 				}
 				matchpo.season=filelist[i].getName().split("-")[0];
 				
-				//Â¼ÈëÊ¤¸ºÇé¿ö
+				//å½•å…¥èƒœè´Ÿæƒ…å†µ
 				int guestTeamScore=Integer.parseInt(matchpo.score.split("-")[0]);
 				int homeTeamScore=Integer.parseInt(matchpo.score.split("-")[1]);
 				if(homeTeamScore>guestTeamScore){
@@ -78,7 +79,7 @@ public class DataProcessing implements DataToSQL{
 					matchpo.ifGuestTeamWin=0;
 				}
 				
-				//Â¼ÈëÇòÔ±¼¼ÊõĞÅÏ¢£¨±ê¼ÇµÚ¶ş¸ö¶ÓµÄĞĞÊı£©
+				//å½•å…¥çƒå‘˜æŠ€æœ¯ä¿¡æ¯ï¼ˆæ ‡è®°ç¬¬äºŒä¸ªé˜Ÿçš„è¡Œæ•°ï¼‰
 				int homeTeamTip=0;
 				for(int j=0;j<info.size();j++){
 					if(data[j].length==1&&j!=2){
@@ -178,7 +179,7 @@ public class DataProcessing implements DataToSQL{
 						ptmp.ifParticipate=0;
 					matchpo.playerStatistic.add(ptmp);
 				}
-				//¼ÆËãÖ÷¿Í¶Ó½ø¹¥·ÀÊØÀº°åÊı
+				//è®¡ç®—ä¸»å®¢é˜Ÿè¿›æ”»é˜²å®ˆç¯®æ¿æ•°
 				int homeDeRebound=0;
 				int guestDeRebound=0;
 				int homeOfRebound=0;
@@ -245,7 +246,7 @@ public class DataProcessing implements DataToSQL{
 				matchpo.homeTeamOffensiveRebound=homeOfRebound;
 				matchpo.homeAllTime=homeTime;
 				matchpo.guestAllTime=guestTime;
-				//¼ÆËãÖ÷¿Í¶Ó½ø¹¥»ØºÏ
+				//è®¡ç®—ä¸»å®¢é˜Ÿè¿›æ”»å›åˆ
 				matchpo.homeTeamOffensiveRound=(double)homeShot+0.4*(double)homePShot-1.07*((double)homeOfRebound/((double)homeOfRebound+(double)guestDeRebound)*((double)homeShot-(double)homeShotin))+1.07*(double)homeFault;
 				matchpo.guestTeamOffensiveRound=(double)guestShot+0.4*(double)guestPShot-1.07*((double)guestOfRebound/((double)guestOfRebound+(double)homeDeRebound)*((double)guestShot-(double)guestShotin))+1.07*(double)guestFault;
 				
@@ -254,17 +255,17 @@ public class DataProcessing implements DataToSQL{
 				
 			}
 		}catch(Exception e) {
-			System.out.println("²Ù×÷³ö´í");
+			System.out.println("æ“ä½œå‡ºé”™");
 			e.printStackTrace();
 		}
 		return mlist;
 		
 	}
 	
-	//ÇòÔ±»ù±¾ĞÅÏ¢ÊäÈë
+	//çƒå‘˜åŸºæœ¬ä¿¡æ¯è¾“å…¥
+	@SuppressWarnings("resource")
 	public ArrayList<PlayerPO> playerRead(){
 		try {
-			String encoding = "GBK";
 			File file = new File("playerData");
 			File filelist[]=file.listFiles();
 			for(int i=0;i<filelist.length;i++){
@@ -272,93 +273,83 @@ public class DataProcessing implements DataToSQL{
 				PlayerPO playerpo=new PlayerPO();
 				ArrayList<String>info=new ArrayList<String>();
 				
-				InputStreamReader read = new InputStreamReader(new FileInputStream(filelist[i].getAbsolutePath()),encoding);
-				BufferedReader bufferedReader = new BufferedReader(read);
+				BufferedReader bufferedReader = new BufferedReader(new FileReader(filelist[i].getAbsolutePath()));
 				String line = null;
-				System.out.println(bufferedReader.readLine());
-				System.out.println(bufferedReader.readLine());
-				System.out.println(bufferedReader.readLine());
-//				while((line = bufferedReader.readLine())!=null) {
-//					info.add(line);
-//					System.out.println(line);
-//				}
-				read.close();
-				
-				String[][]data=new String [9][];
-				for(int j=1;j<info.size()-1;j=j+2){
-					data[(j-1)/2]=info.get(j).split("¨U");
-					System.out.println(data[j][0]);
+				while((line = bufferedReader.readLine())!=null) {
+					info.add(line);
+					System.out.println(line);
 				}
 				
-				playerpo.name=data[0][1].split("©¦")[1];
-				playerpo.uniformNum=Integer.parseInt(data[1][1].split("©¦")[1]);
-				playerpo.position=data[2][1].split("©¦")[1];
-				playerpo.height=data[3][1].split("©¦")[1];
-				playerpo.weight=Double.valueOf(data[4][1].split("©¦")[1]);
-				playerpo.birth=data[5][1].split("©¦")[1];
-				playerpo.age=Integer.parseInt(data[6][1].split("©¦")[1]);
-				playerpo.exp=Integer.parseInt(data[7][1].split("©¦")[1]);
-				playerpo.school=data[8][1].split("©¦")[1];
+				String[][]data=new String [9][];
+				for(int j=1;j<19;j=j+2){
+					data[(j-1)/2]=info.get(j).split("â•‘");
+				}
+				
+				playerpo.name=data[0][1].split("â”‚")[1].trim();
+				try{
+					playerpo.uniformNum=Integer.parseInt((data[1][1].split("â”‚")[1]).trim());
+				}catch(NumberFormatException e){
+					playerpo.uniformNum=0;
+				}
+				playerpo.position=data[2][1].split("â”‚")[1].trim();
+				playerpo.height=data[3][1].split("â”‚")[1].trim();
+				playerpo.weight=Double.valueOf((data[4][1].split("â”‚")[1]).trim());
+				playerpo.birth=data[5][1].split("â”‚")[1].trim();
+				playerpo.age=Integer.parseInt((data[6][1].split("â”‚")[1]).trim());
+				try{
+					playerpo.exp=Integer.parseInt((data[7][1].split("â”‚")[1]).trim());
+				}catch(NumberFormatException e){
+					playerpo.exp=0;
+				}
+				playerpo.school=data[8][1].split("â”‚")[1];
 				plist.add(playerpo);
 				
 			}
 		}catch(Exception e) {
-			System.out.println("²Ù×÷³ö´í");
+			System.out.println("æ“ä½œå‡ºé”™");
 			e.printStackTrace();
 		}
 		return plist;
 		
 	}
 	
-	//Çò¶Ó»ù±¾ĞÅÏ¢ÊäÈë
+	//çƒé˜ŸåŸºæœ¬ä¿¡æ¯è¾“å…¥
+	@SuppressWarnings("resource")
 	public ArrayList<TeamPO> teamRead(){
 		try {
-			String encoding = "GBK";
-			File file = new File("/teamData/teams");
+			File file = new File("teamData/teams");
 			ArrayList<String>info=new ArrayList<String>();					
-			InputStreamReader read = new InputStreamReader(new FileInputStream(file),encoding);
-			BufferedReader bufferedReader = new BufferedReader(read);
+			BufferedReader bufferedReader = new BufferedReader(new FileReader(file));
 			String line = null;
 			while((line = bufferedReader.readLine())!=null) {
 				info.add(line);
+				System.out.println(line);
 				
 			}
-			read.close();
 			
 			for(int j=1;j<info.size()-1;j++){
 				TeamPO teampo=new TeamPO();
-				String data[]=info.get(j).split("¨U")[1].split("©¦");
-				teampo.fullName=data[0];
-				teampo.abbreviation=data[1];
-				teampo.location=data[2];
-				teampo.division=data[3];
-				teampo.partition=data[4];
-				teampo.homeCourt=data[5];
-				teampo.time=data[6];
+				String data[]=info.get(j).split("â•‘")[1].split("â”‚");
+				teampo.fullName=data[0].trim();
+				teampo.abbreviation=data[1].trim();
+				teampo.location=data[2].trim();
+				teampo.division=data[3].trim();
+				teampo.partition=data[4].trim();
+				teampo.homeCourt=data[5].trim();
+				teampo.time=data[6].trim();
 				tlist.add(teampo);
 			}
 			
 		}catch(Exception e) {
-			System.out.println("²Ù×÷³ö´í");
+			System.out.println("æ“ä½œå‡ºé”™");
 			e.printStackTrace();
 		}
 		return tlist;
 		
 	}
 	
-	public static void main(String args[]){
-		DataProcessing d=new DataProcessing();
-		ArrayList<MatchPO> nn=new ArrayList<MatchPO>();
-		ArrayList<PlayerPO> pn=new ArrayList<PlayerPO>();
-
-	//	nn=d.matchRead();
-		pn=d.playerRead();
-		for (int i = 0; i < nn.size(); i++) {
-	//		System.out.println(nn.get(i).date);
-			System.out.println(pn.get(i).school);
-
-			
-		}
-	}
+	
+	
+	
 }
 

@@ -6,7 +6,7 @@ import PO.PlayerTechPO;
 import PO.TeamTechPO;
 
 /*
- * 供返回Tech的半成品使用
+ * 渚涜繑鍥濼ech鐨勫崐鎴愬搧浣跨敤
  */
 public interface SQLservice {
 	

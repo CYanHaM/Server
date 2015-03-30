@@ -9,13 +9,13 @@ import PO.TeamPO;
 
 public interface PlayerDataService extends Remote{
 	public PlayerPO find(PlayerPO ppo)throws RemoteException;
-	/* °´ÕÕÊôÐÔ²éÕÒÇòÔ±£¬²éÕÒÌõ¼þ´æ´¢ÔÚppoÖÐ
-	 * ¿É²éÕÒµÄÊôÐÔÓÐÐÕÃû
+	/* æŒ‰ç…§å±žæ€§æŸ¥æ‰¾çƒå‘˜ï¼ŒæŸ¥æ‰¾æ¡ä»¶å­˜å‚¨åœ¨ppoä¸­
+	 * å¯æŸ¥æ‰¾çš„å±žæ€§æœ‰å§“å
 	 * */
 	
 	public ArrayList<PlayerPO> findByTeam(TeamPO tpo)throws RemoteException;
 	
-	/* °´ÕÕÇò¶Ó²éÕÒÇòÔ±£¬²éÕÒÌõ¼þ´æ´¢ÔÚtpoÖÐ
-	 * ¿É²éÕÒµÄÊôÐÔÓÐ¶ÓÃû
+	/* æŒ‰ç…§çƒé˜ŸæŸ¥æ‰¾çƒå‘˜ï¼ŒæŸ¥æ‰¾æ¡ä»¶å­˜å‚¨åœ¨tpoä¸­
+	 * å¯æŸ¥æ‰¾çš„å±žæ€§æœ‰é˜Ÿå
 	 * */
 }

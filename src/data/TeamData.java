@@ -15,33 +15,32 @@ public class TeamData implements TeamDataService{
 	public TeamPO find(TeamPO tpo) {
 		// TODO Auto-generated method stub
         String name = tpo.abbreviation;
-		
-        //Á¬½ÓÖÁÊı¾İ¿â
-		//Çı¶¯³ÌĞòÃû
+		//è¿æ¥è‡³æ•°æ®åº“
+		//é©±åŠ¨ç¨‹åºå
 		String driver = "com.mysql.jdbc.Driver";
 
-		//URLÖ¸ÏòÒª·ÃÎÊµÄÊı¾İ¿âÃûnba
+		//URLæŒ‡å‘è¦è®¿é—®çš„æ•°æ®åº“ånba
 		String url = "jdbc:mysql://127.0.0.1:3306/nba";
-		// MySQLÅäÖÃÊ±µÄÓÃ»§Ãû
+		// MySQLé…ç½®æ—¶çš„ç”¨æˆ·å
 		String user = "root";
-		// JavaÁ¬½ÓMySQLÅäÖÃÊ±µÄÃÜÂë
+		// Javaè¿æ¥MySQLé…ç½®æ—¶çš„å¯†ç 
 		String password = "";
 				
 		try {
-			// ¼ÓÔØÇı¶¯³ÌĞò
+			// åŠ è½½é©±åŠ¨ç¨‹åº
 			Class.forName(driver);
-			// Á¬ĞøÊı¾İ¿â
+			// è¿ç»­æ•°æ®åº“
 			Connection conn = DriverManager.getConnection(url, user, password);
 			if(!conn.isClosed()){
 				System.out.println("Succeeded connecting to the Database!");
 			}
-			// statementÓÃÀ´Ö´ĞĞSQLÓï¾ä
+			// statementç”¨æ¥æ‰§è¡ŒSQLè¯­å¥
 			Statement statement = conn.createStatement();
-			// ÒªÖ´ĞĞµÄSQLÓï¾ä
-			String sql = "SELECT * FROM t_team WHERE abbreviation = '"+name+"'";
+			// è¦æ‰§è¡Œçš„SQLè¯­å¥
+			String sql = "SELECT 1 FROM t_team WHERE acronym = '"+name+"'";
 			ResultSet rs = statement.executeQuery(sql);  
 			while(rs.next()) {
-				tpo.fullName = new String(rs.getString(0).getBytes("ISO-8859-1"),"utf-8");
+				tpo.fullName = new String(rs.getString(1).getBytes("ISO-8859-1"),"utf-8");
 				tpo.location = new String(rs.getString(2).getBytes("ISO-8859-1"),"utf-8");
 				tpo.division = new String(rs.getString(3).getBytes("ISO-8859-1"),"utf-8");
 				tpo.partition = new String(rs.getString(4).getBytes("ISO-8859-1"),"utf-8");

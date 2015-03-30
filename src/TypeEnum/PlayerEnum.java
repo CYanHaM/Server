@@ -1,14 +1,14 @@
 package TypeEnum;
 
 public enum PlayerEnum {
-	name,//姓名
-	uniformNum,//球衣号码
-	position,//位置
-	height,//身高
-	weight,//体重
-	birth,//生日
-	age,//年龄
-	exp,//球龄
-	school;//毕业学校
+	name,//濮撳悕
+	uniformNum,//鐞冭。鍙风爜
+	position,//浣嶇疆
+	height,//韬珮
+	weight,//浣撻噸
+	birth,//鐢熸棩
+	age,//骞撮緞
+	exp,//鐞冮緞
+	school;//姣曚笟瀛︽牎
 	
 }
