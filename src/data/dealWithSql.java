@@ -37,7 +37,11 @@ public class dealWithSql implements SQLservice {
 			}
 			// statement用来执行SQL语句
 			Statement statement = conn.createStatement();
+<<<<<<< HEAD
 			// 要执行的SQL语句
+=======
+			// Ҫִ�е�SQL���
+>>>>>>> parent of 4c8e36c... 数据库优化
 			String sql = "SELECT FROM t_playerdata";
 			ResultSet rs = statement.executeQuery(sql);
 			while(rs.next()){
@@ -111,7 +115,11 @@ public class dealWithSql implements SQLservice {
 			}
 			// statement用来执行SQL语句
 			Statement statement = conn.createStatement();
+<<<<<<< HEAD
 			// 要执行的SQL语句
+=======
+			// Ҫִ�е�SQL���
+>>>>>>> parent of 4c8e36c... 数据库优化
 			String sql = "SELECT FROM t_playerdata";
 			ResultSet rs = statement.executeQuery(sql);
 			while(rs.next()){

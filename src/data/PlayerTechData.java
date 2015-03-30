@@ -34,7 +34,11 @@ public class PlayerTechData implements PlayerTechDataService {
 				System.out.println("Succeeded connecting to the Database!");
 			}
 			PreparedStatement cmd = conn.
+<<<<<<< HEAD
 					prepareStatement("select * from t_playerdata order by ?");
+=======
+					prepareStatement("select * from t_playerdata order by ? limit 50");
+>>>>>>> parent of 4c8e36c... 数据库优化
 			switch(en) {
 				case name:
 					cmd.setString(1, "name");
@@ -174,7 +178,7 @@ public class PlayerTechData implements PlayerTechDataService {
 				System.out.println("Succeeded connecting to the Database!");
 			}
 			PreparedStatement cmd = conn.
-					prepareStatement("select * from t_playerdata order by ? DESC");
+					prepareStatement("select * from t_playerdata order by ? DESC limit 50");
 			switch(en) {
 				case name:
 					cmd.setString(1, "name");
