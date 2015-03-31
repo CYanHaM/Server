@@ -100,7 +100,7 @@ public class DataProcessing implements DataToSQL{
 					}catch (NumberFormatException e){
 						ptmp.time=0;
 					}
-					System.out.println(ptmp.time);
+				//	System.out.println(ptmp.time);
 					ptmp.shotIn=Integer.parseInt(data[k][3]);
 					ptmp.shot=Integer.parseInt(data[k][4]);
 					ptmp.threeShotIn=Integer.parseInt(data[k][5]);
