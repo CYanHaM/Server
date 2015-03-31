@@ -53,8 +53,6 @@ public class SqlInitial {
 			String sql = "insert into t_player values ('"+po0.name.replaceAll("'", "''")+"','"+po0.uniformNum+"','"+po0.position+"','"+po0.height+"','"+po0.weight+"','"+po0.birth+"','"+po0.age+"','"+po0.exp+"','"+po0.school.replaceAll("'", "''")+"')";
 			for(int i=1;i<size;i++){
 				PlayerPO po = list.get(i);
-				//测试用
-			//	System.out.println(sql);
 				sql += ",('"+po.name.replaceAll("'", "''")+"','"+po.uniformNum+"','"+po.position+"','"+po.height+"','"+po.weight+"','"+po.birth+"','"+po.age+"','"+po.exp+"','"+po.school.replaceAll("'", "''")+"') ";
 			}
 			statement.executeUpdate(sql);
@@ -91,12 +89,13 @@ public class SqlInitial {
 			}
 			// statement用来执行SQL语句
 			Statement statement = conn.createStatement();
-			String sql = "insert into t_team values ";
-			for(int i=0;i<size;i++){
+			TeamPO po0 = list.get(0);
+			String sql = "insert into t_team values ('"+po0.fullName.replaceAll("'", "''")+"','"+po0.abbreviation+"','"+po0.location.replaceAll("'", "''")+"','"+po0.division+"','"+po0.partition+"','"+po0.homeCourt.replaceAll("'", "''")+"','"+po0.time+"')";
+			for(int i=1;i<size;i++){
 				TeamPO po = list.get(i);
-				sql += "('"+po.fullName+"','"+po.abbreviation+"','"+po.location+"','"+po.division+"','"+po.partition+"','"+po.homeCourt+"','"+po.time+"') ";
+				sql += ",('"+po.fullName.replaceAll("'", "''")+"','"+po.abbreviation+"','"+po.location.replaceAll("'", "''")+"','"+po.division+"','"+po.partition+"','"+po.homeCourt.replaceAll("'", "''")+"','"+po.time+"')";
 				}
-			statement.executeQuery(sql);
+			statement.executeUpdate(sql);
 			conn.close();
 		} catch(ClassNotFoundException e) {
 			System.out.println("Sorry,can`t find the Driver!");

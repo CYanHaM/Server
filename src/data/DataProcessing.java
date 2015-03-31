@@ -323,7 +323,7 @@ public class DataProcessing implements DataToSQL{
 			String line = null;
 			while((line = bufferedReader.readLine())!=null) {
 				info.add(line);
-				System.out.println(line);
+			//	System.out.println(line);
 				
 			}
 			
