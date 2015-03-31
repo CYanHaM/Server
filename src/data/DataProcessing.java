@@ -166,7 +166,7 @@ public class DataProcessing implements DataToSQL{
 						ptmp.score=0;
 						
 					}
-					ptmp.team=data[2][0];
+					ptmp.team=data[homeTeamTip][0];
 					
 					if(k>=homeTeamTip+1&&k<=homeTeamTip+5)
 						ptmp.ifFirstLineUp=1;
