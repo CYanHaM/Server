@@ -15,16 +15,17 @@ import PO.TeamPO;
 * 供初始化数据库时调用
 */
 public class SqlInitial {
-	public static void main(String[] args){
+	
+	/*public static void main(String[] args){
 		SqlInitial si = new SqlInitial();
 		//player已成功导入
 		//team已成功导入;
 	    //match和detail已成功导入，需1分半左右，主要时间消耗在循环操作  数据库查询速度没有问题
-		si.match();
-		//si.teamTech();
-		// si.playerTech();
+		//teamTech成功导入;
+		//playerTech成功导入
     }
-
+    */
+	
 	DataToSQL dts = new DataProcessing();
 
 	public void player(){
@@ -394,7 +395,7 @@ public class SqlInitial {
 			String sql = "insert into t_playerdata values ";
 			ResultSet rs1 = statement.executeQuery("select name, season, team, SUM(ifParticipate),SUM(ifFirstLineUp),SUM(rebound),"
 			+ "SUM(secondaryAttack),SUM(time),SUM(offensiveRebound),SUM(defensiveRebound),SUM(steal),SUM(blockShot),SUM(fault),SUM(foul),"
-			+ "SUM(score),SUM(shotIn),SUM(shot),SUM(threeShotIn),SUM(threeShot),SUM(penaltyShotIn),SUM(penaltyShot) GROUP BY(name)");
+			+ "SUM(score),SUM(shotIn),SUM(shot),SUM(threeShotIn),SUM(threeShot),SUM(penaltyShotIn),SUM(penaltyShot) from t_detail GROUP BY name");
 			while(rs1.next()){
 				name = new String(rs1.getString(1).getBytes("ISO-8859-1"),"utf-8");
 				season = new String(rs1.getString(2).getBytes("ISO-8859-1"),"utf-8");
@@ -420,9 +421,9 @@ public class SqlInitial {
 				ResultSet rs2 = statement2.executeQuery("select * from(select homeTeam,SUM(homeAllTime),SUM(homeTeamOffensiveRebound),SUM(homeTeamDefensiveRebound),SUM(guestTeamOffensiveRebound),"
 				+ "SUM(guestTeamDefensiveRebound),SUM(homeShotIn),SUM(guestTeamOffensiveRound),SUM(guestTwoShot),SUM(homeShot),SUM(homePenaltyShot),"
 				+ "SUM(homeFoul) from t_match GROUP BY homeTeam) as subtable where homeTeam='"+team+"'");
-				ResultSet rs3 = statement3.executeQuery("select * from(select guestTeam,NUM(guestAllTime),NUM(guestTeamOffensiveRebound),NUM(guestTeamDefensiveRebound),NUM(homeTeamOffensiveRebound),"
-				+ "NUM(homeTeamDefensiveRebound),NUM(guestShotIn),NUM(homeTeamOffensiveRound),NUM(homeTwoShot),NUM(guestShot),NUM(guestPenaltyShot),"
-				+ "NUM(guestFoul) from t_match GROUP BY guestTeam) where guestTeam='"+team+"'");
+				ResultSet rs3 = statement3.executeQuery("select * from(select guestTeam,SUM(guestAllTime),SUM(guestTeamOffensiveRebound),SUM(guestTeamDefensiveRebound),SUM(homeTeamOffensiveRebound),"
+				+ "SUM(homeTeamDefensiveRebound),SUM(guestShotIn),SUM(homeTeamOffensiveRound),SUM(homeTwoShot),SUM(guestShot),SUM(guestPenaltyShot),"
+				+ "SUM(guestFoul) from t_match GROUP BY guestTeam)as subtable where guestTeam='"+team+"'");
 				while(rs2.next()){
 					teamAllTime = rs2.getInt(2);
 					teamOffensiveRebound = rs2.getInt(3);
