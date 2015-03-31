@@ -11,6 +11,16 @@ import dataservice.TeamDataService;
 
 
 public class TeamData implements TeamDataService{
+/*	
+	public static void main(String[] args){
+		TeamData td = new TeamData();
+		TeamPO tpo = new TeamPO();
+		tpo.abbreviation = "CHA";
+		TeamPO res = td.find(tpo);
+		System.out.println(res.fullName);
+	}
+*/
+	
 	@Override
 	public TeamPO find(TeamPO tpo) {
 		// TODO Auto-generated method stub

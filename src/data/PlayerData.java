@@ -12,6 +12,22 @@ import PO.TeamPO;
 import dataservice.PlayerDataService;
 
 public class PlayerData implements PlayerDataService{
+	
+	public static void main(String[] args){
+		PlayerData pd = new PlayerData();
+	/*	PlayerPO ppo = new PlayerPO();
+		ppo.name = "Aaron Brooks";
+		PlayerPO res1 = pd.find(ppo);
+		System.out.println(res1.age+" "+res1.school);
+	*/
+		TeamPO tpo = new TeamPO();
+		tpo.abbreviation = "CHA";
+		ArrayList<PlayerPO> res2 = pd.findByTeam(tpo);
+		for(int i=0;i<res2.size();i++){
+			System.out.println(res2.get(i).name);
+		}
+	}
+	
 	@Override
 	/* 按照属性查找球员，查找条件存储在ppo中
 	* 可查找的属性有姓名
@@ -90,9 +106,9 @@ public class PlayerData implements PlayerDataService{
 			// statement用来执行SQL语句
 			Statement statement = conn.createStatement();
 			// 要执行的SQL语句
-			String sql = "SELECT name,uniform,position,height,weight,birth,age,exp,school FROM (t_player inner join t_detail on t_player.name=t_detail.name) as subtable where team = '"+abb+"'";
+			String sql = "SELECT distinct t_player.name,uniformNum,t_player.position,height,weight,birth,age,exp,school,team FROM (t_player inner join (select name,team from t_detail)as subtable on t_player.name=subtable.name) where team = '"+abb+"'";
 			ResultSet rs = statement.executeQuery(sql);
-			while(rs.next()) {
+			while(rs.next()) {     System.out.println(rs.getString(10));
 				PlayerPO po = new PlayerPO();
 				po.name = new String(rs.getString(1).getBytes("ISO-8859-1"),"utf-8");
 				po.uniformNum = rs.getInt(2);
