@@ -4,12 +4,28 @@ import java.util.ArrayList;
 import PO.PlayerTechPO;
 import PO.TeamTechPO;
 
-public class TechnicalStatistic {
+public class TechnicalStatistic implements SemiDataToSQL {
+	
+	@SuppressWarnings("null")
+	public void FinalProcessing(){
+		SQLservice ss = null;
+		UpdateService us =null;
+		ArrayList<TeamTechPO> semiTeamTech=new ArrayList<TeamTechPO>();
+		ArrayList<PlayerTechPO>semiPlayerTech=new ArrayList<PlayerTechPO>();
+		semiTeamTech=teamTechGenerating(ss.getTeamTech());
+		semiPlayerTech=playerTechGenerating(ss.getPlayerTech());
+		us.updatePlayerTech(semiPlayerTech);
+		us.updateTeamTech(semiTeamTech);
+
+		
+
+	}
 	public ArrayList<TeamTechPO> teamTechGenerating(ArrayList<TeamTechPO> ttplist){
 		ArrayList<TeamTechPO> result=new ArrayList<TeamTechPO>();
 		
 		for(TeamTechPO ttp:ttplist){
 			TeamTechPO newttp=new TeamTechPO();
+			newttp.index=ttp.index;
 			newttp.name=ttp.name;
 			newttp.season=ttp.season;
 			newttp.gameNum=ttp.gameNum;
@@ -59,6 +75,7 @@ public class TechnicalStatistic {
 		
 		for(PlayerTechPO ptp:ptplist){
 			PlayerTechPO newptp=new PlayerTechPO();
+			newptp.index=ptp.index;
 			newptp.name=ptp.name;
 			newptp.season=ptp.season;
 			newptp.team=ptp.team;
@@ -106,5 +123,6 @@ public class TechnicalStatistic {
 		}
 		return result;
 	}
+
 
 }
