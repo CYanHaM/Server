@@ -228,6 +228,8 @@ public class DataProcessing implements DataToSQL{
 					homeTime=homeTime+matchpo.playerStatistic.get(j).time;
 					
 				}
+				matchpo.homeShot=homeShot;
+				matchpo.guestShot=guestShot;
 				matchpo.homeShotIn=homeShotin;
 				matchpo.guestShotIn=guestShotin;
 				matchpo.homeTwoShot=homeShot-homethreeshot;
