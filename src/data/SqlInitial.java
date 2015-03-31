@@ -241,6 +241,7 @@ public class SqlInitial {
 		Statement statement = conn.createStatement();
 		Statement statement2 = conn.createStatement();
 		String sql = "insert into t_seasondata values ";
+		int index = 1;
 		int tag = 0;
 		ResultSet rs1 = statement2.executeQuery("select homeTeam,season,sum(homeShotIn),sum(homeShot),sum(homeTwoShotIn),sum(homeTwoShot),sum(homePenaltyShotIn),sum(homePenaltyShot),"
 		+ "sum(homeTeamOffensiveRebound),sum(homeTeamDefensiveRebound),sum(homeFoul),sum(homeScore),sum(ifHomeTeamWin),sum(homeTeamOffensiveRound),sum(guestTeamDefensiveRebound),"
@@ -302,11 +303,12 @@ public class SqlInitial {
 			if(tag!=0) 
 				sql+=",";
 			tag++;
-			sql+="('"+teamName+"','"+season+"','"+gameNum+"','"+shotInNum+"','"+shotNum+"','"+threeShotInNum+"','"+threeShotNum+"','"+penaltyShotInNum+"','"+
+			sql+="('"+index+"','"+teamName+"','"+season+"','"+gameNum+"','"+shotInNum+"','"+shotNum+"','"+threeShotInNum+"','"+threeShotNum+"','"+penaltyShotInNum+"','"+
 			penaltyShotNum+"','"+offensiveRebound+"','"+defensiveRebound+"','"+rebound+"','"+secondaryAttack+"','"+steal+"','"+blockShot+"','"+fault+"','"+
 			foul+"','"+score+"','"+shotInRate+"','"+threeShotInRate+"','"+penaltyShotInRate+"','"+winningRate+"','"+winningNum+"','"+offensiveRound+"','"
 			+offensiveEfficiency+"','"+defensiveEfficiency+"','"+reboundEfficiency+"','"+stealEfficiency+"','"+secondaryAttackEfficiency+"','"+opponentDefensiveRebound+"','"+
 			opponentOffensiveRebound+"','"+opponentOffensiveRound+"','"+opponentScore+"') ";
+			index++;
 		}
 		statement.executeUpdate(sql);
 		conn.close();
@@ -393,6 +395,7 @@ public class SqlInitial {
 			Statement statement3 = conn.createStatement();
 			int tag = 0;
 			String sql = "insert into t_playerdata values ";
+			int index = 1;
 			ResultSet rs1 = statement.executeQuery("select name, season, team, SUM(ifParticipate),SUM(ifFirstLineUp),SUM(rebound),"
 			+ "SUM(secondaryAttack),SUM(time),SUM(offensiveRebound),SUM(defensiveRebound),SUM(steal),SUM(blockShot),SUM(fault),SUM(foul),"
 			+ "SUM(score),SUM(shotIn),SUM(shot),SUM(threeShotIn),SUM(threeShot),SUM(penaltyShotIn),SUM(penaltyShot) from t_detail GROUP BY name");
@@ -454,7 +457,7 @@ public class SqlInitial {
 					sql+=",";
 				}
 				tag++;
-				sql+="('"+name.replaceAll("'", "''")+"','"+season+"','"+team+"','"+gameNum+"','"+startingNum+"','"+rebound+"','"+secondaryAttack+"','"+time+"','"+shotInRate+"','"+threeShotInRate+"','"+penaltyShotInRate+"','"+offensiveNum+"','"+defensiveNum+"','"+steal+"','"+blockShot+"','"+fault+"','"+foul+"','"+score+"','"+
+				sql+="('"+index+"','"+name.replaceAll("'", "''")+"','"+season+"','"+team+"','"+gameNum+"','"+startingNum+"','"+rebound+"','"+secondaryAttack+"','"+time+"','"+shotInRate+"','"+threeShotInRate+"','"+penaltyShotInRate+"','"+offensiveNum+"','"+defensiveNum+"','"+steal+"','"+blockShot+"','"+fault+"','"+foul+"','"+score+"','"+
 				efficiency+"','"+GmScEfficiency+"','"+trueShotInRate+"','"+shootingEfficiency+"','"+reboundRate+"','"+offensiveReboundRate+"','"+defensiveReboundRate+"','"+secondaryAttackRate+"','"+stealRate+"','"+blockShotRate+"','"+faultRate+"','"+usageRate+"','"+shotIn+"','"+shot+"','"+threeShotIn+"','"+threeShot+"','"+penaltyShotIn+"','"+penaltyShot+"','"+teamAllTime+"','"+teamOffensiveRebound
 				+"','"+teamDefensiveRebound+"','"+opponentOffensiveRebound+"','"+opponentDefensiveRebound+"','"+teamShotIn+"','"+opponentOffensiveNum+"','"+opponentTwoShot+"','"+teamShot+"','"+teamPenaltyShot+"','"+teamFault+"') ";
 			}
