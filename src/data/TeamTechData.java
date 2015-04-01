@@ -11,7 +11,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import PO.TeamTechPO;
-import TypeEnum.TeamTechEnum;
 import dataservice.TeamTechDataService;
 
 public class TeamTechData extends UnicastRemoteObject implements TeamTechDataService,Serializable{
@@ -26,7 +25,7 @@ public class TeamTechData extends UnicastRemoteObject implements TeamTechDataSer
 	}
 
 	@Override
-	public ArrayList<TeamTechPO> ascend(TeamTechEnum type) {
+	public ArrayList<TeamTechPO> ascend(String type) {
 		// TODO Auto-generated method stub
 		ArrayList<TeamTechPO> list = new ArrayList<TeamTechPO>();
 		//驱动程序名
@@ -47,82 +46,7 @@ public class TeamTechData extends UnicastRemoteObject implements TeamTechDataSer
 			}
 			PreparedStatement cmd = conn.
 			prepareStatement("select * from t_seasondata order by ?");
-			switch(type) {
-				case name:
-				cmd.setString(1, "name");
-				break;
-				case shotInNum:
-				cmd.setString(1, "shotInNum");
-				break;
-				case shotNum:
-				cmd.setString(1, "shotNum");
-				break;
-				case threeShotInNum:
-				cmd.setString(1, "threeShotInNum");
-				break;
-				case threeShotNum:
-				cmd.setString(1, "threeShotNum");
-				break;
-				case penaltyShotInNum:
-				cmd.setString(1, "penaltyShotInNum");
-				break;
-				case penaltyShotNum:
-				cmd.setString(1, "penaltyShotNum");
-				break;
-				case offensiveRebound:
-				cmd.setString(1, "offensiveRebound");
-				break;
-				case rebound:
-				cmd.setString(1, "rebound");
-				break;
-				case secondaryAttack:
-				cmd.setString(1, "secondaryAttack");
-				break;
-				case steal:
-				cmd.setString(1, "steal");
-				break;
-				case blockShot:
-				cmd.setString(1, "blockShot");
-				break;
-				case fault:
-				cmd.setString(1, "fault");
-				break;
-				case foul:
-				cmd.setString(1, "foul");
-				break;
-				case score:
-				cmd.setString(1, "score");
-				break;
-				case threeShotInRate:
-				cmd.setString(1, "threeShotInRate");
-				break;
-				case penaltyShotInRate:
-				cmd.setString(1, "penaltyShotInRate");
-				break;
-				case winningRate:
-				cmd.setString(1, "winningRate");
-				break;
-				case offensiveRound:
-				cmd.setString(1, "offensiveRound");
-				break;
-				case offensiveEfficiency:
-				cmd.setString(1, "offensiveEfficiency");
-				break;
-				case defensiveEfficiency:
-				cmd.setString(1, "defensiveEfficiency");
-				break;
-				case reboundEfficiency:
-				cmd.setString(1, "reboundEfficiency");
-				break;
-				case stealEfficiency:
-				cmd.setString(1, "stealEfficiency");
-				break;
-				case secondaryAttackEfficiency:
-				cmd.setString(1, "secondaryAttackEfficiency");
-				break;
-				default:
-				System.out.println("wrong enum value");
-			}
+			cmd.setString(1, type);
 			ResultSet rs = cmd.executeQuery();
 			while(rs.next()){
 				TeamTechPO po = new TeamTechPO();
@@ -176,7 +100,7 @@ public class TeamTechData extends UnicastRemoteObject implements TeamTechDataSer
 	}
 
 	@Override
-	public ArrayList<TeamTechPO> descend(TeamTechEnum type) {
+	public ArrayList<TeamTechPO> descend(String type) {
 		// TODO Auto-generated method stub
 		ArrayList<TeamTechPO> list = new ArrayList<TeamTechPO>();
 		//驱动程序名
@@ -197,82 +121,7 @@ public class TeamTechData extends UnicastRemoteObject implements TeamTechDataSer
 			}
 			PreparedStatement cmd = conn.
 			prepareStatement("select * from t_seasondata order by ? DESC");
-			switch(type) {
-				case name:
-				cmd.setString(1, "name");
-				break;
-				case shotInNum:
-				cmd.setString(1, "shotInNum");
-				break;
-				case shotNum:
-				cmd.setString(1, "shotNum");
-				break;
-				case threeShotInNum:
-				cmd.setString(1, "threeShotInNum");
-				break;
-				case threeShotNum:
-				cmd.setString(1, "threeShotNum");
-				break;
-				case penaltyShotInNum:
-				cmd.setString(1, "penaltyShotInNum");
-				break;
-				case penaltyShotNum:
-				cmd.setString(1, "penaltyShotNum");
-				break;
-				case offensiveRebound:
-				cmd.setString(1, "offensiveRebound");
-				break;
-				case rebound:
-				cmd.setString(1, "rebound");
-				break;
-				case secondaryAttack:
-				cmd.setString(1, "secondaryAttack");
-				break;
-				case steal:
-				cmd.setString(1, "steal");
-				break;
-				case blockShot:
-				cmd.setString(1, "blockShot");
-				break;
-				case fault:
-				cmd.setString(1, "fault");
-				break;
-				case foul:
-				cmd.setString(1, "foul");
-				break;
-				case score:
-				cmd.setString(1, "score");
-				break;
-				case threeShotInRate:
-				cmd.setString(1, "threeShotInRate");
-				break;
-				case penaltyShotInRate:
-				cmd.setString(1, "penaltyShotInRate");
-				break;
-				case winningRate:
-				cmd.setString(1, "winningRate");
-				break;
-				case offensiveRound:
-				cmd.setString(1, "offensiveRound");
-				break;
-				case offensiveEfficiency:
-				cmd.setString(1, "offensiveEfficiency");
-				break;
-				case defensiveEfficiency:
-				cmd.setString(1, "defensiveEfficiency");
-				break;
-				case reboundEfficiency:
-				cmd.setString(1, "reboundEfficiency");
-				break;
-				case stealEfficiency:
-				cmd.setString(1, "stealEfficiency");
-				break;
-				case secondaryAttackEfficiency:
-				cmd.setString(1, "secondaryAttackEfficiency");
-				break;
-				default:
-				System.out.println("wrong enum value");
-			}
+			cmd.setString(1, type);
 			ResultSet rs = cmd.executeQuery();
 			while(rs.next()){
 				TeamTechPO po = new TeamTechPO();
