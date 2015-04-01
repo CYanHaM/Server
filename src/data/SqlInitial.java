@@ -16,15 +16,16 @@ import PO.TeamPO;
 */
 public class SqlInitial {
 	
-	/*public static void main(String[] args){
+	public static void main(String[] args){
 		SqlInitial si = new SqlInitial();
-		//player已成功导入
-		//team已成功导入;
-	    //match和detail已成功导入，需1分半左右，主要时间消耗在循环操作  数据库查询速度没有问题
-		//teamTech成功导入;
-		//playerTech成功导入
+		si.player();
+		si.team();
+		si.match();
+		si.teamTech();
+		si.playerTech();
+		SemiDataToSQL sds = new TechnicalStatistic();
+		sds.FinalProcessing();
     }
-    */
 	
 	DataToSQL dts = new DataProcessing();
 
@@ -291,7 +292,7 @@ public class SqlInitial {
 				opponentScore += rs2.getInt(17);
 			}
 			threeShotInNum = shotInNum - twoShotInNum; 
-			threeShotNum = shotNum - twoShotNum;       System.out.println(threeShotNum);
+			threeShotNum = shotNum - twoShotNum;  
 			rebound = offensiveRebound+defensiveRebound;
 			ResultSet rs3 = statement.executeQuery("select * from(select team, sum(secondaryAttack),sum(steal),sum(blockShot),sum(foul) from t_detail GROUP BY team) as subTable where team='"+teamName+"'");
 			while(rs3.next()){
@@ -460,6 +461,7 @@ public class SqlInitial {
 				sql+="('"+index+"','"+name.replaceAll("'", "''")+"','"+season+"','"+team+"','"+gameNum+"','"+startingNum+"','"+rebound+"','"+secondaryAttack+"','"+time+"','"+shotInRate+"','"+threeShotInRate+"','"+penaltyShotInRate+"','"+offensiveNum+"','"+defensiveNum+"','"+steal+"','"+blockShot+"','"+fault+"','"+foul+"','"+score+"','"+
 				efficiency+"','"+GmScEfficiency+"','"+trueShotInRate+"','"+shootingEfficiency+"','"+reboundRate+"','"+offensiveReboundRate+"','"+defensiveReboundRate+"','"+secondaryAttackRate+"','"+stealRate+"','"+blockShotRate+"','"+faultRate+"','"+usageRate+"','"+shotIn+"','"+shot+"','"+threeShotIn+"','"+threeShot+"','"+penaltyShotIn+"','"+penaltyShot+"','"+teamAllTime+"','"+teamOffensiveRebound
 				+"','"+teamDefensiveRebound+"','"+opponentOffensiveRebound+"','"+opponentDefensiveRebound+"','"+teamShotIn+"','"+opponentOffensiveNum+"','"+opponentTwoShot+"','"+teamShot+"','"+teamPenaltyShot+"','"+teamFault+"') ";
+				index++;
 			}
 			statement.executeUpdate(sql);
 			conn.close();
