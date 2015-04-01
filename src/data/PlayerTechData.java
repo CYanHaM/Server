@@ -226,7 +226,7 @@ public class PlayerTechData extends UnicastRemoteObject implements PlayerTechDat
 			}
 			// statement用来执行SQL语句
 			PreparedStatement cmd = conn.
-			prepareStatement("select ? from t_playerdata where name in(select name from t_player where position='"+position+"')as subtable1 AND team in (select abbreviation from t_team where division='"+division+"') as subtable2 order by ? DESC limit 50");
+			prepareStatement("select ? from t_playerdata where (name in(select name from t_player where position = '"+position+"'))AND (team in (select abbreviation from t_team where division='"+division+"' ))order by ? DESC limit 50");
 
 			switch(sort){
 				case "score":
@@ -379,7 +379,7 @@ public class PlayerTechData extends UnicastRemoteObject implements PlayerTechDat
 						System.out.println("Succeeded connecting to the Database!");
 					}
 					PreparedStatement cmd = conn.
-							prepareStatement("select * from t_playerdata where name in(select name from t_player where position='"+position+"') as subtable1 AND team in (select abbreviation from t_team where division='"+division+"') as subtable2 AND ?>10 AND ?>10");
+							prepareStatement("select * from t_playerdata where (name in(select name from t_player where position = '"+position+"'))AND (team in (select abbreviation from t_team where division='"+division+"')) AND (?>10) AND (?>10)");
 					switch(doubledouble){
 					case "scoreandrebound":
 						cmd.setString(1, "score");

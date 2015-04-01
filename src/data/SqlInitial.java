@@ -26,7 +26,7 @@ public class SqlInitial {
 		si.match();
 		si.teamTech();
 	*/
-		//si.playerTech();
+		si.playerTech();
 		SemiDataToSQL sds = new TechnicalStatistic();
 		sds.FinalProcessing();
     }
