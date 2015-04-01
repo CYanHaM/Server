@@ -32,7 +32,7 @@ public class UpdateTechData implements UpdateService {
 			String sql = "replace into t_playerdata values";   
 			int size = list.size(); 
 			for(int i=0;i<size;i++){
-				PlayerTechPO po = list.get(i); 
+				PlayerTechPO po = list.get(i);       System.out.println(po.threeShotInRate);
 				if(i!=0) sql+=",";
 				sql += "('"+po.index+"','"+po.name.replaceAll("'", "''")+"','"+po.season+"','"+po.team+"','"+po.gameNum+"','"+po.startingNum+"','"+po.rebound+"','"+po.secondaryAttack+"','"+po.time+"','"+po.shotInRate+"','"+po.threeShotInRate+"','"+po.penaltyShotInRate+"','"+po.offensiveNum+"','"+po.defensiveNum+"','"+po.steal+"','"+po.blockShot+"','"+po.fault+"','"+po.foul+"','"+po.score+"','"+
 						po.efficiency+"','"+po.GmScEfficiency+"','"+po.trueShotInRate+"','"+po.shootingEfficiency+"','"+po.reboundRate+"','"+po.offensiveReboundRate+"','"+po.defensiveReboundRate+"','"+po.secondaryAttackRate+"','"+po.stealRate+"','"+po.blockShotRate+"','"+po.faultRate+"','"+po.usageRate+"','"+po.shotIn+"','"+po.shot+"','"+po.threeShotIn+"','"+po.threeShot+"','"+po.penaltyShotIn+"','"+po.penaltyShot+"','"+po.teamAllTime+"','"+po.teamOffensiveRebound
