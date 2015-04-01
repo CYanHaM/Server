@@ -10,5 +10,4 @@ public interface DataToSQL {
 	public ArrayList<MatchPO> matchRead();
 	public ArrayList<PlayerPO> playerRead();
 	public ArrayList<TeamPO> teamRead();
-
 }

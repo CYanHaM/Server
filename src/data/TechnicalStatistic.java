@@ -4,12 +4,30 @@ import java.util.ArrayList;
 import PO.PlayerTechPO;
 import PO.TeamTechPO;
 
-public class TechnicalStatistic {
+public class TechnicalStatistic implements SemiDataToSQL {
+	
+	public void FinalProcessing(){
+		SQLservice ss=new dealWithSql();
+		UpdateService us =new UpdateTechData();
+		ArrayList<TeamTechPO> semiTeamTech=new ArrayList<TeamTechPO>();
+		ArrayList<PlayerTechPO>semiPlayerTech=new ArrayList<PlayerTechPO>();
+		semiTeamTech=teamTechGenerating(ss.getTeamTech());
+		semiPlayerTech=playerTechGenerating(ss.getPlayerTech());
+		System.out.println(semiTeamTech.size()+"!!");
+		System.out.println(semiTeamTech.size()+"!!!!!");
+
+		us.updatePlayerTech(semiPlayerTech);
+		us.updateTeamTech(semiTeamTech);
+
+		
+
+	}
 	public ArrayList<TeamTechPO> teamTechGenerating(ArrayList<TeamTechPO> ttplist){
 		ArrayList<TeamTechPO> result=new ArrayList<TeamTechPO>();
 		
 		for(TeamTechPO ttp:ttplist){
 			TeamTechPO newttp=new TeamTechPO();
+			newttp.index=ttp.index;
 			newttp.name=ttp.name;
 			newttp.season=ttp.season;
 			newttp.gameNum=ttp.gameNum;
@@ -59,6 +77,7 @@ public class TechnicalStatistic {
 		
 		for(PlayerTechPO ptp:ptplist){
 			PlayerTechPO newptp=new PlayerTechPO();
+			newptp.index=ptp.index;
 			newptp.name=ptp.name;
 			newptp.season=ptp.season;
 			newptp.team=ptp.team;
@@ -68,8 +87,6 @@ public class TechnicalStatistic {
 			newptp.secondaryAttack=ptp.secondaryAttack;
 			newptp.time=ptp.time;
 			newptp.shotInRate=(double)ptp.shotIn/(double)ptp.shot;
-			newptp.threeShotInRate=(double)ptp.threeShotIn/(double)ptp.threeShot;
-			newptp.penaltyShotInRate=(double)ptp.penaltyShotIn/(double)ptp.penaltyShot;
 			newptp.offensiveNum=ptp.offensiveNum;
 			newptp.defensiveNum=ptp.defensiveNum;
 			newptp.steal=ptp.steal;
@@ -81,8 +98,14 @@ public class TechnicalStatistic {
 			newptp.shotIn=ptp.shotIn;
 			newptp.threeShot=ptp.threeShot;
 			newptp.threeShotIn=ptp.threeShotIn;
+			try{
+				newptp.threeShotInRate=(double)ptp.threeShotIn/(double)ptp.threeShot;
+				}catch(ArithmeticException e){
+					newptp.threeShotInRate=0;
+					}
 			newptp.penaltyShot=ptp.penaltyShot;
 			newptp.penaltyShotIn=ptp.penaltyShotIn;
+			newptp.penaltyShotInRate=(double)ptp.penaltyShotIn/(double)ptp.penaltyShot;
 			newptp.efficiency=(ptp.score+ptp.rebound+ptp.secondaryAttack+ptp.steal+ptp.blockShot)-(ptp.shot-ptp.shotIn)-(ptp.penaltyShot-ptp.penaltyShotIn)-ptp.fault;
 			newptp.GmScEfficiency=(double)ptp.score+0.4*(double)ptp.shotIn-0.7*(double)ptp.shot-0.4*((double)ptp.penaltyShot-(double)ptp.penaltyShotIn)+0.7*(double)ptp.offensiveNum+0.3*(double)ptp.defensiveNum+(double)ptp.steal+0.7*(double)ptp.secondaryAttack+0.7*(double)ptp.blockShot-0.4*(double)ptp.foul-(double)ptp.fault;
 			newptp.trueShotInRate=(double)ptp.score/(2*((double)ptp.shot+0.44*(double)ptp.penaltyShot));
@@ -107,4 +130,5 @@ public class TechnicalStatistic {
 		return result;
 	}
 
+	
 }

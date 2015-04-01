@@ -8,6 +8,7 @@ public class TeamTechPO implements Serializable {
 	 * 赛季球队总数据
 	 */
 	public static final long serialVersionUID = 1L;
+	public int index ;                             //编号
 	public String name;                            //球队名称
 	public String season;                          //赛季
 	public int gameNum;                         //比赛场数

@@ -100,7 +100,7 @@ public class DataProcessing implements DataToSQL{
 					}catch (NumberFormatException e){
 						ptmp.time=0;
 					}
-					System.out.println(ptmp.time);
+				//	System.out.println(ptmp.time);
 					ptmp.shotIn=Integer.parseInt(data[k][3]);
 					ptmp.shot=Integer.parseInt(data[k][4]);
 					ptmp.threeShotIn=Integer.parseInt(data[k][5]);
@@ -166,7 +166,7 @@ public class DataProcessing implements DataToSQL{
 						ptmp.score=0;
 						
 					}
-					ptmp.team=data[2][0];
+					ptmp.team=data[homeTeamTip][0];
 					
 					if(k>=homeTeamTip+1&&k<=homeTeamTip+5)
 						ptmp.ifFirstLineUp=1;
@@ -228,6 +228,8 @@ public class DataProcessing implements DataToSQL{
 					homeTime=homeTime+matchpo.playerStatistic.get(j).time;
 					
 				}
+				matchpo.homeShot=homeShot;
+				matchpo.guestShot=guestShot;
 				matchpo.homeShotIn=homeShotin;
 				matchpo.guestShotIn=guestShotin;
 				matchpo.homeTwoShot=homeShot-homethreeshot;
@@ -277,7 +279,7 @@ public class DataProcessing implements DataToSQL{
 				String line = null;
 				while((line = bufferedReader.readLine())!=null) {
 					info.add(line);
-					System.out.println(line);
+				//	System.out.println(line);
 				}
 				
 				String[][]data=new String [9][];
@@ -323,7 +325,7 @@ public class DataProcessing implements DataToSQL{
 			String line = null;
 			while((line = bufferedReader.readLine())!=null) {
 				info.add(line);
-				System.out.println(line);
+			//	System.out.println(line);
 				
 			}
 			
