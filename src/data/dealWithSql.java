@@ -46,7 +46,7 @@ public class dealWithSql implements SQLservice {
 				po.gameNum = rs.getInt(5);
 				po.startingNum = rs.getInt(6);
 				po.rebound = rs.getInt(7);
-				po.secondaryAttackRate = rs.getInt(8);
+				po.secondaryAttack= rs.getInt(8);
 				po.time = rs.getInt(9);
 				po.shotInRate = rs.getDouble(10);
 				po.threeShotInRate = rs.getDouble(11);
@@ -86,7 +86,7 @@ public class dealWithSql implements SQLservice {
 				po.opponentTwoShot = rs.getInt(45);
 				po.teamShot = rs.getInt(46);
 				po.teamPenaltyShot = rs.getInt(47);
-				po.teamFault = rs.getInt(48);
+				po.teamFault = rs.getInt(48);  
 				list.add(po);
 			}
 			rs.close();
