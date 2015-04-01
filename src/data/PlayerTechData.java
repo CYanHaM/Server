@@ -1,6 +1,8 @@
 package data;
 
+import java.io.Serializable;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,7 +13,16 @@ import java.util.ArrayList;
 import PO.PlayerTechPO;
 import TypeEnum.PlayerTechEnum;
 import dataservice.PlayerTechDataService;
-public class PlayerTechData implements PlayerTechDataService {
+public class PlayerTechData extends UnicastRemoteObject implements PlayerTechDataService,Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	protected PlayerTechData() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	//选择某个条件升序,返回升序后的球员数据列表
 	public ArrayList<PlayerTechPO> ascend(PlayerTechEnum en){
 		ArrayList<PlayerTechPO> list = new ArrayList<PlayerTechPO>();

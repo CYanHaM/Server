@@ -1,5 +1,8 @@
 package data;
 
+import java.io.Serializable;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -10,7 +13,17 @@ import PO.TeamPO;
 import dataservice.TeamDataService;
 
 
-public class TeamData implements TeamDataService{
+public class TeamData extends UnicastRemoteObject implements TeamDataService,Serializable{
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+protected TeamData() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 /*	
 	public static void main(String[] args){
 		TeamData td = new TeamData();

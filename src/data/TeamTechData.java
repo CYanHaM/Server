@@ -1,5 +1,8 @@
 package data;
 
+import java.io.Serializable;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -11,8 +14,17 @@ import PO.TeamTechPO;
 import TypeEnum.TeamTechEnum;
 import dataservice.TeamTechDataService;
 
-public class TeamTechData implements TeamTechDataService{
-	
+public class TeamTechData extends UnicastRemoteObject implements TeamTechDataService,Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	protected TeamTechData() throws RemoteException {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	@Override
 	public ArrayList<TeamTechPO> ascend(TeamTechEnum type) {
 		// TODO Auto-generated method stub
