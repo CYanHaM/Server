@@ -15,7 +15,7 @@ import PO.TeamPO;
 * 供初始化数据库时调用
 */
 public class SqlInitial {
-	
+/*
 	public static void main(String[] args){
 		SqlInitial si = new SqlInitial();
 		si.player();
@@ -26,7 +26,7 @@ public class SqlInitial {
 		SemiDataToSQL sds = new TechnicalStatistic();
 		sds.FinalProcessing();
     }
-	
+*/	
 	DataToSQL dts = new DataProcessing();
 
 	public void player(){
