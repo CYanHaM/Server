@@ -86,7 +86,11 @@ public class TechnicalStatistic implements SemiDataToSQL {
 			newptp.rebound=ptp.rebound;
 			newptp.secondaryAttack=ptp.secondaryAttack;
 			newptp.time=ptp.time;
-			newptp.shotInRate=(double)ptp.shotIn/(double)ptp.shot;
+			if(ptp.shot==0){					
+				newptp.shotInRate=0;
+				}else{
+					newptp.shotInRate=(double)ptp.shotIn/(double)ptp.shot;
+				}
 			newptp.offensiveNum=ptp.offensiveNum;
 			newptp.defensiveNum=ptp.defensiveNum;
 			newptp.steal=ptp.steal;
@@ -105,7 +109,11 @@ public class TechnicalStatistic implements SemiDataToSQL {
 				}
 			newptp.penaltyShot=ptp.penaltyShot;
 			newptp.penaltyShotIn=ptp.penaltyShotIn;
-			newptp.penaltyShotInRate=(double)ptp.penaltyShotIn/(double)ptp.penaltyShot;
+			if(ptp.penaltyShot==0){					
+				newptp.penaltyShotInRate=0;
+				}else{
+					newptp.penaltyShotInRate=(double)ptp.penaltyShotIn/(double)ptp.penaltyShot;
+				}
 			newptp.efficiency=(ptp.score+ptp.rebound+ptp.secondaryAttack+ptp.steal+ptp.blockShot)-(ptp.shot-ptp.shotIn)-(ptp.penaltyShot-ptp.penaltyShotIn)-ptp.fault;
 			newptp.GmScEfficiency=(double)ptp.score+0.4*(double)ptp.shotIn-0.7*(double)ptp.shot-0.4*((double)ptp.penaltyShot-(double)ptp.penaltyShotIn)+0.7*(double)ptp.offensiveNum+0.3*(double)ptp.defensiveNum+(double)ptp.steal+0.7*(double)ptp.secondaryAttack+0.7*(double)ptp.blockShot-0.4*(double)ptp.foul-(double)ptp.fault;
 			newptp.trueShotInRate=(double)ptp.score/(2*((double)ptp.shot+0.44*(double)ptp.penaltyShot));
