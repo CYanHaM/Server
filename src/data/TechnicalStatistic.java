@@ -131,6 +131,12 @@ public class TechnicalStatistic implements SemiDataToSQL {
 			newptp.teamOffensiveRebound=ptp.teamOffensiveRebound;
 			newptp.opponentDefensiveRebound=ptp.opponentDefensiveRebound;
 			newptp.opponentOffensiveRebound=ptp.opponentOffensiveRebound;
+			newptp.teamShotIn=ptp.teamShotIn;
+			newptp.opponentOffensiveNum=ptp.opponentOffensiveNum;
+			newptp.opponentTwoShot=ptp.opponentTwoShot;
+			newptp.teamShot=ptp.teamShot;
+			newptp.teamPenaltyShot=ptp.teamPenaltyShot;
+			newptp.teamFault=ptp.teamFault;
 			if((double)ptp.time==0){
 				newptp.reboundRate=0;
 			}else{
