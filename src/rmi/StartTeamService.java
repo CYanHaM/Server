@@ -23,7 +23,7 @@ public class StartTeamService {
 	String host;
 	String port;
 	Remote reg=null;
-	public StartTeamService(){
+	public StartTeamService() throws RemoteException{
 		ServerURL server = new ServerURL();
 		host = server.getHost();
 		System.out.println("host:"+host);
