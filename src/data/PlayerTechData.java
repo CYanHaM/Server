@@ -18,7 +18,7 @@ public class PlayerTechData extends UnicastRemoteObject implements PlayerTechDat
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	protected PlayerTechData() throws RemoteException {
+	public PlayerTechData() throws RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
 	}

@@ -19,7 +19,7 @@ public class PlayerData extends UnicastRemoteObject implements PlayerDataService
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	protected PlayerData() throws RemoteException{
+	public PlayerData() throws RemoteException{
 		super();
 		// TODO Auto-generated constructor stub
 	}

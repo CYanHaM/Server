@@ -19,7 +19,7 @@ public class TeamData extends UnicastRemoteObject implements TeamDataService,Ser
 	 */
 	private static final long serialVersionUID = 1L;
 
-protected TeamData() throws RemoteException {
+public TeamData() throws RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
 	}
