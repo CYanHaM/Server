@@ -6,10 +6,9 @@ import PO.TeamTechPO;
 
 public class TechnicalStatistic implements SemiDataToSQL {
 	
-	@SuppressWarnings("null")
 	public void FinalProcessing(){
-		SQLservice ss = null;
-		UpdateService us =null;
+		SQLservice ss=new dealWithSql();
+		UpdateService us =new UpdateTechData();
 		ArrayList<TeamTechPO> semiTeamTech=new ArrayList<TeamTechPO>();
 		ArrayList<PlayerTechPO>semiPlayerTech=new ArrayList<PlayerTechPO>();
 		semiTeamTech=teamTechGenerating(ss.getTeamTech());
