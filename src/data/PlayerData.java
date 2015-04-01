@@ -1,5 +1,8 @@
 package data;
 
+import java.io.Serializable;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -11,10 +14,24 @@ import PO.PlayerPO;
 import PO.TeamPO;
 import dataservice.PlayerDataService;
 
-public class PlayerData implements PlayerDataService{
-	
+public class PlayerData extends UnicastRemoteObject implements PlayerDataService,Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	public PlayerData() throws RemoteException{
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 	public static void main(String[] args){
-		PlayerData pd = new PlayerData();
+		PlayerData pd=null;
+		try {
+			pd = new PlayerData();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	/*	PlayerPO ppo = new PlayerPO();
 		ppo.name = "Aaron Brooks";
 		PlayerPO res1 = pd.find(ppo);

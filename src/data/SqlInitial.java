@@ -16,13 +16,16 @@ import PO.TeamPO;
 */
 public class SqlInitial {
 
+	public static void main(String[] args){
+		initial();
+	}
 	public static void initial(){
 		SqlInitial si = new SqlInitial();
-		si.player();
+	/*	si.player();
 		si.team();
 		si.match();
 		si.teamTech();
-		si.playerTech();
+	*/	si.playerTech();
 		SemiDataToSQL sds = new TechnicalStatistic();
 		sds.FinalProcessing();
     }

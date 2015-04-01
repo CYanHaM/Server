@@ -8,10 +8,10 @@ import PO.PlayerTechPO;
 import TypeEnum.PlayerTechEnum;
 
 public interface PlayerTechDataService extends Remote{
-	public ArrayList<PlayerTechPO> ascend(PlayerTechEnum type)throws RemoteException;
+	public ArrayList<PlayerTechPO> ascend(String type)throws RemoteException;
 	//按照type所示条件升序排序
 	
-	public ArrayList<PlayerTechPO> descend(PlayerTechEnum type)throws RemoteException;
+	public ArrayList<PlayerTechPO> descend(String type)throws RemoteException;
 	//按照type所示条件降序排序
 	
 	public ArrayList<PlayerTechPO> sift(String position, String division, String sort)throws RemoteException;
