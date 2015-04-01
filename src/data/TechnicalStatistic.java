@@ -116,21 +116,61 @@ public class TechnicalStatistic implements SemiDataToSQL {
 				}
 			newptp.efficiency=(ptp.score+ptp.rebound+ptp.secondaryAttack+ptp.steal+ptp.blockShot)-(ptp.shot-ptp.shotIn)-(ptp.penaltyShot-ptp.penaltyShotIn)-ptp.fault;
 			newptp.GmScEfficiency=(double)ptp.score+0.4*(double)ptp.shotIn-0.7*(double)ptp.shot-0.4*((double)ptp.penaltyShot-(double)ptp.penaltyShotIn)+0.7*(double)ptp.offensiveNum+0.3*(double)ptp.defensiveNum+(double)ptp.steal+0.7*(double)ptp.secondaryAttack+0.7*(double)ptp.blockShot-0.4*(double)ptp.foul-(double)ptp.fault;
-			newptp.trueShotInRate=(double)ptp.score/(2*((double)ptp.shot+0.44*(double)ptp.penaltyShot));
-			newptp.shootingEfficiency=((double)ptp.shotIn+0.5*(double)ptp.threeShotIn)/(double)ptp.shot;
+			if(2*((double)ptp.shot+0.44*(double)ptp.penaltyShot)==0){
+				newptp.trueShotInRate=0;
+				}else{
+					newptp.trueShotInRate=(double)ptp.score/(2*((double)ptp.shot+0.44*(double)ptp.penaltyShot));
+					}
+			if((double)ptp.shot==0){
+				newptp.shootingEfficiency=0;
+			}else{
+				newptp.shootingEfficiency=((double)ptp.shotIn+0.5*(double)ptp.threeShotIn)/(double)ptp.shot;
+			}
 			newptp.teamAllTime=ptp.teamAllTime;
 			newptp.teamDefensiveRebound=ptp.teamDefensiveRebound;
 			newptp.teamOffensiveRebound=ptp.teamOffensiveRebound;
 			newptp.opponentDefensiveRebound=ptp.opponentDefensiveRebound;
 			newptp.opponentOffensiveRebound=ptp.opponentOffensiveRebound;
-			newptp.reboundRate=(double)ptp.rebound*((double)ptp.teamAllTime/5)/(double)ptp.time/((double)ptp.teamDefensiveRebound+(double)ptp.teamOffensiveRebound+(double)ptp.opponentDefensiveRebound+(double)ptp.opponentOffensiveRebound);
-			newptp.offensiveReboundRate=(double)ptp.offensiveNum*((double)ptp.teamAllTime/5)/(double)ptp.time/((double)ptp.teamOffensiveRebound+(double)ptp.opponentOffensiveRebound);
-			newptp.defensiveReboundRate=(double)ptp.defensiveNum*((double)ptp.teamAllTime/5)/(double)ptp.time/((double)ptp.teamDefensiveRebound+(double)ptp.opponentDefensiveRebound);
-			newptp.secondaryAttackRate=(double)ptp.secondaryAttack/((double)ptp.time/((double)ptp.teamAllTime/5)*(double)ptp.teamShotIn-(double)ptp.shotIn);
-			newptp.stealRate=(double)ptp.steal*((double)ptp.teamAllTime/5)/(double)ptp.time/(double)ptp.opponentOffensiveNum;
-			newptp.blockShotRate=(double)ptp.blockShot*((double)ptp.teamAllTime/5)/(double)ptp.time/(double)ptp.opponentTwoShot;
-			newptp.faultRate=(double)ptp.fault/((double)ptp.shot-(double)ptp.threeShot+0.44*(double)ptp.penaltyShot+(double)ptp.fault);
-			newptp.usageRate=((double)ptp.shot+0.44*(double)ptp.penaltyShot+(double)ptp.fault)*((double)ptp.teamAllTime/5)/(double)ptp.time/((double)ptp.teamShot+0.44*(double)ptp.teamPenaltyShot+(double)ptp.teamFault);
+			if((double)ptp.time==0){
+				newptp.reboundRate=0;
+			}else{
+				newptp.reboundRate=(double)ptp.rebound*((double)ptp.teamAllTime/5)/(double)ptp.time/((double)ptp.teamDefensiveRebound+(double)ptp.teamOffensiveRebound+(double)ptp.opponentDefensiveRebound+(double)ptp.opponentOffensiveRebound);
+			}
+			if((double)ptp.time==0){
+				newptp.offensiveReboundRate=0;
+			}else{
+				newptp.offensiveReboundRate=(double)ptp.offensiveNum*((double)ptp.teamAllTime/5)/(double)ptp.time/((double)ptp.teamOffensiveRebound+(double)ptp.opponentOffensiveRebound);
+			}
+			if((double)ptp.time==0){
+				newptp.defensiveReboundRate=0;
+			}else{
+				newptp.defensiveReboundRate=(double)ptp.defensiveNum*((double)ptp.teamAllTime/5)/(double)ptp.time/((double)ptp.teamDefensiveRebound+(double)ptp.opponentDefensiveRebound);
+			}
+			if((double)ptp.time==0){
+				newptp.secondaryAttackRate=0;
+			}else{
+				newptp.secondaryAttackRate=(double)ptp.secondaryAttack/((double)ptp.time/((double)ptp.teamAllTime/5)*(double)ptp.teamShotIn-(double)ptp.shotIn);
+			}
+			if((double)ptp.time==0){
+				newptp.stealRate=0;
+			}else{
+				newptp.stealRate=(double)ptp.steal*((double)ptp.teamAllTime/5)/(double)ptp.time/(double)ptp.opponentOffensiveNum;
+			}
+			if((double)ptp.time==0){
+				newptp.blockShotRate=0;
+			}else{
+				newptp.blockShotRate=(double)ptp.blockShot*((double)ptp.teamAllTime/5)/(double)ptp.time/(double)ptp.opponentTwoShot;
+			}
+			if(((double)ptp.shot==0)){
+				newptp.faultRate=0;
+				}else{
+					newptp.faultRate=(double)ptp.fault/((double)ptp.shot-(double)ptp.threeShot+0.44*(double)ptp.penaltyShot+(double)ptp.fault);
+			}
+			if((double)ptp.time==0){
+				newptp.usageRate=0;
+			}else{
+				newptp.usageRate=((double)ptp.shot+0.44*(double)ptp.penaltyShot+(double)ptp.fault)*((double)ptp.teamAllTime/5)/(double)ptp.time/((double)ptp.teamShot+0.44*(double)ptp.teamPenaltyShot+(double)ptp.teamFault);
+			}
 			
 			result.add(newptp);
 					
