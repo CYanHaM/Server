@@ -23,7 +23,7 @@ public class StartPlayerService {
 	String host;
 	String port;
 	Remote reg=null;
-	public StartPlayerService(){
+	public StartPlayerService() throws RemoteException{
 		ServerURL server = new ServerURL();
 		host = server.getHost();
 		System.out.println("host:"+host);
