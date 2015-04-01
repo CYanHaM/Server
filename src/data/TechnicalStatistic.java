@@ -100,7 +100,7 @@ public class TechnicalStatistic implements SemiDataToSQL {
 			newptp.threeShotIn=ptp.threeShotIn;
 			try{
 				newptp.threeShotInRate=(double)ptp.threeShotIn/(double)ptp.threeShot;
-				}catch(ArithmeticException e){
+				}catch(Exception e){
 					newptp.threeShotInRate=0;
 					}
 			newptp.penaltyShot=ptp.penaltyShot;
