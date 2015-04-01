@@ -12,6 +12,6 @@ public class StartRmi {
 		new StartTeamService();
 		new StartPlayerTechService();
 		new StartPlayerService();
-		SqlInitial.initial();
+	//	SqlInitial.initial();
 	}
 }
