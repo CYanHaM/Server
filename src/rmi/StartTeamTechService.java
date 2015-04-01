@@ -38,7 +38,7 @@ public class StartTeamTechService {
 		TeamTechDataService teamtechdata = new TeamTechData();
 		//绑定的URL标准格式为：rmi://host:port/name(协议名rmi可以省略)
 		try {
-			Naming.rebind("//"+host+":"+port+"/TeamData", teamtechdata);
+			Naming.rebind("//"+host+":"+port+"/TeamTechData", teamtechdata);
 		} catch (RemoteException | MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
