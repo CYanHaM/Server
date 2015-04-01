@@ -23,16 +23,26 @@ public class StartPlayerService {
 	String host;
 	String port;
 	Remote reg=null;
-	public StartPlayerService() throws RemoteException, MalformedURLException{
+	public StartPlayerService(){
 		ServerURL server = new ServerURL();
 		host = server.getHost();
 		System.out.println("host:"+host);
 		port = server.getPlayerPort();
 		//把端口和远程对象UserData注册到RMI注册服务器上
-		reg=LocateRegistry.createRegistry(Integer.valueOf(port));
+		try {
+			reg=LocateRegistry.createRegistry(Integer.valueOf(port));
+		} catch (NumberFormatException | RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		PlayerDataService playerdata = new PlayerData();
 		//绑定的URL标准格式为：rmi://host:port/name(协议名rmi可以省略)
-		Naming.rebind("//"+host+":"+port+"/PlayerData", playerdata);
+		try {
+			Naming.rebind("//"+host+":"+port+"/PlayerData", playerdata);
+		} catch (RemoteException | MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println(">>>>>INFO:远程PlayerData对象绑定成功！");
 	}
 	

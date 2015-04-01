@@ -23,16 +23,26 @@ public class StartTeamTechService {
 	String host;
 	String port;
 	Remote reg=null;
-	public StartTeamTechService() throws RemoteException, MalformedURLException{
+	public StartTeamTechService(){
 		ServerURL server = new ServerURL();
 		host = server.getHost();
 		System.out.println("host:"+host);
 		port = server.getTeamTechPort();
 		//把端口和远程对象UserData注册到RMI注册服务器上
-		reg=LocateRegistry.createRegistry(Integer.valueOf(port));
+		try {
+			reg=LocateRegistry.createRegistry(Integer.valueOf(port));
+		} catch (NumberFormatException | RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		TeamTechDataService teamtechdata = new TeamTechData();
 		//绑定的URL标准格式为：rmi://host:port/name(协议名rmi可以省略)
-		Naming.rebind("//"+host+":"+port+"/TeamData", teamtechdata);
+		try {
+			Naming.rebind("//"+host+":"+port+"/TeamData", teamtechdata);
+		} catch (RemoteException | MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		System.out.println(">>>>>INFO:远程TeamTechData对象绑定成功！");
 	}
 	
@@ -57,4 +67,5 @@ public class StartTeamTechService {
 	public void setPort(String port) {
 		this.port = port;
 	}
+	
 }
