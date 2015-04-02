@@ -86,6 +86,8 @@ public class PlayerData extends UnicastRemoteObject implements PlayerDataService
 				ppo.exp = rs.getInt(8);
 				ppo.school = new String(rs.getString(9).getBytes("ISO-8859-1"),"utf-8");
 			}
+			//
+			System.out.println("查找player");
 			rs.close();
 			conn.close();
 		} catch(ClassNotFoundException e) {
@@ -138,6 +140,7 @@ public class PlayerData extends UnicastRemoteObject implements PlayerDataService
 				po.school = new String(rs.getString(9).getBytes("ISO-8859-1"),"utf-8");
 				list.add(po);
 			}
+			System.out.println("根据team查找player");
 			rs.close();
 			conn.close();
 		} catch(ClassNotFoundException e) {

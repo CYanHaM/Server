@@ -5,9 +5,9 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import PO.TeamTechPO;
@@ -44,10 +44,10 @@ public class TeamTechData extends UnicastRemoteObject implements TeamTechDataSer
 			if(!conn.isClosed()){
 				System.out.println("Succeeded connecting to the Database!");
 			}
-			PreparedStatement cmd = conn.
-			prepareStatement("select * from t_seasondata order by ?");
-			cmd.setString(1, type);
-			ResultSet rs = cmd.executeQuery();
+			String sql = "select * from t_seasondata order by ?";
+			Statement st = conn.createStatement();
+			sql = sql.replace("?", type);
+			ResultSet rs = st.executeQuery(sql);
 			while(rs.next()){
 				TeamTechPO po = new TeamTechPO();
 				po.index = rs.getInt(1);
@@ -86,6 +86,7 @@ public class TeamTechData extends UnicastRemoteObject implements TeamTechDataSer
 				po.opponentScore = rs.getInt(34);
 				list.add(po);
 			}
+			System.out.println("acsend teamTech");
 			rs.close();
 			conn.close();
 		}catch(ClassNotFoundException e) {
@@ -119,10 +120,10 @@ public class TeamTechData extends UnicastRemoteObject implements TeamTechDataSer
 			if(!conn.isClosed()){
 				System.out.println("Succeeded connecting to the Database!");
 			}
-			PreparedStatement cmd = conn.
-			prepareStatement("select * from t_seasondata order by ? DESC");
-			cmd.setString(1, type);
-			ResultSet rs = cmd.executeQuery();
+			String sql = "select * from t_seasondata order by ? DESC";
+			Statement st = conn.createStatement();
+			sql = sql.replace("?", type);
+			ResultSet rs = st.executeQuery(sql);
 			while(rs.next()){
 				TeamTechPO po = new TeamTechPO();
 				po.index = rs.getInt(1);
@@ -161,6 +162,8 @@ public class TeamTechData extends UnicastRemoteObject implements TeamTechDataSer
 				po.opponentScore = rs.getInt(34);
 				list.add(po);
 			}
+			System.out.println("desc teamTech");
+			System.out.println(list.get(0).name);
 			rs.close();
 			conn.close();
 		}catch(ClassNotFoundException e) {

@@ -21,11 +21,10 @@ public class SqlInitial {
 	}
 	public static void initial(){
 		SqlInitial si = new SqlInitial();
-	/*	si.player();
+		si.player();
 		si.team();
 		si.match();
 		si.teamTech();
-	*/
 		si.playerTech();
 		SemiDataToSQL sds = new TechnicalStatistic();
 		sds.FinalProcessing();
@@ -63,6 +62,7 @@ public class SqlInitial {
 				sql += ",('"+po.name.replaceAll("'", "''")+"','"+po.uniformNum+"','"+po.position+"','"+po.height+"','"+po.weight+"','"+po.birth+"','"+po.age+"','"+po.exp+"','"+po.school.replaceAll("'", "''")+"') ";
 			}
 			statement.executeUpdate(sql);
+			System.out.println("player导入成功");
 			conn.close();
 			} catch(ClassNotFoundException e) {
 				System.out.println("Sorry,can`t find the Driver!");
@@ -103,6 +103,7 @@ public class SqlInitial {
 				sql += ",('"+po.fullName.replaceAll("'", "''")+"','"+po.abbreviation+"','"+po.location.replaceAll("'", "''")+"','"+po.division+"','"+po.partition+"','"+po.homeCourt.replaceAll("'", "''")+"','"+po.time+"')";
 				}
 			statement.executeUpdate(sql);
+			System.out.println("team导入成功");
 			conn.close();
 		} catch(ClassNotFoundException e) {
 			System.out.println("Sorry,can`t find the Driver!");
@@ -176,6 +177,7 @@ public class SqlInitial {
 			long dt4 = System.currentTimeMillis();
 			System.out.println(dt3-dt2);
 			System.out.println(dt4-dt3);
+			System.out.println("match和detail导入成功");
 			conn.close();
 		}catch(ClassNotFoundException e) {
 			System.out.println("Sorry,can`t find the Driver!");
@@ -316,6 +318,7 @@ public class SqlInitial {
 			index++;
 		}
 		statement.executeUpdate(sql);
+		System.out.println("TeamTech导入成功");
 		conn.close();
 		}catch(ClassNotFoundException e) {
 			System.out.println("Sorry,can`t find the Driver!");
@@ -468,6 +471,7 @@ public class SqlInitial {
 				index++;
 			}
 			statement.executeUpdate(sql);
+			System.out.println("playerTech导入成功");
 			conn.close();
 		}catch(ClassNotFoundException e) {
 			System.out.println("Sorry,can`t find the Driver!");

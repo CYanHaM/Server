@@ -5,9 +5,9 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 import PO.PlayerTechPO;
@@ -41,10 +41,10 @@ public class PlayerTechData extends UnicastRemoteObject implements PlayerTechDat
 			if(!conn.isClosed()){
 				System.out.println("Succeeded connecting to the Database!");
 			}
-			PreparedStatement cmd = conn.
-			prepareStatement("select * from t_playerdata order by ? ");
-			cmd.setString(1, en);
-			ResultSet rs = cmd.executeQuery();
+			String sql = "select * from t_playerdata order by ? ";
+			Statement st = conn.createStatement();
+			sql = sql.replace("?", en);
+			ResultSet rs = st.executeQuery(sql);
 			while(rs.next()){
 				PlayerTechPO po = new PlayerTechPO();
 				po.index = rs.getInt(1);
@@ -54,7 +54,7 @@ public class PlayerTechData extends UnicastRemoteObject implements PlayerTechDat
 				po.gameNum = rs.getInt(5);
 				po.startingNum = rs.getInt(6);
 				po.rebound = rs.getInt(7);
-				po.secondaryAttackRate = rs.getInt(8);
+				po.secondaryAttack = rs.getInt(8);
 				po.time = rs.getInt(9);
 				po.shotInRate = rs.getDouble(10);
 				po.threeShotInRate = rs.getDouble(11);
@@ -97,6 +97,7 @@ public class PlayerTechData extends UnicastRemoteObject implements PlayerTechDat
 				po.teamFault = rs.getInt(48);
 				list.add(po);
 			}
+			System.out.println("acsend playerTech");
 			rs.close();
 			conn.close();
 		}catch(ClassNotFoundException e) {
@@ -129,10 +130,10 @@ public class PlayerTechData extends UnicastRemoteObject implements PlayerTechDat
 			if(!conn.isClosed()){
 				System.out.println("Succeeded connecting to the Database!");
 			}
-			PreparedStatement cmd = conn.
-			prepareStatement("select * from t_playerdata order by ? DESC");
-			cmd.setString(1, en);
-			ResultSet rs = cmd.executeQuery();
+			String sql = "select * from t_playerdata order by ? DESC";
+			Statement st = conn.createStatement();
+			sql = sql.replace("?", en);
+			ResultSet rs = st.executeQuery(sql);
 			while(rs.next()){
 				PlayerTechPO po = new PlayerTechPO();
 				po.index = rs.getInt(1);
@@ -142,7 +143,7 @@ public class PlayerTechData extends UnicastRemoteObject implements PlayerTechDat
 				po.gameNum = rs.getInt(5);
 				po.startingNum = rs.getInt(6);
 				po.rebound = rs.getInt(7);
-				po.secondaryAttackRate = rs.getInt(8);
+				po.secondaryAttack = rs.getInt(8);
 				po.time = rs.getInt(9);
 				po.shotInRate = rs.getDouble(10);
 				po.threeShotInRate = rs.getDouble(11);
@@ -185,6 +186,7 @@ public class PlayerTechData extends UnicastRemoteObject implements PlayerTechDat
 				po.teamFault = rs.getInt(48);
 				list.add(po);
 			}
+			System.out.println("desc playerTech");
 			rs.close();
 			conn.close();
 		}catch(ClassNotFoundException e) {
@@ -225,75 +227,17 @@ public class PlayerTechData extends UnicastRemoteObject implements PlayerTechDat
 				System.out.println("Succeeded connecting to the Database!");
 			}
 			// statement用来执行SQL语句
-			PreparedStatement cmd = conn.
-			prepareStatement("select ? from t_playerdata where (name in(select name from t_player where position = '"+position+"'))AND (team in (select abbreviation from t_team where division='"+division+"' ))order by ? DESC limit 50");
-
-			switch(sort){
-				case "score":
-					cmd.setString(1, "*");
-					cmd.setString(2, "score");
-					break;
-				case "rebound":
-					cmd.setString(1, "*");
-					cmd.setString(2, "rebound");
-					break;
-				case "secondaryattack":
-					cmd.setString(1, "*");
-					cmd.setString(2, "secondaryAttack");
-					break;
-				case "srs":
-					/*
-					 * "name,season,team,gameNum,startingNum,rebound,secondaryAttack,time,shotInRate,threeShotInRate,"
-							+ "penaltyShotInRate,offensiveNum,defensiveNum,steal,blockShot,fault,foul,score,efficiency,GmScEfficiency,"
-							+ "trueShotInRate,shootingEfficiency,reboundRate,offensiveReboundRate,defensiveReboundRate,secondaryAttackRate"
-							+ "stealRate,blockShotRate,faultRate,usageRate,shotIn,shot,threeShotIn,threeShot,penaltyShotIn,penaltyShot,"
-							+ "teamAllTime,teamOffensiveRebound,teamDefensiveRebound,opponentOffensiveRebound,opponentDefensiveRebound,"
-							+ "teamShotIn,opponentOffensiveNum,opponentTwoShot,teamShot,teamPenaltyShot,teamFault"
-					 */
-					cmd.setString(1, "*, score+rebound+secondaryAttack");
-					cmd.setString(2, "score+rebound+secondaryAttack");
-					break;
-				case "blockshot":
-					cmd.setString(1, "*");
-					cmd.setString(2, "blockshot");
-					break;
-				case "steal":
-					cmd.setString(1, "*");
-					cmd.setString(2, "steal");
-					break;
-				case "foul":
-					cmd.setString(1, "*");
-					cmd.setString(2, "foul");
-					break;
-				case "fault":
-					cmd.setString(1, "*");
-					cmd.setString(2, "fault");
-					break;
-				case "time":
-					cmd.setString(1, "*");
-					cmd.setString(2, "time");
-					break;
-				case "efficiency":
-					cmd.setString(1, "*");
-					cmd.setString(2, "efficiency");
-					break;
-				case "shot":
-					cmd.setString(1, "*");
-					cmd.setString(2, "shot");
-					break;
-				case "threeshot":
-					cmd.setString(1, "*");
-					cmd.setString(2, "threeShot");
-					break;
-				case "penaltyShot":
-					cmd.setString(1, "*");
-					cmd.setString(2, "penaltyShot");
-					break;
-				default:
-					System.out.println("wrong sort string. ");;
+			String sql = "select # from t_playerdata where (name in(select name from t_player where position = '"+position+"')) AND (team in (select abbreviation from t_team where division='"+division+"'))order by ? DESC limit 50";
+			if(sort.equals("srs")){
+            	sql = sql.replace("#", "*,score+rebound+secondaryAttack");
+            	sql = sql.replace("?","score+rebound+secondaryAttack");
+            }
+			else{
+				sql = sql.replace("#", "*");
+            	sql = sql.replace("?",sort);
 			}
-			
-			ResultSet rs = cmd.executeQuery();
+			Statement st = conn.createStatement(); 
+			ResultSet rs = st.executeQuery(sql);
 			while(rs.next()){
 				PlayerTechPO po = new PlayerTechPO();
 				po.index = rs.getInt(1);
@@ -303,7 +247,7 @@ public class PlayerTechData extends UnicastRemoteObject implements PlayerTechDat
 				po.gameNum = rs.getInt(5);
 				po.startingNum = rs.getInt(6);
 				po.rebound = rs.getInt(7);
-				po.secondaryAttackRate = rs.getInt(8);
+				po.secondaryAttack = rs.getInt(8);
 				po.time = rs.getInt(9);
 				po.shotInRate = rs.getDouble(10);
 				po.threeShotInRate = rs.getDouble(11);
@@ -346,6 +290,7 @@ public class PlayerTechData extends UnicastRemoteObject implements PlayerTechDat
 				po.teamFault = rs.getInt(48);
 				list.add(po);
 			}
+			System.out.println("sift");
 			rs.close();
 			conn.close();
 		}catch(ClassNotFoundException e) {
@@ -378,53 +323,9 @@ public class PlayerTechData extends UnicastRemoteObject implements PlayerTechDat
 					if(!conn.isClosed()){
 						System.out.println("Succeeded connecting to the Database!");
 					}
-					PreparedStatement cmd = conn.
-							prepareStatement("select * from t_playerdata where (name in(select name from t_player where position = '"+position+"'))AND (team in (select abbreviation from t_team where division='"+division+"')) AND (?>10) AND (?>10)");
-					switch(doubledouble){
-					case "scoreandrebound":
-						cmd.setString(1, "score");
-						cmd.setString(2, "rebound");
-						break;
-					case "scoreandsecondaryattack":
-						cmd.setString(1, "score");
-						cmd.setString(2, "secondaryAttack");
-						break;
-					case "scoreandsteal":
-						cmd.setString(1, "score");
-						cmd.setString(2, "steal");
-						break;
-					case "scoreandblockshot":
-						cmd.setString(1, "score");
-						cmd.setString(2, "blockShot");
-						break;
-					case "reboundandsecondaryattack":
-						cmd.setString(1, "rebound");
-						cmd.setString(2, "secondaryAttack");
-						break;
-					case "reboundandsteal":
-						cmd.setString(1, "rebound");
-						cmd.setString(2, "steal");
-						break;
-					case "reboundandblockshot":
-						cmd.setString(1, "rebound");
-						cmd.setString(2, "blockShot");
-						break;
-					case "secondaryattackandsteal":
-						cmd.setString(1, "secondaryAttack");
-						cmd.setString(2, "steal");
-						break;
-					case "secondaryattackandblockshot":
-						cmd.setString(1, "secondaryAttack");
-						cmd.setString(2, "blockShot");
-						break;
-					case "stealandblockshot":
-						cmd.setString(1, "steal");
-						cmd.setString(2, "blockShot");
-						break;
-					default:
-						System.out.println("wrong string");	
-					}
-					ResultSet rs = cmd.executeQuery();
+					String sql = "select * from t_playerdata where (( name in(select name from t_player where position = 'F')) AND (team in (select abbreviation from t_team where division='E')) AND ( (rebound>10 and (secondaryAttack>10 or score>10 or steal>10 or blockShot>10)) or(secondaryAttack>10 and (rebound>10 or score>10 or steal>10 or blockShot>10)) or(score>10 and (secondaryAttack>10 or rebound>10 or steal>10 or blockShot>10)) or(steal>10 and (secondaryAttack>10 or score>10 or rebound>10 or blockShot>10)) or(blockShot>10 and (secondaryAttack>10 or score>10 or steal>10 or rebound>10))))";
+				    Statement st = conn.createStatement();
+					ResultSet rs = st.executeQuery(sql);
 					while(rs.next()){
 						PlayerTechPO po = new PlayerTechPO();
 						po.index = rs.getInt(1);
@@ -434,7 +335,7 @@ public class PlayerTechData extends UnicastRemoteObject implements PlayerTechDat
 						po.gameNum = rs.getInt(5);
 						po.startingNum = rs.getInt(6);
 						po.rebound = rs.getInt(7);
-						po.secondaryAttackRate = rs.getInt(8);
+						po.secondaryAttack = rs.getInt(8);
 						po.time = rs.getInt(9);
 						po.shotInRate = rs.getDouble(10);
 						po.threeShotInRate = rs.getDouble(11);
@@ -477,6 +378,7 @@ public class PlayerTechData extends UnicastRemoteObject implements PlayerTechDat
 						po.teamFault = rs.getInt(48);
 						res.add(po);
 					}
+					System.out.println("doubledouble");
 					rs.close();
 					conn.close();
 				}catch(ClassNotFoundException e) {

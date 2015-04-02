@@ -68,6 +68,7 @@ public TeamData() throws RemoteException {
 				tpo.homeCourt = new String(rs.getString(6).getBytes("ISO-8859-1"),"utf-8");
 				tpo.time = new String(rs.getString(7).getBytes("ISO-8859-1"),"utf-8");
 			}
+			System.out.println("find team");
 			rs.close();
 			conn.close();
 		} catch(ClassNotFoundException e) {

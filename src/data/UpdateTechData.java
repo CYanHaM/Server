@@ -40,6 +40,7 @@ public class UpdateTechData implements UpdateService {
 			
 			}
 			statement.executeUpdate(sql);
+			System.out.println("playerTech更新成功");
 		    conn.close();
 		}catch(ClassNotFoundException e) {
 			System.out.println("Sorry,can`t find the Driver!");
@@ -81,6 +82,7 @@ public class UpdateTechData implements UpdateService {
 						po.opponentOffensiveRebound+"','"+po.opponentOffensiveRound+"','"+po.opponentScore+"') ";
 			}
 			statement.executeUpdate(sql);
+			System.out.println("teamTech更新成功");
 		    conn.close();
 		}catch(ClassNotFoundException e) {
 			System.out.println("Sorry,can`t find the Driver!");
